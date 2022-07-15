@@ -1,4 +1,4 @@
-package com.sendiko.jusdoit
+package com.sendiko.justdoit
 
 import org.junit.Test
 

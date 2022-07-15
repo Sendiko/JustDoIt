@@ -1,4 +1,4 @@
-package com.sendiko.jusdoit.ui.home
+package com.sendiko.justdoit.ui.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
