@@ -13,14 +13,15 @@
         <entry key="app/src/main/res/drawable/ic_list.xml" value="0.3175" />
         <entry key="app/src/main/res/drawable/ic_list_active.xml" value="0.3175" />
         <entry key="app/src/main/res/drawable/ic_list_inactive.xml" value="0.3175" />
+        <entry key="app/src/main/res/drawable/ic_list_nav.xml" value="0.3175" />
         <entry key="app/src/main/res/drawable/ic_lock_light.xml" value="0.298" />
         <entry key="app/src/main/res/drawable/ic_login.xml" value="0.298" />
         <entry key="app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.298" />
         <entry key="app/src/main/res/drawable/ic_person_white.xml" value="0.298" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.9" />
-        <entry key="app/src/main/res/layout/card_item_task.xml" value="0.8949536560247168" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/card_item_task.xml" value="0.67" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.3582427536231884" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.6083112290008842" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.7345844504021448" />
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.3582427536231884" />
         <entry key="app/src/main/res/layout/fragment_register.xml" value="0.67" />

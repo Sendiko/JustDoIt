@@ -15,6 +15,8 @@
         app:itemTextColor="@color/white"
         app:itemIconSize="36dp"
         app:itemRippleColor="@color/lighter_ming"
+        app:itemTextAppearanceActive="@style/BottomNavigationTextStyleActive"
+        app:itemTextAppearanceInactive="@style/BottomNavigationTextStyleInactive"
         android:background="@color/indigo_dye"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
