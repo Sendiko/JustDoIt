@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">JustDoIt!</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
+    <string name="title_home">Todo</string>
+    <string name="title_dashboard">Checked</string>
     <string name="title_notifications">Notifications</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
@@ -14,4 +14,11 @@
     <string name="email">Email</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="login_here"><u><![CDATA[<- Login here]]></u></string>
+    <string name="greeting">Hi, Sendiko!</string>
+    <string name="greeting2">Here\'s some things to do</string>
+    <string name="subject_task_list_example">Subject task list example</string>
+    <string name="task_list_example">Task list example</string>
+    <string name="edit">Edit</string>
+    <string name="greeting4">Here\'s list of things you\'ve done</string>
+    <string name="greeting3">Great job, Sendiko!</string>
 </resources>
