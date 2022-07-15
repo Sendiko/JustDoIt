@@ -4,20 +4,26 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.17865707434052758" />
+        <entry key="app/src/main/res/drawable/ic_check_nav.xml" value="0.3175" />
+        <entry key="app/src/main/res/drawable/ic_checked_empty.xml" value="0.1915" />
         <entry key="app/src/main/res/drawable/ic_header.xml" value="0.1915" />
         <entry key="app/src/main/res/drawable/ic_illustration_login.xml" value="0.298" />
         <entry key="app/src/main/res/drawable/ic_jusdoit_logo_dark.xml" value="0.298" />
         <entry key="app/src/main/res/drawable/ic_justdoit_logo_light.xml" value="0.298" />
+        <entry key="app/src/main/res/drawable/ic_list.xml" value="0.3175" />
+        <entry key="app/src/main/res/drawable/ic_list_active.xml" value="0.3175" />
+        <entry key="app/src/main/res/drawable/ic_list_inactive.xml" value="0.3175" />
         <entry key="app/src/main/res/drawable/ic_lock_light.xml" value="0.298" />
         <entry key="app/src/main/res/drawable/ic_login.xml" value="0.298" />
         <entry key="app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.298" />
         <entry key="app/src/main/res/drawable/ic_person_white.xml" value="0.298" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.20382165605095542" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.9" />
+        <entry key="app/src/main/res/layout/card_item_task.xml" value="0.8949536560247168" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.3582427536231884" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.3582427536231884" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.6083112290008842" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.7345844504021448" />
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.3582427536231884" />
-        <entry key="app/src/main/res/layout/fragment_register.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_register.xml" value="0.67" />
         <entry key="app/src/main/res/layout/fragment_splash_screen.xml" value="0.33" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.35833333333333334" />
       </map>

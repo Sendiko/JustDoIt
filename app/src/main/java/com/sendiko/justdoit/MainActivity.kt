@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
 
         navView.setupWithNavController(navController)
-        navView.itemActiveIndicatorColor = getColorStateList(R.color.lighter_ming)
+        navView.itemActiveIndicatorColor = null
 
         navController.addOnDestinationChangedListener{_, destination, _ ->
             when(destination.id){
