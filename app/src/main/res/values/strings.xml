@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">JusDoIt!</string>
+    <string name="app_name">JustDoIt!</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
@@ -7,4 +7,11 @@
     <string name="password">Password</string>
     <string name="login">Login</string>
     <string name="register"><u><![CDATA[<- Register here]]></u></string>
+    <string name="welcome">Welcome!</string>
+    <string name="please_enter_your_username_and_password">Please enter your username and password</string>
+    <string name="app_quote">Make managing task easier</string>
+    <string name="registerq">Register</string>
+    <string name="email">Email</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="login_here"><u><![CDATA[<- Login here]]></u></string>
 </resources>
