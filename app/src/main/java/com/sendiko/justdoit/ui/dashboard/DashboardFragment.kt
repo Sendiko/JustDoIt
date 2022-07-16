@@ -6,7 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.sendiko.justdoit.databinding.FragmentDashboardBinding
+import com.sendiko.justdoit.model.Task
+import com.sendiko.justdoit.ui.home.TaskAdapter
 
 class DashboardFragment : Fragment() {
 
@@ -29,7 +32,15 @@ class DashboardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // TODO : CODE HERE
+        setupRecyclerView()
+    }
+
+    private fun setupRecyclerView(){
+        val taskList = arrayListOf<Task>()
+        val rv = binding.rvTaskChecked
+        rv.layoutManager = LinearLayoutManager(context)
+        rv.setHasFixedSize(true)
+        rv.adapter = TaskAdapter(taskList)
     }
 
     override fun onDestroyView() {
