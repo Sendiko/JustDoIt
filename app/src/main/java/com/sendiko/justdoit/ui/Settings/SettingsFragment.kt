@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.sendiko.justdoit.R
 import com.sendiko.justdoit.databinding.FragmentSettingsBinding
 
 class SettingsFragment : Fragment() {
@@ -23,6 +25,10 @@ class SettingsFragment : Fragment() {
 
         _binding = FragmentSettingsBinding.inflate(layoutInflater)
         val root: View = binding.root
+
+        binding.icCancel.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_notifications_to_navigation_home)
+        }
 
         return root
     }
