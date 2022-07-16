@@ -32,12 +32,12 @@
         app:layout_constraintTop_toBottomOf="@id/greeting" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/button_add"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:src="@drawable/ic_add"
+        android:src="@drawable/ic_add_square"
         app:layout_constraintBottom_toBottomOf="@+id/greeting2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/greeting"
@@ -47,7 +47,10 @@
         android:id="@+id/rv_task"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_margin="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/greeting2"/>
 

@@ -7,15 +7,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.sendiko.justdoit.R
 import com.sendiko.justdoit.databinding.FragmentHomeBinding
 import com.sendiko.justdoit.model.Task
 
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -34,12 +33,29 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
+
+        binding.buttonAdd.setOnClickListener {
+            showInputFragment()
+        }
+
+    }
+
+    private fun showInputFragment() {
+        val inputFrag = BottomSheetDialog(requireContext())
+        val view = layoutInflater.inflate(R.layout.fragment_input_task, null)
+        inputFrag.setContentView(view)
+        inputFrag.show()
     }
 
     private fun setupRecyclerView(){
         val taskList = arrayListOf<Task>(
             Task(
                 "Publish an android app",
+                "My career path",
+                false
+            ),
+            Task(
+                "Improved my skills",
                 "My career path",
                 false
             )
