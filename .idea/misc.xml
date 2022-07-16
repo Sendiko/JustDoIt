@@ -4,6 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.17865707434052758" />
+        <entry key="app/src/main/res/drawable/box_background.xml" value="0.3175" />
+        <entry key="app/src/main/res/drawable/ic_add.xml" value="0.3175" />
         <entry key="app/src/main/res/drawable/ic_check_nav.xml" value="0.3175" />
         <entry key="app/src/main/res/drawable/ic_checked_empty.xml" value="0.1915" />
         <entry key="app/src/main/res/drawable/ic_header.xml" value="0.1915" />
@@ -18,10 +20,13 @@
         <entry key="app/src/main/res/drawable/ic_login.xml" value="0.298" />
         <entry key="app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.298" />
         <entry key="app/src/main/res/drawable/ic_person_white.xml" value="0.298" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.5" />
+        <entry key="app/src/main/res/drawable/ic_rectangle_90.xml" value="0.3175" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.37130801687763715" />
         <entry key="app/src/main/res/layout/card_item_task.xml" value="0.67" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.3582427536231884" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_input_task.xml" value="0.67" />
+        <entry key="app/src/main/res/layout/fragment_input_task_list_dialog.xml" value="0.2941427960666952" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.7345844504021448" />
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.3582427536231884" />
         <entry key="app/src/main/res/layout/fragment_register.xml" value="0.67" />

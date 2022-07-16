@@ -21,4 +21,12 @@
     <string name="edit">Edit</string>
     <string name="greeting4">Here\'s list of things you\'ve done</string>
     <string name="greeting3">Great job, Sendiko!</string>
+    <string name="ic_add">ic_add</string>
+    <string name="add_new_task">Add new task</string>
+    <string name="task">Task</string>
+    <string name="task_hint">things you want to do....</string>
+    <string name="subject">Subject</string>
+    <string name="subject_hint">the subject...</string>
+    <string name="cancel">Cancel</string>
+    <string name="add">Add</string>
 </resources>
