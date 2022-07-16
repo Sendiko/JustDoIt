@@ -19,9 +19,9 @@
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.sendiko.justdoit.ui.notifications.NotificationsFragment"
+        android:name="com.sendiko.justdoit.ui.Settings.SettingsFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_settings" />
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.sendiko.justdoit.ui.login.LoginFragment"
