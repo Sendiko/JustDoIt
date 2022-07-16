@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="BottomNavigationTextStyleActive">
+        <item name="fontFamily" android:state_active="true">@font/nunito_bold</item>
+    </style>
+    <style name="BottomNavigationTextStyleInactive">
+        <item name="fontFamily" android:state_active="false">@font/nunito_regular</item>
+    </style>
+
+</resources>

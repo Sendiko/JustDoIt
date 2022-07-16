@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.sendiko.justdoit.ui.register.RegisterFragment">
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:fontFamily="@font/nunito_bold"
+        android:text="@string/registerq"
+        android:textColor="@color/indigo_dye"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textview3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/nunito_bold"
+        android:text="@string/app_quote"
+        android:textColor="@color/indigo_dye"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/textView2"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/ic_blob_2"
+        android:layout_marginTop="9dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textview3"
+        app:layout_constraintStart_toStartOf="parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/label_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/username"
+            android:fontFamily="@font/nunito_bold"
+            android:textSize="18sp"
+            android:layout_marginTop="48dp"
+            android:layout_marginStart="16dp"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layout_username"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:boxCornerRadiusTopStart="32dp"
+            app:boxCornerRadiusTopEnd="32dp"
+            app:boxCornerRadiusBottomStart="32dp"
+            app:boxCornerRadiusBottomEnd="32dp"
+            app:boxBackgroundMode="filled"
+            app:boxBackgroundColor="@color/white"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp"
+            app:expandedHintEnabled="false"
+            app:hintAnimationEnabled="false"
+            app:hintEnabled="false"
+            app:layout_constraintTop_toBottomOf="@id/label_username"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/username"
+                android:singleLine="true"
+                android:textColor="@color/indigo_dye"
+                android:fontFamily="@font/nunito_bold"
+                android:textAlignment="center"
+                android:textColorHint="@color/darket_gainsboro"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/label_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/email"
+            android:fontFamily="@font/nunito_bold"
+            android:textSize="18sp"
+            android:layout_margin="16dp"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@id/layout_username"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layout_email"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:boxCornerRadiusTopStart="32dp"
+            app:boxCornerRadiusTopEnd="32dp"
+            app:boxCornerRadiusBottomStart="32dp"
+            app:boxCornerRadiusBottomEnd="32dp"
+            app:boxBackgroundMode="filled"
+            app:boxBackgroundColor="@color/white"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp"
+            app:expandedHintEnabled="false"
+            app:hintAnimationEnabled="false"
+            app:hintEnabled="false"
+            app:layout_constraintTop_toBottomOf="@id/label_email"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/email"
+                android:singleLine="true"
+                android:inputType="textEmailAddress"
+                android:textColor="@color/indigo_dye"
+                android:fontFamily="@font/nunito_bold"
+                android:textAlignment="center"
+                android:textColorHint="@color/darket_gainsboro"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/label_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/password"
+            android:fontFamily="@font/nunito_bold"
+            android:textSize="18sp"
+            android:layout_margin="16dp"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@id/layout_email"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layout_password"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:boxCornerRadiusTopStart="32dp"
+            app:boxCornerRadiusTopEnd="32dp"
+            app:boxCornerRadiusBottomStart="32dp"
+            app:boxCornerRadiusBottomEnd="32dp"
+            app:boxBackgroundMode="filled"
+            app:boxBackgroundColor="@color/white"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp"
+            app:expandedHintEnabled="false"
+            app:hintAnimationEnabled="false"
+            app:hintEnabled="false"
+            app:layout_constraintTop_toBottomOf="@id/label_password"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/password"
+                android:singleLine="true"
+                android:inputType="textPassword"
+                android:textColor="@color/indigo_dye"
+                android:fontFamily="@font/nunito_bold"
+                android:textAlignment="center"
+                android:textColorHint="@color/darket_gainsboro"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/label_confirm_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/confirm_password"
+            android:fontFamily="@font/nunito_bold"
+            android:textSize="18sp"
+            android:layout_margin="16dp"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@id/layout_password"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layout_confirm"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:boxCornerRadiusTopStart="32dp"
+            app:boxCornerRadiusTopEnd="32dp"
+            app:boxCornerRadiusBottomStart="32dp"
+            app:boxCornerRadiusBottomEnd="32dp"
+            app:boxBackgroundMode="filled"
+            app:boxBackgroundColor="@color/white"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp"
+            app:expandedHintEnabled="false"
+            app:hintAnimationEnabled="false"
+            app:hintEnabled="false"
+            app:layout_constraintTop_toBottomOf="@id/label_confirm_password"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/confirm_password"
+                android:inputType="textPassword"
+                android:singleLine="true"
+                android:fontFamily="@font/nunito_bold"
+                android:textColor="@color/indigo_dye"
+                android:textAlignment="center"
+                android:textColorHint="@color/darket_gainsboro"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/button_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito_bold"
+            android:layout_marginTop="16dp"
+            android:textAllCaps="true"
+            android:backgroundTint="@color/lighter_ming"
+            app:layout_constraintTop_toBottomOf="@id/layout_confirm"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="@string/registerq" />
+
+        <TextView
+            android:id="@+id/login_here"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_margin="16dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/nunito_bold"
+            android:text="@string/login_here"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button_register" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
