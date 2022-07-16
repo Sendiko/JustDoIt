@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.loginFragment -> navView.isVisible = false
                 R.id.registerFragment -> navView.isVisible = false
                 R.id.splashScreenFragment -> navView.isVisible = false
+                R.id.navigation_notifications -> navView.isVisible = false
                 else -> navView.isVisible = true
             }
         }

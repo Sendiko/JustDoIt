@@ -6,7 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.sendiko.justdoit.R
 import com.sendiko.justdoit.databinding.FragmentDashboardBinding
 import com.sendiko.justdoit.model.Task
 import com.sendiko.justdoit.ui.home.TaskAdapter
@@ -33,6 +36,22 @@ class DashboardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
+
+        binding.buttonAdd.setOnClickListener {
+            showInputFragment()
+        }
+
+        binding.buttonSettings.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_dashboard_to_navigation_notifications)
+        }
+
+    }
+
+    private fun showInputFragment() {
+        val inputFrag = BottomSheetDialog(requireContext())
+        val view = layoutInflater.inflate(R.layout.fragment_input_task, null)
+        inputFrag.setContentView(view)
+        inputFrag.show()
     }
 
     private fun setupRecyclerView(){

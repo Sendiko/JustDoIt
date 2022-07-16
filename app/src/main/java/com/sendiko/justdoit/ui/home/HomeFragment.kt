@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.sendiko.justdoit.R
@@ -38,6 +39,10 @@ class HomeFragment : Fragment() {
             showInputFragment()
         }
 
+        binding.buttonSettings.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_home_to_navigation_notifications)
+        }
+
     }
 
     private fun showInputFragment() {
@@ -48,18 +53,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupRecyclerView(){
-        val taskList = arrayListOf<Task>(
-            Task(
-                "Publish an android app",
-                "My career path",
-                false
-            ),
-            Task(
-                "Improved my skills",
-                "My career path",
-                false
-            )
-        )
+        val taskList = arrayListOf<Task>()
         val rv = binding.rvTask
         rv.layoutManager = LinearLayoutManager(context)
         rv.setHasFixedSize(true)

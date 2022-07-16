@@ -23,7 +23,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="32dp"
                 android:textSize="24sp"
                 android:fontFamily="@font/nunito_bold"
                 android:textColor="@color/white"
