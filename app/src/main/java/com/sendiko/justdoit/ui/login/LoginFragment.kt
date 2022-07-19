@@ -5,14 +5,28 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.sendiko.justdoit.R
+import com.sendiko.justdoit.dataStore
 import com.sendiko.justdoit.databinding.FragmentLoginBinding
+import com.sendiko.justdoit.repository.preferences.AuthPreferences
+import com.sendiko.justdoit.repository.preferences.AuthViewModel
+import com.sendiko.justdoit.repository.preferences.AuthViewModelFactory
 
 class LoginFragment : Fragment() {
 
     private var _binding : FragmentLoginBinding?= null
     private val binding get() = _binding!!
+
+    private val pref by lazy{
+        val context = requireNotNull(this.context)
+        AuthPreferences.getInstance(context.dataStore)
+    }
+
+    private val authViewModel : AuthViewModel by lazy {
+        ViewModelProvider(this, AuthViewModelFactory(pref))[AuthViewModel::class.java]
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,12 +42,17 @@ class LoginFragment : Fragment() {
             val u = binding.inputUsername.text.toString()
             val p = binding.inputUsername.text.toString()
             when{
-                validation(u, p) -> findNavController().navigate(R.id.action_loginFragment_to_navigation_home)
+                validation(u, p) -> postLogin(u, p)
             }
         }
         binding.textView.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
+    }
+
+    private fun postLogin(u: String, p: String) {
+        authViewModel.setLoginState(true)
+        findNavController().navigate(R.id.action_loginFragment_to_navigation_home)
     }
 
     private fun validation(username : String, password : String): Boolean {

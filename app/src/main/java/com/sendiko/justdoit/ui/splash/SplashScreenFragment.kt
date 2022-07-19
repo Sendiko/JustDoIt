@@ -8,14 +8,28 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.sendiko.justdoit.R
+import com.sendiko.justdoit.dataStore
 import com.sendiko.justdoit.databinding.FragmentSplashScreenBinding
+import com.sendiko.justdoit.repository.preferences.AuthPreferences
+import com.sendiko.justdoit.repository.preferences.AuthViewModel
+import com.sendiko.justdoit.repository.preferences.AuthViewModelFactory
 
 class SplashScreenFragment : Fragment() {
 
     private var _binding : FragmentSplashScreenBinding?= null
     private val binding get() = _binding!!
+
+    private val pref by lazy{
+        val context = requireNotNull(this.context)
+        AuthPreferences.getInstance(context.dataStore)
+    }
+
+    private val authViewModel : AuthViewModel by lazy {
+        ViewModelProvider(this, AuthViewModelFactory(pref))[AuthViewModel::class.java]
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,9 +52,20 @@ class SplashScreenFragment : Fragment() {
             binding.appLogo.startAnimation(zoomIn)
         }, 100)
 
-        Handler(Looper.myLooper()!!).postDelayed({
-            findNavController().navigate(R.id.action_splashScreenFragment_to_loginFragment)
-        }, 1000)
+        authViewModel.getLoginState().observe(viewLifecycleOwner){ isLoggedIn ->
+            when(isLoggedIn){
+                true -> {
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        findNavController().navigate(R.id.action_splashScreenFragment_to_navigation_home)
+                    }, 1000)
+                }
+                else -> {
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        findNavController().navigate(R.id.action_splashScreenFragment_to_loginFragment)
+                    }, 1000)
+                }
+            }
+        }
 
     }
 }
