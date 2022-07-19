@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/indigo_dye"
@@ -11,23 +12,25 @@
         android:id="@+id/app_logo"
         android:layout_width="96dp"
         android:layout_height="96dp"
-        android:src="@drawable/ic_justdoit_logo_light"
+        android:contentDescription="@string/app_name"
+        android:src="@mipmap/ic_launcher_app_round"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/app_name" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/app_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/nunito_bold"
         android:text="@string/app_name"
         android:textColor="@color/white"
         android:textSize="24sp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/app_logo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

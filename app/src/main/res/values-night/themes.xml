@@ -11,7 +11,9 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" >?attr/colorPrimaryVariant</item>
+        <item name="android:navigationBarColor">@color/indigo_dye</item>
         <!-- Customize your theme here. -->
+        <item name="android:windowSplashScreenBackground" tools:targetApi="s">@color/indigo_dye</item>
     </style>
 
     <style name="navButtonActive" parent="Widget.MaterialComponents.BottomNavigationView">
