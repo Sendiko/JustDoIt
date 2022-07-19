@@ -43,7 +43,8 @@
         app:layout_constraintBottom_toBottomOf="@+id/greeting2"
         app:layout_constraintEnd_toStartOf="@+id/button_settings"
         app:layout_constraintTop_toTopOf="@+id/greeting"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        app:tint="@color/lighter_ming" />
 
     <ImageView
         android:id="@+id/button_settings"
