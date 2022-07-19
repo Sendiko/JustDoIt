@@ -25,7 +25,7 @@ class RegisterFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.loginHere.setOnClickListener {
-            findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
+            findNavController().navigate(R.id.action_registerFragment2_to_loginFragment2)
         }
 
         binding.buttonRegister.setOnClickListener {
@@ -34,7 +34,7 @@ class RegisterFragment : Fragment() {
             val p = binding.inpurPassword.toString()
             val cp = binding.inputConfirmPassword.toString()
             when{
-                validation(u, e, p, cp) -> findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
+                validation(u, e, p, cp) -> findNavController().navigate(R.id.action_registerFragment2_to_loginFragment2)
             }
         }
 

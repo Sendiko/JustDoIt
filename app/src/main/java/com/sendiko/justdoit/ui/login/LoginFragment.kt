@@ -1,5 +1,6 @@
 package com.sendiko.justdoit.ui.login
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,8 +8,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.sendiko.justdoit.MainActivity
 import com.sendiko.justdoit.R
-import com.sendiko.justdoit.dataStore
+import com.sendiko.justdoit.dataStore1
 import com.sendiko.justdoit.databinding.FragmentLoginBinding
 import com.sendiko.justdoit.repository.preferences.AuthPreferences
 import com.sendiko.justdoit.repository.preferences.AuthViewModel
@@ -21,7 +23,7 @@ class LoginFragment : Fragment() {
 
     private val pref by lazy{
         val context = requireNotNull(this.context)
-        AuthPreferences.getInstance(context.dataStore)
+        AuthPreferences.getInstance(context.dataStore1)
     }
 
     private val authViewModel : AuthViewModel by lazy {
@@ -46,13 +48,14 @@ class LoginFragment : Fragment() {
             }
         }
         binding.textView.setOnClickListener {
-            findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
+            findNavController().navigate(R.id.action_loginFragment2_to_registerFragment2)
         }
     }
 
     private fun postLogin(u: String, p: String) {
         authViewModel.setLoginState(true)
-        findNavController().navigate(R.id.action_loginFragment_to_navigation_home)
+        val intent = Intent(requireActivity(), MainActivity::class.java)
+        startActivity(intent)
     }
 
     private fun validation(username : String, password : String): Boolean {

@@ -23,6 +23,7 @@
         <entry key="app/src/main/res/drawable/ic_person_white.xml" value="0.298" />
         <entry key="app/src/main/res/drawable/ic_rectangle_90.xml" value="0.3175" />
         <entry key="app/src/main/res/drawable/ic_settings_bg.xml" value="0.3175" />
+        <entry key="app/src/main/res/layout/activity_first.xml" value="0.2941427960666952" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.37130801687763715" />
         <entry key="app/src/main/res/layout/card_item_task.xml" value="0.67" />
         <entry key="app/src/main/res/layout/card_item_task_checked.xml" value="0.67" />
