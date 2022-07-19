@@ -59,7 +59,7 @@ class SplashScreenFragment : Fragment() {
                 true -> {
                     Handler(Looper.getMainLooper()).postDelayed({
                         findNavController().navigate(R.id.action_splashScreenFragment_to_navigation_home)
-                    }, 1000)
+                    }, 500)
                 }
                 else -> {
                     Handler(Looper.getMainLooper()).postDelayed({

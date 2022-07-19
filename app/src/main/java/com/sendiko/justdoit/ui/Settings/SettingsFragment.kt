@@ -8,12 +8,25 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.sendiko.justdoit.R
+import com.sendiko.justdoit.dataStore
 import com.sendiko.justdoit.databinding.FragmentSettingsBinding
+import com.sendiko.justdoit.repository.preferences.AuthPreferences
+import com.sendiko.justdoit.repository.preferences.AuthViewModel
+import com.sendiko.justdoit.repository.preferences.AuthViewModelFactory
 
 class SettingsFragment : Fragment() {
 
     private var _binding: FragmentSettingsBinding? = null
     private val binding get() = _binding!!
+
+    private val pref by lazy{
+        val context = requireNotNull(this.context)
+        AuthPreferences.getInstance(context.dataStore)
+    }
+
+    private val authViewModel : AuthViewModel by lazy {
+        ViewModelProvider(this, AuthViewModelFactory(pref))[AuthViewModel::class.java]
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,6 +41,11 @@ class SettingsFragment : Fragment() {
 
         binding.icCancel.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_notifications_to_navigation_home)
+        }
+
+        binding.icLogout.setOnClickListener {
+            authViewModel.setLoginState(false)
+            findNavController().navigate(R.id.action_navigation_notifications_to_splashScreenFragment)
         }
 
         return root

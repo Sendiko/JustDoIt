@@ -39,6 +39,9 @@
             app:destination="@id/navigation_home"
             app:popUpTo="@id/navigation_notifications"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_navigation_notifications_to_splashScreenFragment"
+            app:destination="@id/splashScreenFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
