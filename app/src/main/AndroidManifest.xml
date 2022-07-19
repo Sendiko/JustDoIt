@@ -14,9 +14,12 @@
         android:theme="@style/Theme.JusDoIt"
         tools:targetApi="31">
         <activity
-            android:name="com.sendiko.justdoit.MainActivity"
-            android:exported="true"
-            android:label="@string/app_name">
+            android:name=".MainActivity"
+            android:exported="false"
+            android:theme="@style/MainActivityTheme"/>
+        <activity
+            android:name=".FirstActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

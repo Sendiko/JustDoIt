@@ -1,6 +1,7 @@
 package com.sendiko.justdoit.ui.splash
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -11,8 +12,9 @@ import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.sendiko.justdoit.MainActivity
 import com.sendiko.justdoit.R
-import com.sendiko.justdoit.dataStore
+import com.sendiko.justdoit.dataStore1
 import com.sendiko.justdoit.databinding.FragmentSplashScreenBinding
 import com.sendiko.justdoit.repository.preferences.AuthPreferences
 import com.sendiko.justdoit.repository.preferences.AuthViewModel
@@ -26,7 +28,7 @@ class SplashScreenFragment : Fragment() {
 
     private val pref by lazy{
         val context = requireNotNull(this.context)
-        AuthPreferences.getInstance(context.dataStore)
+        AuthPreferences.getInstance(context.dataStore1)
     }
 
     private val authViewModel : AuthViewModel by lazy {
@@ -58,12 +60,13 @@ class SplashScreenFragment : Fragment() {
             when(isLoggedIn){
                 true -> {
                     Handler(Looper.getMainLooper()).postDelayed({
-                        findNavController().navigate(R.id.action_splashScreenFragment_to_navigation_home)
+                        val intent = Intent(requireActivity(), MainActivity::class.java)
+                        startActivity(intent)
                     }, 500)
                 }
                 else -> {
                     Handler(Looper.getMainLooper()).postDelayed({
-                        findNavController().navigate(R.id.action_splashScreenFragment_to_loginFragment)
+                        findNavController().navigate(R.id.action_splashScreenFragment2_to_loginFragment2)
                     }, 1000)
                 }
             }

@@ -1,5 +1,6 @@
 package com.sendiko.justdoit.ui.Settings
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.sendiko.justdoit.FirstActivity
 import com.sendiko.justdoit.R
 import com.sendiko.justdoit.dataStore
 import com.sendiko.justdoit.databinding.FragmentSettingsBinding
@@ -45,7 +47,8 @@ class SettingsFragment : Fragment() {
 
         binding.icLogout.setOnClickListener {
             authViewModel.setLoginState(false)
-            findNavController().navigate(R.id.action_navigation_notifications_to_splashScreenFragment)
+            val intent = Intent(requireActivity(), FirstActivity::class.java)
+            startActivity(intent)
         }
 
         return root
