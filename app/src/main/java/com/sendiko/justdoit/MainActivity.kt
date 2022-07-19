@@ -3,6 +3,7 @@ package com.sendiko.justdoit
 import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
@@ -27,5 +28,13 @@ class MainActivity : AppCompatActivity() {
 
         navView.setupWithNavController(navController)
         navView.itemActiveIndicatorColor = null
+
+        navController.addOnDestinationChangedListener{ _, destination, _, ->
+            when(destination.id){
+                R.id.navigation_notifications -> navView.isVisible = false
+                else -> navView.isVisible = true
+            }
+        }
+
     }
 }
