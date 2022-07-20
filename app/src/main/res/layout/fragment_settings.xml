@@ -14,7 +14,7 @@
         android:fontFamily="@font/nunito_extrabold"
         android:text="@string/settings"
         android:textColor="@color/indigo_dye"
-        android:textSize="20sp"
+        android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -23,7 +23,8 @@
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:src="@drawable/ic_cancel"
-        android:layout_margin="16dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
@@ -68,38 +69,39 @@
         app:layout_constraintTop_toBottomOf="@+id/greeting3" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="32dp"
         android:background="@drawable/ic_settings_bg"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/imageView2">
 
         <TextView
             android:id="@+id/label_theme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/nunito_bold"
             android:text="@string/theme"
             android:textColor="@color/white"
-            android:fontFamily="@font/nunito_bold"
-            android:layout_marginStart="16dp"
             android:textSize="20sp"
-            app:layout_constraintTop_toTopOf="@id/ic_theme"
             app:layout_constraintBottom_toBottomOf="@id/ic_theme"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/ic_theme" />
 
         <ImageView
             android:id="@+id/ic_theme"
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:src="@drawable/ic_icon_theme"
             android:layout_marginTop="48dp"
             android:layout_marginEnd="16dp"
+            android:contentDescription="@string/theme"
+            android:src="@drawable/ic_icon_theme"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="@string/theme" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <View
             android:id="@+id/border_1"
@@ -107,42 +109,42 @@
             android:layout_height="2dp"
             android:layout_margin="16dp"
             android:background="@color/white"
-            app:layout_constraintTop_toBottomOf="@id/label_theme"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/label_theme" />
 
         <TextView
             android:id="@+id/label_logout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/logout"
+            android:layout_marginStart="16dp"
             android:fontFamily="@font/nunito_bold"
+            android:text="@string/logout"
             android:textColor="@color/white"
             android:textSize="20sp"
-            android:layout_marginStart="16dp"
-            app:layout_constraintTop_toTopOf="@id/ic_logout"
             app:layout_constraintBottom_toBottomOf="@id/ic_logout"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/ic_logout" />
 
         <ImageView
             android:id="@+id/ic_logout"
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:src="@drawable/ic_logout"
             android:layout_margin="16dp"
-            app:layout_constraintTop_toBottomOf="@id/border_1"
+            android:src="@drawable/ic_logout"
+            app:layout_constraintBottom_toTopOf="@id/border_2"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/border_2"/>
+            app:layout_constraintTop_toBottomOf="@id/border_1" />
 
         <View
             android:id="@+id/border_2"
             android:layout_width="0dp"
             android:layout_height="2dp"
-            android:background="@color/white"
             android:layout_margin="16dp"
-            app:layout_constraintTop_toBottomOf="@id/label_logout"
+            android:background="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@id/label_logout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

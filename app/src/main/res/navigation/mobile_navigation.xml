@@ -15,6 +15,11 @@
             app:destination="@id/navigation_notifications"
             app:popUpTo="@id/navigation_home"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_navigation_home_to_taskFragment2"
+            app:destination="@id/taskFragment2"
+            app:popUpTo="@id/navigation_home"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
@@ -25,6 +30,11 @@
         <action
             android:id="@+id/action_navigation_dashboard_to_navigation_notifications"
             app:destination="@id/navigation_notifications"
+            app:popUpTo="@id/navigation_dashboard"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_navigation_dashboard_to_taskFragment2"
+            app:destination="@id/taskFragment2"
             app:popUpTo="@id/navigation_dashboard"
             app:popUpToInclusive="true" />
     </fragment>
@@ -38,6 +48,17 @@
             android:id="@+id/action_navigation_notifications_to_navigation_home"
             app:destination="@id/navigation_home"
             app:popUpTo="@id/navigation_notifications"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/taskFragment2"
+        android:name="com.sendiko.justdoit.ui.task.TaskFragment"
+        android:label="fragment_task"
+        tools:layout="@layout/fragment_task" >
+        <action
+            android:id="@+id/action_taskFragment2_to_navigation_home"
+            app:destination="@id/navigation_home"
+            app:popUpTo="@id/taskFragment2"
             app:popUpToInclusive="true" />
     </fragment>
 </navigation>

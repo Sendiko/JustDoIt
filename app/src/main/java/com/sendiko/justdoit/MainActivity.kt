@@ -32,6 +32,7 @@ class MainActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener{ _, destination, _, ->
             when(destination.id){
                 R.id.navigation_notifications -> navView.isVisible = false
+                R.id.taskFragment2 -> navView.isVisible = false
                 else -> navView.isVisible = true
             }
         }
