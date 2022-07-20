@@ -9,14 +9,27 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sendiko.justdoit.R
+import com.sendiko.justdoit.dataStore1
 import com.sendiko.justdoit.databinding.FragmentDashboardBinding
 import com.sendiko.justdoit.model.Task
+import com.sendiko.justdoit.repository.preferences.AuthPreferences
+import com.sendiko.justdoit.repository.preferences.AuthViewModel
+import com.sendiko.justdoit.repository.preferences.AuthViewModelFactory
 import com.sendiko.justdoit.ui.home.TaskAdapter
 
 class DashboardFragment : Fragment() {
 
     private var _binding: FragmentDashboardBinding? = null
     private val binding get() = _binding!!
+
+    private val pref by lazy{
+        val context = requireNotNull(this.context)
+        AuthPreferences.getInstance(context.dataStore1)
+    }
+
+    private val authViewModel : AuthViewModel by lazy {
+        ViewModelProvider(this, AuthViewModelFactory(pref))[AuthViewModel::class.java]
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,6 +41,10 @@ class DashboardFragment : Fragment() {
 
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        authViewModel.getUser().observe(viewLifecycleOwner){
+            binding.greeting.text = "Great job, $it!"
+        }
 
         return root
     }

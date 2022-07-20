@@ -9,13 +9,26 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sendiko.justdoit.R
+import com.sendiko.justdoit.dataStore1
 import com.sendiko.justdoit.databinding.FragmentHomeBinding
 import com.sendiko.justdoit.model.Task
+import com.sendiko.justdoit.repository.preferences.AuthPreferences
+import com.sendiko.justdoit.repository.preferences.AuthViewModel
+import com.sendiko.justdoit.repository.preferences.AuthViewModelFactory
 
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+
+    private val pref by lazy{
+        val context = requireNotNull(this.context)
+        AuthPreferences.getInstance(context.dataStore1)
+    }
+
+    private val authViewModel : AuthViewModel by lazy {
+        ViewModelProvider(this, AuthViewModelFactory(pref))[AuthViewModel::class.java]
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,6 +49,10 @@ class HomeFragment : Fragment() {
 
         binding.buttonAdd.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_home_to_taskFragment2)
+        }
+
+        authViewModel.getUser().observe(viewLifecycleOwner){
+            binding.greeting.text = "Hi, $it!"
         }
 
         binding.buttonSettings.setOnClickListener {
