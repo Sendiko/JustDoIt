@@ -6,12 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.sendiko.justdoit.MainActivity
 import com.sendiko.justdoit.R
 import com.sendiko.justdoit.dataStore1
 import com.sendiko.justdoit.databinding.FragmentLoginBinding
+import com.sendiko.justdoit.repository.SharedViewModel
 import com.sendiko.justdoit.repository.preferences.AuthPreferences
 import com.sendiko.justdoit.repository.preferences.AuthViewModel
 import com.sendiko.justdoit.repository.preferences.AuthViewModelFactory
@@ -20,6 +22,8 @@ class LoginFragment : Fragment() {
 
     private var _binding : FragmentLoginBinding?= null
     private val binding get() = _binding!!
+
+    private val sharedViewModel : SharedViewModel by activityViewModels()
 
     private val pref by lazy{
         val context = requireNotNull(this.context)
@@ -50,9 +54,15 @@ class LoginFragment : Fragment() {
         binding.textView.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment2_to_registerFragment2)
         }
+
+        authViewModel.getUser().observe(viewLifecycleOwner){
+            sharedViewModel.saveUsername(it)
+        }
+
     }
 
     private fun postLogin(u: String, p: String) {
+        authViewModel.saveUsername(u)
         authViewModel.setLoginState(true)
         val intent = Intent(requireActivity(), MainActivity::class.java)
         startActivity(intent)
