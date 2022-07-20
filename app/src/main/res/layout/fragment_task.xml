@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.task.TaskFragment">
 
     <ImageView
@@ -59,13 +59,13 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:hint="@string/task_hint"
-            android:textColorHint="@color/gainsboro"
             app:boxBackgroundMode="outline"
             app:boxStrokeWidth="0dp"
             app:boxStrokeWidthFocused="0dp"
+            app:expandedHintEnabled="false"
             app:helperTextEnabled="false"
             app:hintAnimationEnabled="false"
+            app:hintEnabled="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/label_task">
@@ -76,7 +76,9 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/box_background_reversed"
                 android:fontFamily="@font/nunito_semibold"
-                android:textColor="@color/white" />
+                android:hint="@string/task_hint"
+                android:textColor="@color/white"
+                android:textColorHint="@color/gainsboro" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -100,13 +102,13 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:hint="@string/subject_hint"
-            android:textColorHint="@color/gainsboro"
             app:boxBackgroundMode="outline"
             app:boxStrokeWidth="0dp"
             app:boxStrokeWidthFocused="0dp"
+            app:expandedHintEnabled="false"
             app:helperTextEnabled="false"
             app:hintAnimationEnabled="false"
+            app:hintEnabled="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/label_subject">
@@ -117,7 +119,9 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/box_background_reversed"
                 android:fontFamily="@font/nunito_semibold"
-                android:textColor="@color/white" />
+                android:hint="@string/subject_hint"
+                android:textColor="@color/white"
+                android:textColorHint="@color/gainsboro" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -138,5 +142,18 @@
             app:layout_constraintTop_toBottomOf="@+id/layout_subject" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ProgressBar
+        android:id="@+id/loading"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:progressTint="@color/white"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
