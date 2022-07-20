@@ -45,6 +45,10 @@ class SettingsFragment : Fragment() {
             findNavController().navigate(R.id.action_navigation_notifications_to_navigation_home)
         }
 
+        authViewModel.getUser().observe(viewLifecycleOwner){
+            binding.greeting3.text = it
+        }
+
         binding.icLogout.setOnClickListener {
             authViewModel.setLoginState(false)
             val intent = Intent(requireActivity(), FirstActivity::class.java)
