@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.sendiko.justdoit.R
 import com.sendiko.justdoit.databinding.FragmentDashboardBinding
 import com.sendiko.justdoit.model.Task
@@ -38,20 +37,13 @@ class DashboardFragment : Fragment() {
         setupRecyclerView()
 
         binding.buttonAdd.setOnClickListener {
-            showInputFragment()
+            findNavController().navigate(R.id.action_navigation_dashboard_to_taskFragment2)
         }
 
         binding.buttonSettings.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_dashboard_to_navigation_notifications)
         }
 
-    }
-
-    private fun showInputFragment() {
-        val inputFrag = BottomSheetDialog(requireContext())
-        val view = layoutInflater.inflate(R.layout.fragment_input_task, null)
-        inputFrag.setContentView(view)
-        inputFrag.show()
     }
 
     private fun setupRecyclerView(){

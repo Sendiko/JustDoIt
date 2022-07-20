@@ -5,6 +5,7 @@
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.17865707434052758" />
         <entry key="app/src/main/res/drawable/box_background.xml" value="0.3175" />
+        <entry key="app/src/main/res/drawable/box_background_reversed.xml" value="0.3175" />
         <entry key="app/src/main/res/drawable/ic_add.xml" value="0.3175" />
         <entry key="app/src/main/res/drawable/ic_check_nav.xml" value="0.3175" />
         <entry key="app/src/main/res/drawable/ic_checkbox_filled.xml" value="0.3175" />
@@ -28,14 +29,15 @@
         <entry key="app/src/main/res/layout/card_item_task.xml" value="0.67" />
         <entry key="app/src/main/res/layout/card_item_task_checked.xml" value="0.67" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.3663471778487753" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.2941427960666952" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.75" />
         <entry key="app/src/main/res/layout/fragment_input_task.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_input_task_list_dialog.xml" value="0.2941427960666952" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.3582427536231884" />
         <entry key="app/src/main/res/layout/fragment_register.xml" value="0.48314606741573035" />
-        <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.2660924750679964" />
+        <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_splash_screen.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_task.xml" value="0.47285223367697593" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.35833333333333334" />
       </map>
     </option>
