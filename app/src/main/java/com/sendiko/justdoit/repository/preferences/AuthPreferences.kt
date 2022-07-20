@@ -10,44 +10,44 @@ import kotlinx.coroutines.flow.map
 
 class AuthPreferences private constructor(val dataStore: DataStore<Preferences>){
 
-    private val loginKey = booleanPreferencesKey("login")
-    private val usernameKey = stringPreferencesKey("username")
+   private val loginKey = booleanPreferencesKey("login")
+   private val usernameKey = stringPreferencesKey("username")
 
-    fun getUsername() : Flow<String> {
-        return dataStore.data.map { key ->
-            key[usernameKey]?:""
-        }
-    }
+   fun getUsername() : Flow<String> {
+      return dataStore.data.map { key ->
+         key[usernameKey]?:""
+      }
+   }
 
-    suspend fun saveUsername(username : String){
-        dataStore.edit { key ->
-            key[usernameKey] = username
-        }
-    }
+   suspend fun saveUsername(username : String){
+      dataStore.edit { key ->
+         key[usernameKey] = username
+      }
+   }
 
-    fun getLoginState() : Flow<Boolean> {
-        return dataStore.data.map { key ->
-            key[loginKey]?: false
-        }
-    }
+   fun getLoginState() : Flow<Boolean> {
+      return dataStore.data.map { key ->
+         key[loginKey]?: false
+      }
+   }
 
-    suspend fun setLoginState(isLoggedIn : Boolean){
-        dataStore.edit { key ->
-            key[loginKey] = isLoggedIn
-        }
-    }
+   suspend fun setLoginState(isLoggedIn : Boolean){
+      dataStore.edit { key ->
+         key[loginKey] = isLoggedIn
+      }
+   }
 
-    companion object{
-        @Volatile
-        private var INSTANCE : AuthPreferences ?= null
+   companion object{
+      @Volatile
+      private var INSTANCE : AuthPreferences ?= null
 
-        fun getInstance(dataStore: DataStore<Preferences>) : AuthPreferences{
-            return INSTANCE ?: kotlin.synchronized(this){
-                val instance = AuthPreferences(dataStore)
-                INSTANCE = instance
-                instance
-            }
-        }
-    }
+      fun getInstance(dataStore: DataStore<Preferences>) : AuthPreferences{
+         return INSTANCE ?: kotlin.synchronized(this){
+            val instance = AuthPreferences(dataStore)
+            INSTANCE = instance
+            instance
+         }
+      }
+   }
 
 }

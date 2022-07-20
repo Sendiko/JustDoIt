@@ -11,25 +11,25 @@ import com.sendiko.justdoit.databinding.FragmentTaskBinding
 
 class TaskFragment : Fragment() {
 
-    private var _binding : FragmentTaskBinding?= null
-    private val binding get() = _binding!!
+   private var _binding : FragmentTaskBinding?= null
+   private val binding get() = _binding!!
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentTaskBinding.inflate(layoutInflater)
+   override fun onCreateView(
+      inflater: LayoutInflater, container: ViewGroup?,
+      savedInstanceState: Bundle?
+   ): View {
+      _binding = FragmentTaskBinding.inflate(layoutInflater)
 
-        return binding.root
-    }
+      return binding.root
+   }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+      super.onViewCreated(view, savedInstanceState)
 
-        binding.icCancel.setOnClickListener {
-            findNavController().navigate(R.id.action_taskFragment2_to_navigation_home)
-        }
+      binding.icCancel.setOnClickListener {
+         findNavController().navigate(R.id.action_taskFragment2_to_navigation_home)
+      }
 
-    }
+   }
 
 }

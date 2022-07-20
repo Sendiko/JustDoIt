@@ -19,60 +19,60 @@ import com.sendiko.justdoit.ui.home.TaskAdapter
 
 class DashboardFragment : Fragment() {
 
-    private var _binding: FragmentDashboardBinding? = null
-    private val binding get() = _binding!!
+   private var _binding: FragmentDashboardBinding? = null
+   private val binding get() = _binding!!
 
-    private val pref by lazy{
-        val context = requireNotNull(this.context)
-        AuthPreferences.getInstance(context.dataStore1)
-    }
+   private val pref by lazy{
+      val context = requireNotNull(this.context)
+      AuthPreferences.getInstance(context.dataStore1)
+   }
 
-    private val authViewModel : AuthViewModel by lazy {
-        ViewModelProvider(this, AuthViewModelFactory(pref))[AuthViewModel::class.java]
-    }
+   private val authViewModel : AuthViewModel by lazy {
+      ViewModelProvider(this, AuthViewModelFactory(pref))[AuthViewModel::class.java]
+   }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        val dashboardViewModel =
-            ViewModelProvider(this)[DashboardViewModel::class.java]
+   override fun onCreateView(
+      inflater: LayoutInflater,
+      container: ViewGroup?,
+      savedInstanceState: Bundle?
+   ): View {
+      val dashboardViewModel =
+         ViewModelProvider(this)[DashboardViewModel::class.java]
 
-        _binding = FragmentDashboardBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+      _binding = FragmentDashboardBinding.inflate(inflater, container, false)
+      val root: View = binding.root
 
-        authViewModel.getUser().observe(viewLifecycleOwner){
-            binding.greeting.text = "Great job, $it!"
-        }
+      authViewModel.getUser().observe(viewLifecycleOwner){
+         binding.greeting.text = "Great job, $it!"
+      }
 
-        return root
-    }
+      return root
+   }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        setupRecyclerView()
+   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+      super.onViewCreated(view, savedInstanceState)
+      setupRecyclerView()
 
-        binding.buttonAdd.setOnClickListener {
-            findNavController().navigate(R.id.action_navigation_dashboard_to_taskFragment2)
-        }
+      binding.buttonAdd.setOnClickListener {
+         findNavController().navigate(R.id.action_navigation_dashboard_to_taskFragment2)
+      }
 
-        binding.buttonSettings.setOnClickListener {
-            findNavController().navigate(R.id.action_navigation_dashboard_to_navigation_notifications)
-        }
+      binding.buttonSettings.setOnClickListener {
+         findNavController().navigate(R.id.action_navigation_dashboard_to_navigation_notifications)
+      }
 
-    }
+   }
 
-    private fun setupRecyclerView(){
-        val taskList = arrayListOf<Task>()
-        val rv = binding.rvTaskChecked
-        rv.layoutManager = LinearLayoutManager(context)
-        rv.setHasFixedSize(true)
-        rv.adapter = TaskAdapter(taskList)
-    }
+   private fun setupRecyclerView(){
+      val taskList = arrayListOf<Task>()
+      val rv = binding.rvTaskChecked
+      rv.layoutManager = LinearLayoutManager(context)
+      rv.setHasFixedSize(true)
+      rv.adapter = TaskAdapter(taskList)
+   }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
+   override fun onDestroyView() {
+      super.onDestroyView()
+      _binding = null
+   }
 }
