@@ -20,6 +20,9 @@ class HomeViewModel : ViewModel() {
    private val _isLoading = MutableLiveData<Boolean>()
    val isLoading : LiveData<Boolean> = _isLoading
 
+   private val _isEmpty = MutableLiveData<Boolean>()
+   val isEmpty : LiveData<Boolean> = _isEmpty
+
    fun getTaskData(taskArrayList : ArrayList<Task>, recyclerView: RecyclerView){
       _isLoading.value = true
       viewModelScope.launch {
@@ -28,12 +31,21 @@ class HomeViewModel : ViewModel() {
             object : ValueEventListener {
                override fun onDataChange(snapshot: DataSnapshot) {
                   taskArrayList.clear()
-                  for (s in snapshot.children){
-                     val task = s.getValue(Task::class.java)
-                     taskArrayList.add(task!!)
-                     _isLoading.value = false
+                  when{
+                     snapshot.exists() -> {
+                        for (s in snapshot.children){
+                           val task = s.getValue(Task::class.java)
+                           taskArrayList.add(task!!)
+                           _isLoading.value = false
+                           _isEmpty.value = false
+                        }
+                        recyclerView.adapter = TaskAdapter(taskArrayList)
+                     }
+                     else -> {
+                        _isLoading.value = false
+                        _isEmpty.value = true
+                     }
                   }
-                  recyclerView.adapter = TaskAdapter(taskArrayList)
                }
 
                override fun onCancelled(error: DatabaseError) {

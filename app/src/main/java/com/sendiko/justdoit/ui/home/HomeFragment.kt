@@ -61,6 +61,13 @@ class HomeFragment : Fragment() {
          }
       }
 
+      homeViewModel.isEmpty.observe(viewLifecycleOwner){
+         when{
+            it -> binding.imageView.isVisible = true
+            else -> binding.imageView.isVisible = false
+         }
+      }
+
       binding.buttonAdd.setOnClickListener {
          findNavController().navigate(R.id.action_navigation_home_to_taskFragment2)
       }

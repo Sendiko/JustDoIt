@@ -15,8 +15,8 @@ class TaskViewModel : ViewModel() {
       var success = true
       db = FirebaseDatabase.getInstance().getReference("this")
       viewModelScope.launch {
-         val task = Task(t, s, false)
          val key = db.push().key.toString()
+         val task = Task(key, t, s, false)
          db.child(key).setValue(task).addOnCompleteListener{
             success = true
          }.addOnFailureListener {
