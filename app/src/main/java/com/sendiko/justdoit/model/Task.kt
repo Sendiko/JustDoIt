@@ -1,7 +1,7 @@
 package com.sendiko.justdoit.model
 
 data class Task(
-   var task : String,
-   val subject: String?,
-   val isDone : Boolean
+   var task : String?= null,
+   val subject: String?= null,
+   val isDone : Boolean?= false
 )

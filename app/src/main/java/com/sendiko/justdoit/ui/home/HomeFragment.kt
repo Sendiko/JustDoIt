@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,6 +23,8 @@ class HomeFragment : Fragment() {
    private var _binding: FragmentHomeBinding? = null
    private val binding get() = _binding!!
 
+   private val homeViewModel : HomeViewModel by activityViewModels()
+
    private val pref by lazy{
       val context = requireNotNull(this.context)
       AuthPreferences.getInstance(context.dataStore1)
@@ -35,8 +39,6 @@ class HomeFragment : Fragment() {
       container: ViewGroup?,
       savedInstanceState: Bundle?
    ): View {
-      val homeViewModel =
-         ViewModelProvider(this)[HomeViewModel::class.java]
 
       _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
@@ -46,6 +48,18 @@ class HomeFragment : Fragment() {
    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
       super.onViewCreated(view, savedInstanceState)
       setupRecyclerView()
+
+      homeViewModel.isLoading.observe(viewLifecycleOwner){
+         when{
+            it -> {
+               binding.progressBar.isAnimating
+               binding.progressBar.isVisible= true
+            }
+            else -> {
+               binding.progressBar.isVisible = false
+            }
+         }
+      }
 
       binding.buttonAdd.setOnClickListener {
          findNavController().navigate(R.id.action_navigation_home_to_taskFragment2)
@@ -66,7 +80,7 @@ class HomeFragment : Fragment() {
       val rv = binding.rvTask
       rv.layoutManager = LinearLayoutManager(context)
       rv.setHasFixedSize(true)
-      rv.adapter = TaskAdapter(taskList)
+      homeViewModel.getTaskData(taskList, rv)
    }
 
    override fun onDestroyView() {
