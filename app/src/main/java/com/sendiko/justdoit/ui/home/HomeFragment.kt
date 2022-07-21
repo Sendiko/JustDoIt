@@ -51,13 +51,8 @@ class HomeFragment : Fragment() {
 
       homeViewModel.isLoading.observe(viewLifecycleOwner){
          when{
-            it -> {
-               binding.progressBar.isAnimating
-               binding.progressBar.isVisible= true
-            }
-            else -> {
-               binding.progressBar.isVisible = false
-            }
+            it -> binding.progressBar.isVisible= true
+            else -> binding.progressBar.isVisible = false
          }
       }
 

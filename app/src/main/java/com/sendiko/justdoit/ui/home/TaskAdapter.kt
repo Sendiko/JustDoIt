@@ -22,9 +22,8 @@ class TaskAdapter(private val task : ArrayList<Task>) : RecyclerView.Adapter<Tas
       holder.binding.task.text = currentItem.task
       holder.binding.subjectTask.text = currentItem.subject
 
-      when (currentItem.isDone) {
-         true -> holder.binding.checkbox.setImageResource(R.drawable.ic_checkbox_filled)
-         else -> holder.binding.checkbox.setImageResource(R.drawable.ic_checked_empty)
+      holder.binding.checkbox.setOnClickListener {
+         checkTask(currentItem)
       }
 
    }
@@ -33,8 +32,13 @@ class TaskAdapter(private val task : ArrayList<Task>) : RecyclerView.Adapter<Tas
       return task.size
    }
 
-   fun checkTask(task: Task){
+   private fun checkTask(task: Task){
       val db = FirebaseDatabase.getInstance().getReference("this")
+      val db2 = FirebaseDatabase.getInstance().getReference("this_checked")
+      val task = Task(task.id, task.task, task.subject, true)
+      db2.child(task.id.toString()).setValue(task).addOnCompleteListener {
+         db.child(task.id.toString()).removeValue()
+      }
    }
 
 }
