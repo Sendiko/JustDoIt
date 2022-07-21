@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,8 +21,6 @@ class HomeFragment : Fragment() {
    private var _binding: FragmentHomeBinding? = null
    private val binding get() = _binding!!
 
-   private lateinit var taskArrayList : ArrayList<Task>
-
    private val pref by lazy{
       val context = requireNotNull(this.context)
       AuthPreferences.getInstance(context.dataStore1)
@@ -33,14 +30,15 @@ class HomeFragment : Fragment() {
       ViewModelProvider(this, AuthViewModelFactory(pref))[AuthViewModel::class.java]
    }
 
-   private val homeViewModel : HomeViewModel by activityViewModels()
-
    override fun onCreateView(
       inflater: LayoutInflater,
       container: ViewGroup?,
       savedInstanceState: Bundle?
    ): View {
-      _binding = FragmentHomeBinding.inflate(layoutInflater)
+      val homeViewModel =
+         ViewModelProvider(this)[HomeViewModel::class.java]
+
+      _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
       return binding.root
    }
@@ -64,10 +62,11 @@ class HomeFragment : Fragment() {
    }
 
    private fun setupRecyclerView(){
+      val taskList = arrayListOf<Task>()
       val rv = binding.rvTask
       rv.layoutManager = LinearLayoutManager(context)
-      taskArrayList = arrayListOf()
-      homeViewModel.getTask(taskArrayList, rv)
+      rv.setHasFixedSize(true)
+      rv.adapter = TaskAdapter(taskList)
    }
 
    override fun onDestroyView() {

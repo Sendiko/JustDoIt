@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.sendiko.justdoit.R
 import com.sendiko.justdoit.databinding.FragmentTaskBinding
 
@@ -37,6 +38,12 @@ class TaskFragment : Fragment() {
          val t = binding.inputTask.text.toString()
          val s = binding.inputSubject.text.toString()
          taskViewModel.insertTask(t, s)
+         taskViewModel.success.observe(viewLifecycleOwner){
+            when{
+               it -> findNavController().navigate(R.id.action_taskFragment2_to_navigation_home)
+               else -> Snackbar.make(requireView(), "Error", Snackbar.LENGTH_LONG).show()
+            }
+         }
       }
 
    }
