@@ -26,6 +26,11 @@ class Task2Adapter(private val task2 : ArrayList<Task2>) :
       holder.binding.checkbox.setOnClickListener {
          unCheckTask(currentItem)
       }
+
+      holder.binding.delete.setOnClickListener {
+         deleteTask(currentItem)
+      }
+
    }
 
    override fun getItemCount(): Int {
@@ -40,4 +45,10 @@ class Task2Adapter(private val task2 : ArrayList<Task2>) :
          db2.child(task.id.toString()).removeValue()
       }
    }
+
+   private fun deleteTask(task2: Task2){
+      val db = FirebaseDatabase.getInstance().getReference("this_checked")
+      db.child(task2.id.toString()).removeValue()
+   }
+
 }
