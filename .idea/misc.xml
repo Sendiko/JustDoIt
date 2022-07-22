@@ -24,12 +24,13 @@
         <entry key="app/src/main/res/drawable/ic_person_white.xml" value="0.298" />
         <entry key="app/src/main/res/drawable/ic_rectangle_90.xml" value="0.3175" />
         <entry key="app/src/main/res/drawable/ic_settings_bg.xml" value="0.3175" />
+        <entry key="app/src/main/res/drawable/ic_task_bg.xml" value="0.298" />
         <entry key="app/src/main/res/layout/activity_first.xml" value="0.2941427960666952" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.37130801687763715" />
         <entry key="app/src/main/res/layout/card_item_task.xml" value="0.67" />
         <entry key="app/src/main/res/layout/card_item_task_checked.xml" value="0.67" />
-        <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.9" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.75" />
+        <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.47810979847116053" />
         <entry key="app/src/main/res/layout/fragment_input_task.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_input_task_list_dialog.xml" value="0.2941427960666952" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.33" />
@@ -37,7 +38,9 @@
         <entry key="app/src/main/res/layout/fragment_register.xml" value="0.48314606741573035" />
         <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_splash_screen.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/fragment_task.xml" value="0.47285223367697593" />
+        <entry key="app/src/main/res/layout/fragment_task.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_update_dialog.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/fragment_update_dialog_list_dialog.xml" value="0.33" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.35833333333333334" />
       </map>
     </option>

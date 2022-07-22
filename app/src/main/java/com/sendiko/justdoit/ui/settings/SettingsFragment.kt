@@ -18,48 +18,48 @@ import com.sendiko.justdoit.repository.preferences.AuthViewModelFactory
 
 class SettingsFragment : Fragment() {
 
-    private var _binding: FragmentSettingsBinding? = null
-    private val binding get() = _binding!!
+   private var _binding: FragmentSettingsBinding? = null
+   private val binding get() = _binding!!
 
-    private val pref by lazy{
-        val context = requireNotNull(this.context)
-        AuthPreferences.getInstance(context.dataStore)
-    }
+   private val pref by lazy{
+      val context = requireNotNull(this.context)
+      AuthPreferences.getInstance(context.dataStore)
+   }
 
-    private val authViewModel : AuthViewModel by lazy {
-        ViewModelProvider(this, AuthViewModelFactory(pref))[AuthViewModel::class.java]
-    }
+   private val authViewModel : AuthViewModel by lazy {
+      ViewModelProvider(this, AuthViewModelFactory(pref))[AuthViewModel::class.java]
+   }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        val settingsViewModel =
-            ViewModelProvider(this)[SettingsViewModel::class.java]
+   override fun onCreateView(
+      inflater: LayoutInflater,
+      container: ViewGroup?,
+      savedInstanceState: Bundle?
+   ): View {
+      val settingsViewModel =
+         ViewModelProvider(this)[SettingsViewModel::class.java]
 
-        _binding = FragmentSettingsBinding.inflate(layoutInflater)
-        val root: View = binding.root
+      _binding = FragmentSettingsBinding.inflate(layoutInflater)
+      val root: View = binding.root
 
-        binding.icCancel.setOnClickListener {
-            findNavController().navigate(R.id.action_navigation_notifications_to_navigation_home)
-        }
+      binding.icCancel.setOnClickListener {
+         findNavController().navigate(R.id.action_navigation_notifications_to_navigation_home)
+      }
 
-        authViewModel.getUser().observe(viewLifecycleOwner){
-            binding.greeting3.text = it
-        }
+      authViewModel.getUser().observe(viewLifecycleOwner){
+         binding.greeting3.text = it
+      }
 
-        binding.icLogout.setOnClickListener {
-            authViewModel.setLoginState(false)
-            val intent = Intent(requireActivity(), FirstActivity::class.java)
-            startActivity(intent)
-        }
+      binding.icLogout.setOnClickListener {
+         authViewModel.setLoginState(false)
+         val intent = Intent(requireActivity(), FirstActivity::class.java)
+         startActivity(intent)
+      }
 
-        return root
-    }
+      return root
+   }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
+   override fun onDestroyView() {
+      super.onDestroyView()
+      _binding = null
+   }
 }

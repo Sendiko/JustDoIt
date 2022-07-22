@@ -20,91 +20,91 @@ import com.sendiko.justdoit.repository.preferences.AuthViewModelFactory
 
 class LoginFragment : Fragment() {
 
-    private var _binding : FragmentLoginBinding?= null
-    private val binding get() = _binding!!
+   private var _binding : FragmentLoginBinding?= null
+   private val binding get() = _binding!!
 
-    private val sharedViewModel : SharedViewModel by activityViewModels()
+   private val sharedViewModel : SharedViewModel by activityViewModels()
 
-    private val pref by lazy{
-        val context = requireNotNull(this.context)
-        AuthPreferences.getInstance(context.dataStore1)
-    }
+   private val pref by lazy{
+      val context = requireNotNull(this.context)
+      AuthPreferences.getInstance(context.dataStore1)
+   }
 
-    private val authViewModel : AuthViewModel by lazy {
-        ViewModelProvider(this, AuthViewModelFactory(pref))[AuthViewModel::class.java]
-    }
+   private val authViewModel : AuthViewModel by lazy {
+      ViewModelProvider(this, AuthViewModelFactory(pref))[AuthViewModel::class.java]
+   }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentLoginBinding.inflate(layoutInflater)
-        return binding.root
-    }
+   override fun onCreateView(
+      inflater: LayoutInflater, container: ViewGroup?,
+      savedInstanceState: Bundle?
+   ): View {
+      _binding = FragmentLoginBinding.inflate(layoutInflater)
+      return binding.root
+   }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        binding.buttonLogin.setOnClickListener {
-            val u = binding.inputUsername.text.toString()
-            val p = binding.inputUsername.text.toString()
-            when{
-                validation(u, p) -> postLogin(u, p)
+   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+      super.onViewCreated(view, savedInstanceState)
+      binding.buttonLogin.setOnClickListener {
+         val u = binding.inputUsername.text.toString()
+         val p = binding.inputUsername.text.toString()
+         when{
+            validation(u, p) -> postLogin(u, p)
+         }
+      }
+      binding.textView.setOnClickListener {
+         findNavController().navigate(R.id.action_loginFragment2_to_registerFragment2)
+      }
+
+      authViewModel.getUser().observe(viewLifecycleOwner){
+         sharedViewModel.saveUsername(it)
+      }
+
+   }
+
+   private fun postLogin(u: String, p: String) {
+      authViewModel.saveUsername(u)
+      authViewModel.setLoginState(true)
+      val intent = Intent(requireActivity(), MainActivity::class.java)
+      startActivity(intent)
+   }
+
+   private fun validation(username : String, password : String): Boolean {
+      var valid = true
+      when {
+         username.isNotBlank() -> {
+            when {
+               password.isNotBlank() -> {
+                  valid = true
+                  binding.layoutUsername.error = null
+                  binding.layoutPassword.error = null
+               }
+               username.isBlank() || password.isBlank() -> {
+                  valid = false
+                  binding.layoutUsername.error = "Please fill in Username and Password"
+                  binding.layoutPassword.error = "Please fill in Username and Password"
+               }
+               password.length < 8 -> {
+                  binding.layoutPassword.error = "Password must be at least 8 characters"
+                  valid = false
+               }
             }
-        }
-        binding.textView.setOnClickListener {
-            findNavController().navigate(R.id.action_loginFragment2_to_registerFragment2)
-        }
+         }
+         username.isBlank() || password.isBlank() -> {
+            valid = false
+            binding.layoutUsername.error = "Please fill in Username and Password"
+            binding.layoutPassword.error = "Please fill in Username and Password"
+         }
+         password.length < 8 -> {
+            binding.layoutPassword.error = "Password must be at least 8 characters"
+            valid = false
+         }
+      }
+      return valid
+   }
 
-        authViewModel.getUser().observe(viewLifecycleOwner){
-            sharedViewModel.saveUsername(it)
-        }
-
-    }
-
-    private fun postLogin(u: String, p: String) {
-        authViewModel.saveUsername(u)
-        authViewModel.setLoginState(true)
-        val intent = Intent(requireActivity(), MainActivity::class.java)
-        startActivity(intent)
-    }
-
-    private fun validation(username : String, password : String): Boolean {
-        var valid = true
-        when {
-            username.isNotBlank() -> {
-                when {
-                    password.isNotBlank() -> {
-                        valid = true
-                        binding.layoutUsername.error = null
-                        binding.layoutPassword.error = null
-                    }
-                    username.isBlank() || password.isBlank() -> {
-                        valid = false
-                        binding.layoutUsername.error = "Please fill in Username and Password"
-                        binding.layoutPassword.error = "Please fill in Username and Password"
-                    }
-                    password.length < 8 -> {
-                        binding.layoutPassword.error = "Password must be at least 8 characters"
-                        valid = false
-                    }
-                }
-            }
-            username.isBlank() || password.isBlank() -> {
-                valid = false
-                binding.layoutUsername.error = "Please fill in Username and Password"
-                binding.layoutPassword.error = "Please fill in Username and Password"
-            }
-            password.length < 8 -> {
-                binding.layoutPassword.error = "Password must be at least 8 characters"
-                valid = false
-            }
-        }
-        return valid
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
-    }
+   override fun onDestroy() {
+      super.onDestroy()
+      _binding = null
+   }
 
 }
