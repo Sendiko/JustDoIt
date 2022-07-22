@@ -1,18 +1,18 @@
 package com.sendiko.justdoit.ui.home
 
+import android.app.Application
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.*
 import com.sendiko.justdoit.model.Task
 import kotlinx.coroutines.launch
 
-class HomeViewModel : ViewModel() {
+class HomeViewModel(application: Application) : AndroidViewModel(application) {
 
    private lateinit var db : DatabaseReference
+
+   private val context by lazy { getApplication<Application>().applicationContext }
 
    private val _isFailed = MutableLiveData<Boolean>()
    val isFailed : LiveData<Boolean> = _isFailed
@@ -39,7 +39,7 @@ class HomeViewModel : ViewModel() {
                            _isLoading.value = false
                            _isEmpty.value = false
                         }
-                        recyclerView.adapter = TaskAdapter(taskArrayList)
+                        recyclerView.adapter = TaskAdapter(taskArrayList,context)
                      }
                      else -> {
                         _isLoading.value = false
