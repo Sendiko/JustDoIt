@@ -7,7 +7,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.FirebaseDatabase
-import com.sendiko.justdoit.R
 import com.sendiko.justdoit.databinding.CardItemTaskBinding
 import com.sendiko.justdoit.model.Task
 
@@ -46,5 +45,4 @@ class TaskAdapter(private val task : ArrayList<Task>, context : Context) : Recyc
          db.child(task.id.toString()).removeValue()
       }
    }
-
 }
