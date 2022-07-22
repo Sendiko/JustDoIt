@@ -32,6 +32,7 @@ class DashboardViewModel : ViewModel() {
          db.addValueEventListener(
             object : ValueEventListener {
                override fun onDataChange(snapshot: DataSnapshot) {
+                  taskArrayList.clear()
                   when{
                      snapshot.exists() -> {
                         for (s in snapshot.children){
