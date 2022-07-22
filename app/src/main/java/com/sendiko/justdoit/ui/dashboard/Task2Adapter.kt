@@ -1,5 +1,6 @@
 package com.sendiko.justdoit.ui.dashboard
 
+import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -22,6 +23,8 @@ class Task2Adapter(private val task2 : ArrayList<Task2>) :
       val currentItem = task2[position]
       holder.binding.task.text = currentItem.task
       holder.binding.subjectTask.text = currentItem.subject
+      holder.binding.task.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
+      holder.binding.subjectTask.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
 
       holder.binding.checkbox.setOnClickListener {
          unCheckTask(currentItem)
@@ -40,9 +43,9 @@ class Task2Adapter(private val task2 : ArrayList<Task2>) :
    private fun unCheckTask(task2: Task2){
       val db = FirebaseDatabase.getInstance().getReference("this")
       val db2 = FirebaseDatabase.getInstance().getReference("this_checked")
-      val task = Task(task2.id, task2.task, task2.subject, true)
-      db.child(task.id.toString()).setValue(task).addOnCompleteListener {
-         db2.child(task.id.toString()).removeValue()
+      val tasks = Task(task2.id, task2.task, task2.subject, true)
+      db.child(task2.id.toString()).setValue(tasks).addOnCompleteListener {
+         db2.child(task2.id.toString()).removeValue()
       }
    }
 
