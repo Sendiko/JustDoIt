@@ -6,11 +6,11 @@ import androidx.lifecycle.ViewModel
 
 class SharedViewModel : ViewModel() {
 
-    private val _username = MutableLiveData<String>()
-    var username : LiveData<String> = _username
+   private val _username = MutableLiveData<String>()
+   var username : LiveData<String> = _username
 
-    fun saveUsername(username : String){
-        _username.value = username
-    }
+   fun saveUsername(username : String){
+      _username.value = username
+   }
 
 }

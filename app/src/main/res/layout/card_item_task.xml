@@ -33,7 +33,7 @@
                 android:textAlignment="textStart"
                 android:textColor="@color/indigo_dye"
                 android:textSize="18sp"
-                app:layout_constraintEnd_toStartOf="@+id/edit"
+                app:layout_constraintEnd_toStartOf="@+id/update"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -51,14 +51,14 @@
                 android:textAlignment="textStart"
                 android:textColor="@color/indigo_dye"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/edit"
+                app:layout_constraintEnd_toStartOf="@+id/update"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/task"
                 app:layout_constraintVertical_bias="0.238" />
 
             <ImageView
-                android:id="@+id/edit"
+                android:id="@+id/update"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:layout_marginTop="16dp"
@@ -66,8 +66,7 @@
                 android:layout_marginBottom="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/checkbox"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_edit" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/checkbox"
