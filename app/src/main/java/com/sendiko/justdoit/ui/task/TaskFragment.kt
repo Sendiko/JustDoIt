@@ -38,11 +38,36 @@ class TaskFragment : Fragment() {
          val t = binding.inputTask.text.toString()
          val s = binding.inputSubject.text.toString()
          when{
-            taskViewModel.insertTask(t, s) -> findNavController().navigate(R.id.action_taskFragment2_to_navigation_home)
-            else -> Toast.makeText(context, "failed", Toast.LENGTH_SHORT).show()
+            validationFrom(t, s) -> {
+               when{
+                  taskViewModel.insertTask(t, s) ->
+                     findNavController().navigate(R.id.action_taskFragment2_to_navigation_home)
+                  else -> Toast.makeText(context, "failed", Toast.LENGTH_SHORT).show()
+               }
+            }
          }
       }
 
+   }
+
+   private fun validationFrom(t : String, s : String) : Boolean {
+      var valid = false
+      when{
+         t.isEmpty() -> {
+            binding.layoutTask.error = "This can't be empty"
+            valid = false
+         }
+         s.isEmpty() -> {
+            binding.layoutSubject.error = "This can't be empty"
+            valid = false
+         }
+         t.isNotEmpty() && s.isNotEmpty() -> {
+            binding.layoutTask.error = null
+            binding.layoutSubject.error = null
+            valid = true
+         }
+      }
+      return valid
    }
 
 }
