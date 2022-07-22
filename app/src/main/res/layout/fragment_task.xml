@@ -30,21 +30,23 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/container"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="32dp"
-        android:background="@drawable/ic_settings_bg"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/ic_task_bg"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/label_new_task">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/label_task"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="48dp"
+            android:layout_marginTop="16dp"
             android:fontFamily="@font/nunito_bold"
             android:text="@string/task"
             android:textColor="@color/white"
@@ -62,6 +64,8 @@
             app:boxBackgroundMode="outline"
             app:boxStrokeWidth="0dp"
             app:boxStrokeWidthFocused="0dp"
+            app:errorIconTint="@android:color/holo_red_light"
+            app:errorTextColor="@android:color/holo_red_light"
             app:expandedHintEnabled="false"
             app:helperTextEnabled="false"
             app:hintAnimationEnabled="false"
@@ -74,13 +78,13 @@
                 android:id="@+id/input_task"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:singleLine="true"
-                android:textCursorDrawable="@color/white"
                 android:background="@drawable/box_background_reversed"
                 android:fontFamily="@font/nunito_semibold"
                 android:hint="@string/task_hint"
+                android:singleLine="true"
                 android:textColor="@color/white"
-                android:textColorHint="@color/gainsboro" />
+                android:textColorHint="@color/gainsboro"
+                android:textCursorDrawable="@color/white" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -107,6 +111,8 @@
             app:boxBackgroundMode="outline"
             app:boxStrokeWidth="0dp"
             app:boxStrokeWidthFocused="0dp"
+            app:errorIconTint="@android:color/holo_red_light"
+            app:errorTextColor="@android:color/holo_red_light"
             app:expandedHintEnabled="false"
             app:helperTextEnabled="false"
             app:hintAnimationEnabled="false"
@@ -119,12 +125,12 @@
                 android:id="@+id/input_subject"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textCursorDrawable="@color/white"
                 android:background="@drawable/box_background_reversed"
                 android:fontFamily="@font/nunito_semibold"
                 android:hint="@string/subject_hint"
                 android:textColor="@color/white"
-                android:textColorHint="@color/gainsboro" />
+                android:textColorHint="@color/gainsboro"
+                android:textCursorDrawable="@color/white" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -135,11 +141,13 @@
             android:layout_marginStart="72dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="72dp"
+            android:layout_marginBottom="16dp"
             android:backgroundTint="@color/white"
             android:fontFamily="@font/nunito_bold"
             android:text="@string/save"
             android:textAllCaps="true"
             android:textColor="@color/indigo_dye"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/layout_subject"
             app:layout_constraintStart_toStartOf="@+id/layout_subject"
             app:layout_constraintTop_toBottomOf="@+id/layout_subject" />
