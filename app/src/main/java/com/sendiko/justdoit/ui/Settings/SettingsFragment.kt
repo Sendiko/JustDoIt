@@ -1,4 +1,4 @@
-package com.sendiko.justdoit.ui.settings
+package com.sendiko.justdoit.ui.Settings
 
 import android.content.Intent
 import android.os.Bundle
