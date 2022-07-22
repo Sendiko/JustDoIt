@@ -63,9 +63,15 @@ class DashboardFragment : Fragment() {
 
       dashboardViewModel.isEmpty.observe(viewLifecycleOwner){
          when{
-            it -> binding.imageView3.isVisible = true
+            it -> {
+               binding.imageView3.isVisible = true
+            }
             else -> binding.imageView3.isVisible = false
          }
+      }
+
+      binding.swipeRefresh.setOnRefreshListener {
+         requireActivity().recreate()
       }
 
       binding.buttonAdd.setOnClickListener {

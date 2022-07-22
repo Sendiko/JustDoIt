@@ -16,6 +16,8 @@ class DashboardViewModel : ViewModel() {
 
    private lateinit var db : DatabaseReference
 
+   var emptyList = false
+
    private val _isFailed = MutableLiveData<Boolean>()
    val isFailed : LiveData<Boolean> = _isFailed
 
@@ -40,12 +42,14 @@ class DashboardViewModel : ViewModel() {
                            taskArrayList.add(task!!)
                            _isLoading.value = false
                            _isEmpty.value = false
+                           emptyList = false
                         }
                         recyclerView.adapter = Task2Adapter(taskArrayList)
                      }
                      else -> {
                         _isLoading.value = false
                         _isEmpty.value = true
+                        emptyList = true
                      }
                   }
                }

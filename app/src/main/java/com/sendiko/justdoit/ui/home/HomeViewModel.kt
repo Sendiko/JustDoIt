@@ -14,6 +14,8 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
 
    private val context by lazy { getApplication<Application>().applicationContext }
 
+   var emptyList = false
+
    private val _isFailed = MutableLiveData<Boolean>()
    val isFailed : LiveData<Boolean> = _isFailed
 
@@ -38,12 +40,14 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
                            taskArrayList.add(task!!)
                            _isLoading.value = false
                            _isEmpty.value = false
+                           emptyList = false
                         }
                         recyclerView.adapter = TaskAdapter(taskArrayList,context)
                      }
                      else -> {
                         _isLoading.value = false
                         _isEmpty.value = true
+                        emptyList = true
                      }
                   }
                }

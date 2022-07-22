@@ -72,21 +72,27 @@ class HomeFragment : Fragment() {
 
       homeViewModel.isEmpty.observe(viewLifecycleOwner){
          when{
-            it -> binding.imageView.isVisible = true
+            it -> {
+               binding.imageView.isVisible = true
+            }
             else -> binding.imageView.isVisible = false
          }
-      }
-
-      binding.buttonAdd.setOnClickListener {
-         findNavController().navigate(R.id.action_navigation_home_to_taskFragment2)
       }
 
       authViewModel.getUser().observe(viewLifecycleOwner){
          binding.greeting.text = "Hi, $it!"
       }
 
+      binding.buttonAdd.setOnClickListener {
+         findNavController().navigate(R.id.action_navigation_home_to_taskFragment2)
+      }
+
       binding.buttonSettings.setOnClickListener {
          findNavController().navigate(R.id.action_navigation_home_to_navigation_notifications)
+      }
+
+      binding.swipeRefresh.setOnRefreshListener {
+         requireActivity().recreate()
       }
 
    }
