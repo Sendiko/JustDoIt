@@ -1,2 +1,2 @@
 # JustDoIt
-## your everyday task manager
+## Branch for features update without issue
