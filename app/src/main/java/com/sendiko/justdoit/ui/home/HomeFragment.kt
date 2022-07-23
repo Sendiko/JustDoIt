@@ -126,14 +126,10 @@ class HomeFragment : Fragment() {
       }
 
       buttonSubmit.setOnClickListener {
-         CoroutineScope(Dispatchers.IO).launch {
-            val t = inputTask.text.toString()
-            val s = inputSubject.text.toString()
-            val key = db.push().key.toString()
-            val task = Task(key, t, s, false)
-            db.child(key).setValue(task).addOnCompleteListener {
-               inputSheet.dismiss()
-            }
+         val t = inputTask.text.toString()
+         val s = inputSubject.text.toString()
+         homeViewModel.inputTask(t, s).observe(viewLifecycleOwner){
+            inputSheet.dismiss()
          }
       }
 
