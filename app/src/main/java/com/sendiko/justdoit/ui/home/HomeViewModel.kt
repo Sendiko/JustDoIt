@@ -25,6 +25,22 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
    private val _isEmpty = MutableLiveData<Boolean>()
    val isEmpty : LiveData<Boolean> = _isEmpty
 
+   fun inputTask(t : String, s : String) : LiveData<Boolean> {
+      val isDone = MutableLiveData<Boolean>()
+      _isLoading.value = true
+      viewModelScope.launch {
+         isDone.value = false
+         db = FirebaseDatabase.getInstance().getReference("this")
+         val key = db.push().key.toString()
+         val task = Task(key, t, s, false)
+         db.child(key).setValue(task).addOnCompleteListener {
+            _isLoading.value = false
+            isDone.value = true
+         }
+      }
+      return isDone
+   }
+
    fun getTaskData(taskArrayList : ArrayList<Task>, recyclerView: RecyclerView){
       _isLoading.value = true
       viewModelScope.launch {
