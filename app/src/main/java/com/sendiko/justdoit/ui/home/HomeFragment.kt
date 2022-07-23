@@ -36,8 +36,6 @@ import org.w3c.dom.Text
 
 class HomeFragment : Fragment() {
 
-   private lateinit var db : DatabaseReference
-
    private var _binding: FragmentHomeBinding? = null
    private val binding get() = _binding!!
 
@@ -86,8 +84,12 @@ class HomeFragment : Fragment() {
          when{
             it -> {
                binding.imageView.isVisible = true
+               binding.textSwipe.isVisible = true
             }
-            else -> binding.imageView.isVisible = false
+            else -> {
+               binding.imageView.isVisible = false
+               binding.textSwipe.isVisible = false
+            }
          }
       }
 
@@ -119,7 +121,6 @@ class HomeFragment : Fragment() {
       val inputSubject = view.findViewById<TextInputEditText>(R.id.input_subject)
       val buttonCancel = view.findViewById<Button>(R.id.button_cancel)
       val buttonSubmit = view.findViewById<Button>(R.id.button_submit)
-      db = FirebaseDatabase.getInstance().getReference("this")
 
       buttonCancel.setOnClickListener {
          inputSheet.dismiss()

@@ -4,12 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.textfield.TextInputEditText
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.sendiko.justdoit.R
 import com.sendiko.justdoit.dataStore1
 import com.sendiko.justdoit.databinding.FragmentDashboardBinding
@@ -65,8 +70,12 @@ class DashboardFragment : Fragment() {
          when{
             it -> {
                binding.imageView3.isVisible = true
+               binding.textSwipe3.isVisible = true
             }
-            else -> binding.imageView3.isVisible = false
+            else -> {
+               binding.imageView3.isVisible = false
+               binding.textSwipe3.isVisible = false
+            }
          }
       }
 
@@ -75,11 +84,36 @@ class DashboardFragment : Fragment() {
       }
 
       binding.buttonAdd.setOnClickListener {
-         findNavController().navigate(R.id.action_navigation_dashboard_to_taskFragment2)
+         showInputSheet()
       }
 
       binding.buttonSettings.setOnClickListener {
          findNavController().navigate(R.id.action_navigation_dashboard_to_navigation_notifications)
+      }
+
+   }
+
+   private fun showInputSheet(){
+      val inputSheet = BottomSheetDialog(requireContext())
+      val view = layoutInflater.inflate(R.layout.fragment_task, null)
+      inputSheet.setContentView(view)
+      inputSheet.show()
+
+      val inputTask = view.findViewById<TextInputEditText>(R.id.input_task)
+      val inputSubject = view.findViewById<TextInputEditText>(R.id.input_subject)
+      val buttonCancel = view.findViewById<Button>(R.id.button_cancel)
+      val buttonSubmit = view.findViewById<Button>(R.id.button_submit)
+
+      buttonCancel.setOnClickListener {
+         inputSheet.dismiss()
+      }
+
+      buttonSubmit.setOnClickListener {
+         val t = inputTask.text.toString()
+         val s = inputSubject.text.toString()
+         dashboardViewModel.inputTask(t, s).observe(viewLifecycleOwner){
+            inputSheet.dismiss()
+         }
       }
 
    }
