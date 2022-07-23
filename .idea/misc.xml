@@ -38,7 +38,7 @@
         <entry key="app/src/main/res/layout/fragment_register.xml" value="0.48314606741573035" />
         <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_splash_screen.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/fragment_task.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_task.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_update_dialog.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_update_dialog_list_dialog.xml" value="0.33" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.35833333333333334" />

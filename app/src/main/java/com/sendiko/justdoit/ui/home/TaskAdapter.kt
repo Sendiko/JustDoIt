@@ -14,9 +14,6 @@ class TaskAdapter(private val task : ArrayList<Task>, context : Context) : Recyc
 
    class TaskViewHolder(var binding: CardItemTaskBinding) : RecyclerView.ViewHolder(binding.root)
 
-   private val _precessIsDone = MutableLiveData<Boolean>()
-   val processIsDone : LiveData<Boolean> = _precessIsDone
-
    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
       val binding = CardItemTaskBinding.inflate(LayoutInflater.from(parent.context))
       return TaskViewHolder(binding)

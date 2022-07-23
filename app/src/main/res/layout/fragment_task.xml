@@ -3,168 +3,138 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".ui.task.TaskFragment">
 
-    <ImageView
-        android:id="@+id/ic_cancel"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="18dp"
-        android:layout_marginEnd="16dp"
-        android:src="@drawable/ic_cancel"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/label_new_task"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:fontFamily="@font/nunito_bold"
-        android:text="@string/add_new_task"
-        android:textColor="@color/indigo_dye"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/container"
-        android:layout_width="0dp"
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/ic_task_bg"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@color/indigo_dye"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/label_task"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
             android:fontFamily="@font/nunito_bold"
-            android:text="@string/task"
+            android:text="@string/add_new_task"
             android:textColor="@color/white"
-            android:textSize="18sp"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/layout_task"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            app:boxBackgroundMode="outline"
-            app:boxStrokeWidth="0dp"
-            app:boxStrokeWidthFocused="0dp"
-            app:errorIconTint="@android:color/holo_red_light"
-            app:errorTextColor="@android:color/holo_red_light"
-            app:expandedHintEnabled="false"
-            app:helperTextEnabled="false"
-            app:hintAnimationEnabled="false"
-            app:hintEnabled="false"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/label_task">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/input_task"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/box_background_reversed"
-                android:fontFamily="@font/nunito_semibold"
-                android:hint="@string/task_hint"
-                android:singleLine="true"
-                android:textColor="@color/white"
-                android:textColorHint="@color/gainsboro"
-                android:textCursorDrawable="@color/white" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <TextView
-            android:id="@+id/label_subject"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/nunito_bold"
-            android:text="@string/subject"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/layout_task" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/layout_subject"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            app:boxBackgroundMode="outline"
-            app:boxStrokeWidth="0dp"
-            app:boxStrokeWidthFocused="0dp"
-            app:errorIconTint="@android:color/holo_red_light"
-            app:errorTextColor="@android:color/holo_red_light"
-            app:expandedHintEnabled="false"
-            app:helperTextEnabled="false"
-            app:hintAnimationEnabled="false"
-            app:hintEnabled="false"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/label_subject">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/input_subject"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/box_background_reversed"
-                android:fontFamily="@font/nunito_semibold"
-                android:hint="@string/subject_hint"
-                android:textColor="@color/white"
-                android:textColorHint="@color/gainsboro"
-                android:textCursorDrawable="@color/white" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <Button
-            android:id="@+id/button_save"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="72dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="72dp"
-            android:layout_marginBottom="16dp"
-            android:backgroundTint="@color/white"
-            android:fontFamily="@font/nunito_bold"
-            android:text="@string/save"
-            android:textAllCaps="true"
-            android:textColor="@color/indigo_dye"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/layout_subject"
-            app:layout_constraintStart_toStartOf="@+id/layout_subject"
-            app:layout_constraintTop_toBottomOf="@+id/layout_subject" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <ProgressBar
-        android:id="@+id/loading"
-        style="?android:attr/progressBarStyle"
+    <TextView
+        android:id="@+id/label_task"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:progressTint="@color/white"
-        android:visibility="gone"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/nunito_bold"
+        android:text="@string/task"
+        android:textColor="@color/indigo_dye"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layout_task"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp"
+        app:expandedHintEnabled="false"
+        app:hintAnimationEnabled="false"
+        app:hintEnabled="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/label_task">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/input_task"
+            android:singleLine="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/box_background"
+            android:fontFamily="@font/nunito_semibold"
+            android:hint="@string/task_hint"
+            android:textColor="@color/indigo_dye" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/label_subject"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/nunito_bold"
+        android:text="@string/subject"
+        android:textColor="@color/indigo_dye"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_task" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layout_subject"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp"
+        app:expandedHintEnabled="false"
+        app:hintAnimationEnabled="false"
+        app:hintEnabled="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/label_subject">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/input_subject"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/box_background"
+            android:fontFamily="@font/nunito_semibold"
+            android:hint="@string/subject_hint"
+            android:textColor="@color/indigo_dye" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/button_submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="32dp"
+        android:fontFamily="@font/nunito_bold"
+        android:text="@string/add"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/layout_subject" />
+
+    <Button
+        android:id="@+id/button_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/nunito_bold"
+        android:text="@string/cancel"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toStartOf="@+id/button_submit"
+        app:layout_constraintTop_toBottomOf="@+id/layout_subject" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
