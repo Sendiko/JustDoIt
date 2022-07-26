@@ -21,13 +21,17 @@
 
             <TextView
                 android:id="@+id/greeting"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
                 android:fontFamily="@font/nunito_extrabold"
                 android:text="@string/greeting3"
                 android:textColor="@color/indigo_dye"
                 android:textSize="20sp"
+                app:layout_constraintEnd_toStartOf="@+id/button_add"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
