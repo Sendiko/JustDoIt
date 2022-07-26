@@ -51,6 +51,7 @@ class SettingsFragment : Fragment() {
 
       binding.icLogout.setOnClickListener {
          authViewModel.setLoginState(false)
+         authViewModel.clearUser()
          val intent = Intent(requireActivity(), FirstActivity::class.java)
          startActivity(intent)
       }

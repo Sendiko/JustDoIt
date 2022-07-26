@@ -5,6 +5,12 @@ import kotlinx.coroutines.launch
 
 class AuthViewModel(private val auth : AuthPreferences) : ViewModel() {
 
+   fun clearUser(){
+      viewModelScope.launch {
+         auth.clearUsername()
+      }
+   }
+
    fun getUser() : LiveData<String> {
       return auth.getUsername().asLiveData()
    }

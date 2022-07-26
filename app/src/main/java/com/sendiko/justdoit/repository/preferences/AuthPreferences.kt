@@ -13,6 +13,12 @@ class AuthPreferences private constructor(val dataStore: DataStore<Preferences>)
    private val loginKey = booleanPreferencesKey("login")
    private val usernameKey = stringPreferencesKey("username")
 
+   suspend fun clearUsername(){
+      dataStore.edit { key ->
+         key.remove(usernameKey)
+      }
+   }
+
    fun getUsername() : Flow<String> {
       return dataStore.data.map { key ->
          key[usernameKey]?:""
