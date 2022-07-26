@@ -4,8 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.sendiko.justdoit.R
 import com.sendiko.justdoit.databinding.FragmentRegisterBinding
 
@@ -13,6 +16,8 @@ class RegisterFragment : Fragment() {
 
    private var _binding : FragmentRegisterBinding?= null
    private val binding get() = _binding!!
+
+   private val registerViewModel : RegisterViewModel by activityViewModels()
 
    override fun onCreateView(
       inflater: LayoutInflater, container: ViewGroup?,
@@ -28,16 +33,42 @@ class RegisterFragment : Fragment() {
          findNavController().navigate(R.id.action_registerFragment2_to_loginFragment2)
       }
 
+      registerViewModel.isFailed.observe(viewLifecycleOwner){
+         when (it.isFailed) {
+            true -> showSnackbar(it.errorMessage.toString())
+            else -> null
+         }
+      }
+
+      registerViewModel.isLoading.observe(viewLifecycleOwner){
+         when{
+            it -> binding.progressBar3.isVisible = true
+            else -> binding.progressBar3.isVisible = false
+         }
+      }
+
       binding.buttonRegister.setOnClickListener {
          val u = binding.inputUsername.text.toString()
          val e = binding.inputEmail.text.toString()
          val p = binding.inpurPassword.toString()
          val cp = binding.inputConfirmPassword.toString()
          when{
-            validation(u, e, p, cp) -> findNavController().navigate(R.id.action_registerFragment2_to_loginFragment2)
+            validation(u, e, p, cp) -> registerUser(e, p)
          }
       }
 
+   }
+
+   private fun showSnackbar(message : String){
+      Snackbar.make(requireView(), message, Snackbar.LENGTH_LONG).show()
+   }
+
+   private fun registerUser(e : String, p: String){
+      registerViewModel.registerUser(e, p).observe(viewLifecycleOwner){
+         when{
+            it -> findNavController().navigate(R.id.action_registerFragment2_to_loginFragment2)
+         }
+      }
    }
 
    private fun validation(u: String, e : String, p: String, cp : String): Boolean {
@@ -57,11 +88,6 @@ class RegisterFragment : Fragment() {
          }
          p.length < 8 -> {
             binding.layoutPassword.error = "Password need to be at least 8 characters"
-            valid = false
-         }
-         p != cp -> {
-            binding.layoutPassword.error = "Password didn't match"
-            binding.layoutConfirm.error = "Password didn't match"
             valid = false
          }
          else -> valid = true

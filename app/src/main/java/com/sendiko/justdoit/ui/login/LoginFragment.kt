@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.sendiko.justdoit.MainActivity
 import com.sendiko.justdoit.R
 import com.sendiko.justdoit.dataStore1
@@ -23,7 +24,7 @@ class LoginFragment : Fragment() {
    private var _binding : FragmentLoginBinding?= null
    private val binding get() = _binding!!
 
-   private val sharedViewModel : SharedViewModel by activityViewModels()
+   private val loginViewModel : LoginViewModel by activityViewModels()
 
    private val pref by lazy{
       val context = requireNotNull(this.context)
@@ -44,6 +45,7 @@ class LoginFragment : Fragment() {
 
    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
       super.onViewCreated(view, savedInstanceState)
+
       binding.buttonLogin.setOnClickListener {
          val u = binding.inputUsername.text.toString()
          val p = binding.inputUsername.text.toString()
@@ -51,21 +53,32 @@ class LoginFragment : Fragment() {
             validation(u, p) -> postLogin(u, p)
          }
       }
+
       binding.textView.setOnClickListener {
          findNavController().navigate(R.id.action_loginFragment2_to_registerFragment2)
       }
 
-      authViewModel.getUser().observe(viewLifecycleOwner){
-         sharedViewModel.saveUsername(it)
+      loginViewModel.isFailed.observe(viewLifecycleOwner){
+         when(it.isFailed){
+            true -> showSnackbar(it.errorMessage.toString())
+            else -> null
+         }
       }
 
    }
 
+   private fun showSnackbar(message : String){
+      Snackbar.make(requireView(), message, Snackbar.LENGTH_LONG).show()
+   }
+
    private fun postLogin(u: String, p: String) {
-      authViewModel.saveUsername(u)
-      authViewModel.setLoginState(true)
-      val intent = Intent(requireActivity(), MainActivity::class.java)
-      startActivity(intent)
+
+      loginViewModel.loginWithUser(u, p).observe(viewLifecycleOwner){
+         authViewModel.saveUsername(u)
+         authViewModel.setLoginState(true)
+         val intent = Intent(requireActivity(), MainActivity::class.java)
+         startActivity(intent)
+      }
    }
 
    private fun validation(username : String, password : String): Boolean {

@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -59,6 +60,13 @@ class DashboardFragment : Fragment() {
       super.onViewCreated(view, savedInstanceState)
       setupRecyclerView()
 
+      dashboardViewModel.isFailed.observe(viewLifecycleOwner){
+         when(it.isFailed){
+            true -> showSnackbar(it.errorMessage.toString())
+            else -> null
+         }
+      }
+
       dashboardViewModel.isLoading.observe(viewLifecycleOwner){
          when{
             it -> binding.progressBar2.isVisible = true
@@ -71,10 +79,12 @@ class DashboardFragment : Fragment() {
             it -> {
                binding.imageView3.isVisible = true
                binding.textSwipe3.isVisible = true
+               binding.rvTaskChecked.isVisible = false
             }
             else -> {
                binding.imageView3.isVisible = false
                binding.textSwipe3.isVisible = false
+               binding.rvTaskChecked.isVisible = true
             }
          }
       }
@@ -91,6 +101,10 @@ class DashboardFragment : Fragment() {
          findNavController().navigate(R.id.action_navigation_dashboard_to_navigation_notifications)
       }
 
+   }
+
+   private fun showSnackbar(message : String){
+      Snackbar.make(requireView(), message, Snackbar.LENGTH_LONG).show()
    }
 
    private fun showInputSheet(){
