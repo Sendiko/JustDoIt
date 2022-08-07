@@ -14,12 +14,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 import com.sendiko.justdoit.R
 import com.sendiko.justdoit.dataStore1
 import com.sendiko.justdoit.databinding.FragmentDashboardBinding
-import com.sendiko.justdoit.model.Task2
+import com.sendiko.justdoit.repository.model.Task2
 import com.sendiko.justdoit.repository.preferences.AuthPreferences
 import com.sendiko.justdoit.repository.preferences.AuthViewModel
 import com.sendiko.justdoit.repository.preferences.AuthViewModelFactory

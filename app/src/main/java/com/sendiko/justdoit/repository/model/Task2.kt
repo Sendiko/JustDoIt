@@ -1,4 +1,4 @@
-package com.sendiko.justdoit.model
+package com.sendiko.justdoit.repository.model
 
 data class Task2(
    var id : String?= null,

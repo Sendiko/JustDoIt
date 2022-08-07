@@ -6,14 +6,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
-import com.sendiko.justdoit.model.FailedMessage
-import com.sendiko.justdoit.model.Task2
-import com.sendiko.justdoit.ui.home.TaskAdapter
+import com.sendiko.justdoit.repository.model.FailedMessage
+import com.sendiko.justdoit.repository.model.Task2
 import kotlinx.coroutines.launch
 
 class DashboardViewModel : ViewModel() {
@@ -40,7 +38,7 @@ class DashboardViewModel : ViewModel() {
       viewModelScope.launch {
          isDone.value = false
          val key = db.push().key.toString()
-         val task = com.sendiko.justdoit.model.Task(key, t, s, false)
+         val task = com.sendiko.justdoit.repository.model.Task(key, t, s, false)
          val user = auth.currentUser
          db = FirebaseDatabase.getInstance().getReference("${user?.uid}_this")
          db.child(key).setValue(task).addOnSuccessListener {

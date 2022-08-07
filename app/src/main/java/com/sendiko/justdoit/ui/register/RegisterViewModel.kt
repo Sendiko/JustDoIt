@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.sendiko.justdoit.model.FailedMessage
+import com.sendiko.justdoit.repository.model.FailedMessage
 import kotlinx.coroutines.launch
 
 class RegisterViewModel : ViewModel() {

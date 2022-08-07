@@ -9,8 +9,8 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
 import com.sendiko.justdoit.databinding.CardItemTaskCheckedBinding
-import com.sendiko.justdoit.model.Task
-import com.sendiko.justdoit.model.Task2
+import com.sendiko.justdoit.repository.model.Task
+import com.sendiko.justdoit.repository.model.Task2
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

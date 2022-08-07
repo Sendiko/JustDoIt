@@ -8,8 +8,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
-import com.sendiko.justdoit.model.FailedMessage
-import com.sendiko.justdoit.model.Task
+import com.sendiko.justdoit.repository.model.FailedMessage
+import com.sendiko.justdoit.repository.model.Task
 import kotlinx.coroutines.launch
 
 class HomeViewModel(application: Application) : AndroidViewModel(application) {
