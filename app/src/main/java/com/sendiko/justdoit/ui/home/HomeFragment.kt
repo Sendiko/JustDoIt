@@ -1,38 +1,27 @@
 package com.sendiko.justdoit.ui.home
 
 import android.os.Bundle
-import android.text.Layout
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 import com.sendiko.justdoit.R
 import com.sendiko.justdoit.dataStore1
 import com.sendiko.justdoit.databinding.FragmentHomeBinding
-import com.sendiko.justdoit.model.Task
+import com.sendiko.justdoit.repository.model.Task
 import com.sendiko.justdoit.repository.ViewModelFactory
 import com.sendiko.justdoit.repository.preferences.AuthPreferences
 import com.sendiko.justdoit.repository.preferences.AuthViewModel
 import com.sendiko.justdoit.repository.preferences.AuthViewModelFactory
-import com.sendiko.justdoit.ui.dashboard.DashboardViewModel
-import com.sendiko.justdoit.ui.task.TaskFragment
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import org.w3c.dom.Text
 
 class HomeFragment : Fragment() {
 
@@ -85,11 +74,20 @@ class HomeFragment : Fragment() {
             it -> {
                binding.imageView.isVisible = true
                binding.textSwipe.isVisible = true
+               binding.rvTask.isVisible = false
             }
             else -> {
                binding.imageView.isVisible = false
                binding.textSwipe.isVisible = false
+               binding.rvTask.isVisible = true
             }
+         }
+      }
+
+      homeViewModel.isFailed.observe(viewLifecycleOwner){
+         when (it.isFailed) {
+            true -> showSnackbar(it.errorMessage.toString())
+            else -> null
          }
       }
 
@@ -111,6 +109,10 @@ class HomeFragment : Fragment() {
 
    }
 
+   private fun showSnackbar(message : String){
+      Snackbar.make(requireView(), message, Snackbar.LENGTH_LONG).show()
+   }
+
    private fun showInputSheet(){
       val inputSheet = BottomSheetDialog(requireContext())
       val view = layoutInflater.inflate(R.layout.fragment_task, null)
@@ -129,9 +131,6 @@ class HomeFragment : Fragment() {
       buttonSubmit.setOnClickListener {
          val t = inputTask.text.toString()
          val s = inputSubject.text.toString()
-         homeViewModel.inputTask(t, s).observe(viewLifecycleOwner){
-            inputSheet.dismiss()
-         }
       }
 
    }
@@ -141,7 +140,6 @@ class HomeFragment : Fragment() {
       val rv = binding.rvTask
       rv.layoutManager = LinearLayoutManager(context)
       rv.setHasFixedSize(true)
-      homeViewModel.getTaskData(taskList, rv)
    }
 
    override fun onDestroyView() {

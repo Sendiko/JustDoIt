@@ -22,6 +22,7 @@
         app:layout_constraintVertical_bias="0.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:layout_editor_absoluteX="16dp"
@@ -101,7 +102,7 @@
         android:layout_marginStart="18dp"
         android:layout_marginBottom="16dp"
         android:fontFamily="@font/nunito_bold"
-        android:text="@string/username"
+        android:text="@string/email"
         android:textColor="@color/indigo_dye"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/layout_username"
@@ -136,14 +137,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/nunito_bold"
-            android:hint="@string/username"
-            android:textCursorDrawable="@color/white"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
             android:paddingStart="32dp"
             android:paddingEnd="32dp"
             android:singleLine="true"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textColorHint="@color/gainsboro"
+            android:textCursorDrawable="@color/white"
             android:textSize="16sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
