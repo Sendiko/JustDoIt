@@ -17,7 +17,7 @@ import com.google.android.material.textfield.TextInputEditText
 import com.sendiko.justdoit.R
 import com.sendiko.justdoit.dataStore1
 import com.sendiko.justdoit.databinding.FragmentDashboardBinding
-import com.sendiko.justdoit.repository.model.Task2
+import com.sendiko.justdoit.repository.model.Task
 import com.sendiko.justdoit.repository.preferences.AuthPreferences
 import com.sendiko.justdoit.repository.preferences.AuthViewModel
 import com.sendiko.justdoit.repository.preferences.AuthViewModelFactory
@@ -123,19 +123,15 @@ class DashboardFragment : Fragment() {
       buttonSubmit.setOnClickListener {
          val t = inputTask.text.toString()
          val s = inputSubject.text.toString()
-         dashboardViewModel.inputTask(t, s).observe(viewLifecycleOwner){
-            inputSheet.dismiss()
-         }
       }
 
    }
 
    private fun setupRecyclerView(){
-      val taskList = arrayListOf<Task2>()
+      val taskList = arrayListOf<Task>()
       val rv = binding.rvTaskChecked
       rv.layoutManager = LinearLayoutManager(context)
       rv.setHasFixedSize(true)
-      dashboardViewModel.getTaskData(taskList, rv)
    }
 
    override fun onDestroyView() {

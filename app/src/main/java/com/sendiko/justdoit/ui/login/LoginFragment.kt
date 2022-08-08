@@ -2,14 +2,18 @@ package com.sendiko.justdoit.ui.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
+import com.sendiko.justdoit.FirstActivity
 import com.sendiko.justdoit.MainActivity
 import com.sendiko.justdoit.R
 import com.sendiko.justdoit.dataStore1
@@ -40,22 +44,29 @@ class LoginFragment : Fragment() {
       savedInstanceState: Bundle?
    ): View {
       _binding = FragmentLoginBinding.inflate(layoutInflater)
+      toThisFragment()
       return binding.root
    }
 
    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
       super.onViewCreated(view, savedInstanceState)
 
+      val fadeIn = AnimationUtils.loadAnimation(context, R.anim.fade_in)
+      binding.root.startAnimation(fadeIn)
+
       binding.buttonLogin.setOnClickListener {
          val u = binding.inputUsername.text.toString()
          val p = binding.inputUsername.text.toString()
          when{
-            validation(u, p) -> postLogin(u, p)
+            validation(u, p) -> {
+               val intent = Intent(requireActivity(), MainActivity::class.java)
+               startActivity(intent)
+            }
          }
       }
 
       binding.textView.setOnClickListener {
-         findNavController().navigate(R.id.action_loginFragment2_to_registerFragment2)
+         toRegisterFragment()
       }
 
       loginViewModel.isFailed.observe(viewLifecycleOwner){
@@ -67,49 +78,70 @@ class LoginFragment : Fragment() {
 
    }
 
-   private fun showSnackbar(message : String){
-      Snackbar.make(requireView(), message, Snackbar.LENGTH_LONG).show()
+   private fun toRegisterFragment(){
+      val fadeOut = AnimationUtils.loadAnimation(context, R.anim.fade_out)
+      binding.labelUsername.startAnimation(fadeOut)
+      binding.layoutUsername.startAnimation(fadeOut)
+      binding.labelPassword.startAnimation(fadeOut)
+      binding.layoutPassword.startAnimation(fadeOut)
+      binding.layoutToolbar.startAnimation(fadeOut)
+      binding.buttonLogin.startAnimation(fadeOut)
+      binding.textView.startAnimation(fadeOut)
+      Handler(Looper.getMainLooper()).postDelayed({
+         binding.labelUsername.visibility = View.INVISIBLE
+         binding.layoutUsername.visibility = View.INVISIBLE
+         binding.labelPassword.visibility = View.INVISIBLE
+         binding.layoutPassword.visibility = View.INVISIBLE
+         binding.layoutToolbar.visibility = View.INVISIBLE
+         binding.buttonLogin.visibility = View.INVISIBLE
+         binding.textView.visibility = View.INVISIBLE
+         findNavController().navigate(R.id.action_loginFragment2_to_registerFragment2)
+      }, 350)
    }
 
-   private fun postLogin(u: String, p: String) {
+   private fun toThisFragment(){
+      val fadeIn = AnimationUtils.loadAnimation(context, R.anim.fade_in)
+      binding.labelUsername.startAnimation(fadeIn)
+      binding.layoutUsername.startAnimation(fadeIn)
+      binding.labelPassword.startAnimation(fadeIn)
+      binding.layoutPassword.startAnimation(fadeIn)
+      binding.layoutToolbar.startAnimation(fadeIn)
+      binding.buttonLogin.startAnimation(fadeIn)
+      binding.textView.startAnimation(fadeIn)
+      Handler(Looper.getMainLooper()).postDelayed({
+         binding.labelUsername.visibility = View.VISIBLE
+         binding.layoutUsername.visibility = View.VISIBLE
+         binding.labelPassword.visibility = View.VISIBLE
+         binding.layoutPassword.visibility = View.VISIBLE
+         binding.layoutToolbar.visibility = View.VISIBLE
+         binding.buttonLogin.visibility = View.VISIBLE
+         binding.textView.visibility = View.VISIBLE
+      }, 2000)
+   }
 
-      loginViewModel.loginWithUser(u, p).observe(viewLifecycleOwner){
-         authViewModel.saveUsername(u)
-         authViewModel.setLoginState(true)
-         val intent = Intent(requireActivity(), MainActivity::class.java)
-         startActivity(intent)
-      }
+   private fun showSnackbar(message : String){
+      Snackbar.make(requireView(), message, Snackbar.LENGTH_LONG).show()
    }
 
    private fun validation(username : String, password : String): Boolean {
       var valid = true
       when {
-         username.isNotBlank() -> {
-            when {
-               password.isNotBlank() -> {
-                  valid = true
-                  binding.layoutUsername.error = null
-                  binding.layoutPassword.error = null
-               }
-               username.isBlank() || password.isBlank() -> {
-                  valid = false
-                  binding.layoutUsername.error = "Please fill in Username and Password"
-                  binding.layoutPassword.error = "Please fill in Username and Password"
-               }
-               password.length < 8 -> {
-                  binding.layoutPassword.error = "Password must be at least 8 characters"
-                  valid = false
-               }
-            }
+         username.isNotBlank() && password.isNotBlank() -> {
+            valid = true
+            binding.layoutUsername.error = null
+            binding.layoutPassword.error = null
          }
-         username.isBlank() || password.isBlank() -> {
+         username.isEmpty() -> {
             valid = false
-            binding.layoutUsername.error = "Please fill in Username and Password"
-            binding.layoutPassword.error = "Please fill in Username and Password"
+            binding.layoutUsername.error = "Username can't be empty"
+         }
+         password.isBlank() -> {
+            valid = false
+            binding.layoutPassword.error = "Password can't be empty"
          }
          password.length < 8 -> {
-            binding.layoutPassword.error = "Password must be at least 8 characters"
             valid = false
+            binding.layoutPassword.error = "Password must be at least 8 characters"
          }
       }
       return valid

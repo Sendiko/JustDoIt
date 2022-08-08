@@ -131,11 +131,6 @@ class HomeFragment : Fragment() {
       buttonSubmit.setOnClickListener {
          val t = inputTask.text.toString()
          val s = inputSubject.text.toString()
-         homeViewModel.inputTask(t, s).observe(viewLifecycleOwner){
-            when{
-               it -> inputSheet.dismiss()
-            }
-         }
       }
 
    }
@@ -145,7 +140,6 @@ class HomeFragment : Fragment() {
       val rv = binding.rvTask
       rv.layoutManager = LinearLayoutManager(context)
       rv.setHasFixedSize(true)
-      homeViewModel.getTaskData(taskList, rv)
    }
 
    override fun onDestroyView() {

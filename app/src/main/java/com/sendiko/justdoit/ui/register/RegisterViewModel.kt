@@ -12,32 +12,10 @@ import kotlinx.coroutines.launch
 
 class RegisterViewModel : ViewModel() {
 
-   private lateinit var auth : FirebaseAuth
-
    private val _isFailed = MutableLiveData<FailedMessage>()
    val isFailed : LiveData<FailedMessage> = _isFailed
 
    private val _isLoading = MutableLiveData<Boolean>()
    val isLoading : LiveData<Boolean> = _isLoading
-
-   fun registerUser(e : String, p : String) : LiveData<Boolean> {
-      val isDone = MutableLiveData<Boolean>()
-      _isLoading.value = true
-      viewModelScope.launch {
-         auth = Firebase.auth
-         auth.createUserWithEmailAndPassword(e, p).addOnCompleteListener {
-            when{
-               it.isSuccessful -> {
-                  _isLoading.value = false
-                  isDone.value = true
-               }
-            }
-         }.addOnFailureListener {
-            _isLoading.value = false
-            _isFailed.value = FailedMessage(true, it.message)
-         }
-      }
-      return isDone
-   }
 
 }

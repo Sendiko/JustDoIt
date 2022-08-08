@@ -10,13 +10,12 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
 import com.sendiko.justdoit.databinding.CardItemTaskCheckedBinding
 import com.sendiko.justdoit.repository.model.Task
-import com.sendiko.justdoit.repository.model.Task2
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class Task2Adapter(private val task2 : ArrayList<Task2>) :
-   RecyclerView.Adapter<Task2Adapter.Task2ViewHolder>() {
+class TaskCheckedAdapter(private val task : ArrayList<Task>) :
+   RecyclerView.Adapter<TaskCheckedAdapter.Task2ViewHolder>() {
 
    class Task2ViewHolder(var binding : CardItemTaskCheckedBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -28,7 +27,7 @@ class Task2Adapter(private val task2 : ArrayList<Task2>) :
    }
 
    override fun onBindViewHolder(holder: Task2ViewHolder, position: Int) {
-      val currentItem = task2[position]
+      val currentItem = task[position]
       holder.binding.task.text = currentItem.task
       holder.binding.subjectTask.text = currentItem.subject
       holder.binding.task.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
@@ -45,10 +44,10 @@ class Task2Adapter(private val task2 : ArrayList<Task2>) :
    }
 
    override fun getItemCount(): Int {
-      return task2.size
+      return task.size
    }
 
-   private fun unCheckTask(task2: Task2){
+   private fun unCheckTask(task2: Task){
       CoroutineScope(Dispatchers.IO).launch {
          auth = Firebase.auth
          val user = auth.currentUser
@@ -61,7 +60,7 @@ class Task2Adapter(private val task2 : ArrayList<Task2>) :
       }
    }
 
-   private fun deleteTask(task2: Task2){
+   private fun deleteTask(task2: Task){
       auth = Firebase.auth
       val user = auth.currentUser
       val db = FirebaseDatabase.getInstance().getReference("${user?.uid}_this_checked")
