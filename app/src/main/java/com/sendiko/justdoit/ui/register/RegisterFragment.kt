@@ -27,6 +27,7 @@ class RegisterFragment : Fragment() {
       savedInstanceState: Bundle?
    ): View {
       _binding = FragmentRegisterBinding.inflate(layoutInflater)
+      toThisFragment()
       return binding.root
    }
 
@@ -62,6 +63,36 @@ class RegisterFragment : Fragment() {
          val cp = binding.inputConfirmPassword.toString()
       }
 
+   }
+
+   private fun toThisFragment(){
+      val fadeIn = AnimationUtils.loadAnimation(context, R.anim.fade_in)
+      binding.textView2.startAnimation(fadeIn)
+      binding.textview3.startAnimation(fadeIn)
+      binding.labelUsername.startAnimation(fadeIn)
+      binding.layoutUsername.startAnimation(fadeIn)
+      binding.labelEmail.startAnimation(fadeIn)
+      binding.layoutEmail.startAnimation(fadeIn)
+      binding.labelPassword.startAnimation(fadeIn)
+      binding.layoutPassword.startAnimation(fadeIn)
+      binding.labelConfirmPassword.startAnimation(fadeIn)
+      binding.layoutConfirm.startAnimation(fadeIn)
+      binding.buttonRegister.startAnimation(fadeIn)
+      binding.loginHere.startAnimation(fadeIn)
+      Handler(Looper.getMainLooper()).postDelayed({
+         binding.textView2.visibility = View.VISIBLE
+         binding.textview3.visibility = View.VISIBLE
+         binding.labelUsername.visibility = View.VISIBLE
+         binding.layoutUsername.visibility = View.VISIBLE
+         binding.labelEmail.visibility = View.VISIBLE
+         binding.layoutEmail.visibility = View.VISIBLE
+         binding.labelPassword.visibility = View.VISIBLE
+         binding.layoutPassword.visibility = View.VISIBLE
+         binding.labelConfirmPassword.visibility = View.VISIBLE
+         binding.layoutConfirm.visibility = View.VISIBLE
+         binding.buttonRegister.visibility = View.VISIBLE
+         binding.loginHere.visibility = View.VISIBLE
+      }, 2000)
    }
 
    private fun toLoginFragment(){
