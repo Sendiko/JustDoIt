@@ -23,7 +23,6 @@ import com.sendiko.justdoit.repository.model.Task
 import com.sendiko.justdoit.repository.preferences.AuthPreferences
 import com.sendiko.justdoit.repository.preferences.AuthViewModel
 import com.sendiko.justdoit.repository.preferences.AuthViewModelFactory
-import com.sendiko.justdoit.ui.home.TaskAdapter
 import com.sendiko.justdoit.ui.task.TaskViewModel
 
 class DashboardFragment : Fragment() {
@@ -124,7 +123,7 @@ class DashboardFragment : Fragment() {
       val task = arrayListOf<Task>()
       val rv = binding.rvTaskChecked
       rv.layoutManager = LinearLayoutManager(context)
-      val rvAdapter = TaskAdapter(task, requireContext())
+      val rvAdapter = TaskCheckedAdapter(task, requireContext())
       rv.adapter = rvAdapter
       rvAdapter.updateList(taskList)
       rv.setHasFixedSize(true)
