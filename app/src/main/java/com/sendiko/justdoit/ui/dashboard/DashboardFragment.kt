@@ -113,7 +113,7 @@ class DashboardFragment : Fragment() {
       buttonSubmit.setOnClickListener {
          val t = inputTask.text.toString()
          val s = inputSubject.text.toString()
-         val task = Task(0, t, s, false)
+         val task = Task(t, s, false)
          taskViewModel.insertTask(task)
          inputSheet.dismiss()
       }

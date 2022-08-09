@@ -5,10 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "taskTable")
-data class Task(
-
-   @PrimaryKey(autoGenerate = true)
-   var id : Int?= null,
+class Task(
 
    @ColumnInfo(name = "task")
    var task : String?= null,
@@ -19,4 +16,7 @@ data class Task(
    @ColumnInfo(name = "isDone")
    var isDone : Boolean?= false
 
-)
+) {
+   @PrimaryKey(autoGenerate = true)
+   var id = 0
+}
