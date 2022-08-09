@@ -3,8 +3,7 @@ package com.sendiko.justdoit.repository
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.sendiko.justdoit.ui.dashboard.DashboardViewModel
-import com.sendiko.justdoit.ui.home.HomeViewModel
+import com.sendiko.justdoit.ui.task.TaskViewModel
 
 class ViewModelFactory private constructor(private val application : Application) : ViewModelProvider.NewInstanceFactory(){
    companion object {
@@ -26,7 +25,7 @@ class ViewModelFactory private constructor(private val application : Application
 
    override fun <T : ViewModel> create(modelClass: Class<T>): T {
       return when {
-         modelClass.isAssignableFrom(HomeViewModel::class.java)-> HomeViewModel(application) as T
+         modelClass.isAssignableFrom(TaskViewModel::class.java)-> TaskViewModel(application) as T
          else -> throw IllegalArgumentException("Unknown model class : " + modelClass.name)
       }
    }

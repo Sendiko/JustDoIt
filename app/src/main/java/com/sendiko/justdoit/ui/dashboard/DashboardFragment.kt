@@ -1,12 +1,13 @@
 package com.sendiko.justdoit.ui.dashboard
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -17,10 +18,13 @@ import com.google.android.material.textfield.TextInputEditText
 import com.sendiko.justdoit.R
 import com.sendiko.justdoit.dataStore1
 import com.sendiko.justdoit.databinding.FragmentDashboardBinding
+import com.sendiko.justdoit.repository.ViewModelFactory
 import com.sendiko.justdoit.repository.model.Task
 import com.sendiko.justdoit.repository.preferences.AuthPreferences
 import com.sendiko.justdoit.repository.preferences.AuthViewModel
 import com.sendiko.justdoit.repository.preferences.AuthViewModelFactory
+import com.sendiko.justdoit.ui.home.TaskAdapter
+import com.sendiko.justdoit.ui.task.TaskViewModel
 
 class DashboardFragment : Fragment() {
 
@@ -28,6 +32,16 @@ class DashboardFragment : Fragment() {
    private val binding get() = _binding!!
 
    private val dashboardViewModel : DashboardViewModel by activityViewModels()
+
+   private val taskViewModel : TaskViewModel by lazy {
+      val activity = requireNotNull(this.activity)
+      getViewModel(activity)
+   }
+
+   private fun getViewModel(activity: FragmentActivity) : TaskViewModel {
+      val factory = ViewModelFactory.getInstance(activity.application)
+      return ViewModelProvider(this, factory)[TaskViewModel::class.java]
+   }
 
    private val pref by lazy{
       val context = requireNotNull(this.context)
@@ -38,6 +52,7 @@ class DashboardFragment : Fragment() {
       ViewModelProvider(this, AuthViewModelFactory(pref))[AuthViewModel::class.java]
    }
 
+   @SuppressLint("SetTextI18n")
    override fun onCreateView(
       inflater: LayoutInflater,
       container: ViewGroup?,
@@ -56,36 +71,11 @@ class DashboardFragment : Fragment() {
 
    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
       super.onViewCreated(view, savedInstanceState)
-      setupRecyclerView()
 
-      dashboardViewModel.isFailed.observe(viewLifecycleOwner){
-         when(it.isFailed){
-            true -> showSnackbar(it.errorMessage.toString())
-            else -> null
-         }
+      taskViewModel.allTasks.observe(viewLifecycleOwner){
+         setupRecyclerView(it)
       }
 
-      dashboardViewModel.isLoading.observe(viewLifecycleOwner){
-         when{
-            it -> binding.progressBar2.isVisible = true
-            else -> binding.progressBar2.isVisible = false
-         }
-      }
-
-      dashboardViewModel.isEmpty.observe(viewLifecycleOwner){
-         when{
-            it -> {
-               binding.imageView3.isVisible = true
-               binding.textSwipe3.isVisible = true
-               binding.rvTaskChecked.isVisible = false
-            }
-            else -> {
-               binding.imageView3.isVisible = false
-               binding.textSwipe3.isVisible = false
-               binding.rvTaskChecked.isVisible = true
-            }
-         }
-      }
 
       binding.swipeRefresh.setOnRefreshListener {
          requireActivity().recreate()
@@ -123,14 +113,20 @@ class DashboardFragment : Fragment() {
       buttonSubmit.setOnClickListener {
          val t = inputTask.text.toString()
          val s = inputSubject.text.toString()
+         val task = Task(0, t, s, false)
+         taskViewModel.insertTask(task)
+         inputSheet.dismiss()
       }
 
    }
 
-   private fun setupRecyclerView(){
-      val taskList = arrayListOf<Task>()
+   private fun setupRecyclerView(taskList : List<Task>){
+      val task = arrayListOf<Task>()
       val rv = binding.rvTaskChecked
       rv.layoutManager = LinearLayoutManager(context)
+      val rvAdapter = TaskAdapter(task, requireContext())
+      rv.adapter = rvAdapter
+      rvAdapter.updateList(taskList)
       rv.setHasFixedSize(true)
    }
 
