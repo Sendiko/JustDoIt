@@ -119,10 +119,12 @@ class HomeFragment : Fragment() {
       val task = arrayListOf<Task>()
       val rv = binding.rvTask
       val rvAdapter = TaskAdapter(task, requireContext())
-      rv.layoutManager = LinearLayoutManager(context)
-      rv.adapter = rvAdapter
       rvAdapter.updateList(taskList)
-      rv.setHasFixedSize(true)
+      rv.apply {
+         adapter = rvAdapter
+         layoutManager = LinearLayoutManager(context)
+         setHasFixedSize(true)
+      }
    }
 
    override fun onDestroyView() {

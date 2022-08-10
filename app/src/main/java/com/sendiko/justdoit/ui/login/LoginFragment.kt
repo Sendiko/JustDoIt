@@ -13,12 +13,10 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
-import com.sendiko.justdoit.FirstActivity
 import com.sendiko.justdoit.MainActivity
 import com.sendiko.justdoit.R
 import com.sendiko.justdoit.dataStore1
 import com.sendiko.justdoit.databinding.FragmentLoginBinding
-import com.sendiko.justdoit.repository.SharedViewModel
 import com.sendiko.justdoit.repository.preferences.AuthPreferences
 import com.sendiko.justdoit.repository.preferences.AuthViewModel
 import com.sendiko.justdoit.repository.preferences.AuthViewModelFactory
@@ -58,10 +56,7 @@ class LoginFragment : Fragment() {
          val u = binding.inputUsername.text.toString()
          val p = binding.inputUsername.text.toString()
          when{
-            validation(u, p) -> {
-               val intent = Intent(requireActivity(), MainActivity::class.java)
-               startActivity(intent)
-            }
+            validation(u, p) -> postLogin(u)
          }
       }
 
@@ -121,6 +116,13 @@ class LoginFragment : Fragment() {
 
    private fun showSnackbar(message : String){
       Snackbar.make(requireView(), message, Snackbar.LENGTH_LONG).show()
+   }
+
+   private fun postLogin(u : String){
+      authViewModel.saveUsername(u)
+      authViewModel.setLoginState(true)
+      val intent = Intent(requireActivity(), MainActivity::class.java)
+      startActivity(intent)
    }
 
    private fun validation(username : String, password : String): Boolean {

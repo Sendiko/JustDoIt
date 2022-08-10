@@ -19,4 +19,8 @@ interface TaskDataAccessObject {
     @Query("SELECT * FROM taskTable ORDER BY id ASC")
     fun getTask() : LiveData<List<Task>>
 
+    @Query("SELECT * FROM taskTable WHERE isDone")
+    fun getCheckedTask() : LiveData<List<Task>>
+
+
 }

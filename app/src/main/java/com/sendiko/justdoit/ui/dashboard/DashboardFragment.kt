@@ -80,7 +80,7 @@ class DashboardFragment : Fragment() {
          requireActivity().recreate()
       }
 
-      binding.buttonAdd.setOnClickListener {
+      binding.buttonAdd2.setOnClickListener {
          showInputSheet()
       }
 
@@ -96,7 +96,7 @@ class DashboardFragment : Fragment() {
 
    private fun showInputSheet(){
       val inputSheet = BottomSheetDialog(requireContext())
-      val view = layoutInflater.inflate(R.layout.fragment_task, null)
+      val view = layoutInflater.inflate(R.layout.fragment_task)
       inputSheet.setContentView(view)
       inputSheet.show()
 
