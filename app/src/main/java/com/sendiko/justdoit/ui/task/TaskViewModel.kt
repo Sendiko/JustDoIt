@@ -14,11 +14,13 @@ class TaskViewModel(application: Application) : AndroidViewModel(application) {
 
     private val repo : TaskRepository
     val allTasks : LiveData<List<Task>>
+    val allCheckTasks : LiveData<List<Task>>
 
     init {
         val dao = TaskDatabase.getDatabase(application).taskDao()
         repo = TaskRepository(dao)
         allTasks = repo.allTask
+        allCheckTasks = repo.allCheckTask
     }
 
     fun insertTask(task: Task) = viewModelScope.launch(Dispatchers.IO){

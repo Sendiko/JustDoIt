@@ -8,6 +8,8 @@ class TaskRepository(private val taskDao : TaskDataAccessObject) {
 
     val allTask : LiveData<List<Task>> = taskDao.getTask()
 
+    val allCheckTask : LiveData<List<Task>> = taskDao.getCheckedTask()
+
     suspend fun insertTask(task: Task) = taskDao.insertTask(task)
 
     suspend fun updateTask(task: Task) = taskDao.updateTask(task)

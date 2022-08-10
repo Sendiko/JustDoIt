@@ -10,7 +10,7 @@ import com.sendiko.justdoit.databinding.CardItemTaskBinding
 import com.sendiko.justdoit.repository.model.Task
 
 private const val TAG = "TaskAdapter"
-class TaskAdapter(private val task : ArrayList<Task>, context : Context) : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>(){
+class TaskAdapter(private val task : ArrayList<Task>, context : Context, private val onClick : onItemClickListener) : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>(){
 
    class TaskViewHolder(var binding: CardItemTaskBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -25,7 +25,11 @@ class TaskAdapter(private val task : ArrayList<Task>, context : Context) : Recyc
       holder.binding.subjectTask.text = currentItem.subject
 
       holder.binding.checkbox.setOnClickListener {
-         // TODO: UPDATE TASK TO CHECKED
+         onClick.onCheckListener(currentItem)
+      }
+
+      holder.binding.update.setOnClickListener {
+         onClick.onDeleteListener(currentItem)
       }
 
    }
@@ -40,6 +44,11 @@ class TaskAdapter(private val task : ArrayList<Task>, context : Context) : Recyc
       task.addAll(newList)
       notifyDataSetChanged()
       Log.d(TAG, "updateList: $newList")
+   }
+
+   interface onItemClickListener {
+      fun onCheckListener(task: Task)
+      fun onDeleteListener(task: Task)
    }
 
 }

@@ -2,6 +2,8 @@ package com.sendiko.justdoit.ui.settings
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -52,8 +54,12 @@ class SettingsFragment : Fragment() {
       binding.icLogout.setOnClickListener {
          authViewModel.setLoginState(false)
          authViewModel.clearUser()
-         val intent = Intent(requireActivity(), FirstActivity::class.java)
-         startActivity(intent)
+         binding.progressBar4.visibility = View.VISIBLE
+         Handler(Looper.getMainLooper()).postDelayed({
+            binding.progressBar4.visibility = View.GONE
+            val intent = Intent(requireActivity(), FirstActivity::class.java)
+            startActivity(intent)
+         }, 1000)
       }
 
       return root

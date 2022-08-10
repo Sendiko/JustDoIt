@@ -2,6 +2,7 @@ package com.sendiko.justdoit
 
 import android.content.Context
 import android.os.Bundle
+import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.datastore.core.DataStore
@@ -26,13 +27,21 @@ class MainActivity : AppCompatActivity() {
       val navView: BottomNavigationView = binding.navView
       val navController = findNavController(R.id.nav_host_fragment_activity_main)
 
+      val fadeOut = AnimationUtils.loadAnimation(this,R.anim.fade_out)
+
       navView.setupWithNavController(navController)
       navView.itemActiveIndicatorColor = null
 
       navController.addOnDestinationChangedListener{ _, destination, _, ->
          when(destination.id){
-            R.id.navigation_notifications -> navView.isVisible = false
-            R.id.taskFragment2 -> navView.isVisible = false
+            R.id.navigation_settings -> {
+               navView.startAnimation(fadeOut)
+               navView.isVisible = false
+            }
+            R.id.navigation_task -> {
+               navView.startAnimation(fadeOut)
+               navView.isVisible = false
+            }
             else -> navView.isVisible = true
          }
       }

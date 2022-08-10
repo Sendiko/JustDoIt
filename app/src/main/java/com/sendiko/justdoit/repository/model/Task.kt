@@ -14,7 +14,7 @@ class Task(
    var subject: String?= null,
 
    @ColumnInfo(name = "isDone")
-   var isDone : Boolean?= false
+   var isDone : String?= null
 
 ) {
    @PrimaryKey(autoGenerate = true)

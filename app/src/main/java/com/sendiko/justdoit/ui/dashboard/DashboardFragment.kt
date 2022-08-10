@@ -8,12 +8,10 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.sendiko.justdoit.R
 import com.sendiko.justdoit.dataStore1
@@ -29,8 +27,6 @@ class DashboardFragment : Fragment() {
 
    private var _binding: FragmentDashboardBinding? = null
    private val binding get() = _binding!!
-
-   private val dashboardViewModel : DashboardViewModel by activityViewModels()
 
    private val taskViewModel : TaskViewModel by lazy {
       val activity = requireNotNull(this.activity)
@@ -71,7 +67,7 @@ class DashboardFragment : Fragment() {
    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
       super.onViewCreated(view, savedInstanceState)
 
-      taskViewModel.allTasks.observe(viewLifecycleOwner){
+      taskViewModel.allCheckTasks.observe(viewLifecycleOwner){
          setupRecyclerView(it)
       }
 
@@ -90,13 +86,9 @@ class DashboardFragment : Fragment() {
 
    }
 
-   private fun showSnackbar(message : String){
-      Snackbar.make(requireView(), message, Snackbar.LENGTH_LONG).show()
-   }
-
    private fun showInputSheet(){
       val inputSheet = BottomSheetDialog(requireContext())
-      val view = layoutInflater.inflate(R.layout.fragment_task)
+      val view = layoutInflater.inflate(R.layout.fragment_task, null)
       inputSheet.setContentView(view)
       inputSheet.show()
 
@@ -112,7 +104,7 @@ class DashboardFragment : Fragment() {
       buttonSubmit.setOnClickListener {
          val t = inputTask.text.toString()
          val s = inputSubject.text.toString()
-         val task = Task(t, s, false)
+         val task = Task(t, s, "true")
          taskViewModel.insertTask(task)
          inputSheet.dismiss()
       }
@@ -120,10 +112,18 @@ class DashboardFragment : Fragment() {
    }
 
    private fun setupRecyclerView(taskList : List<Task>){
-      val task = arrayListOf<Task>()
       val rv = binding.rvTaskChecked
       rv.layoutManager = LinearLayoutManager(context)
-      val rvAdapter = TaskCheckedAdapter(task, requireContext())
+      val rvAdapter = TaskCheckedAdapter(arrayListOf(), requireContext(), object : TaskCheckedAdapter.onItemClickListener{
+         override fun onUncheckListener(task: Task) {
+            taskViewModel.updateTask(Task(task.task, task.subject, "false"))
+         }
+
+         override fun onDeleteListener(task: Task) {
+            taskViewModel.deleteTask(task)
+         }
+
+      })
       rv.adapter = rvAdapter
       rvAdapter.updateList(taskList)
       rv.setHasFixedSize(true)

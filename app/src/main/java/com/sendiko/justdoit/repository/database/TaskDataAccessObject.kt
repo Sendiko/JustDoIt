@@ -16,10 +16,10 @@ interface TaskDataAccessObject {
     @Delete
     suspend fun deleteTask(task: Task)
 
-    @Query("SELECT * FROM taskTable ORDER BY id ASC")
+    @Query("SELECT * FROM taskTable WHERE isDone = 'false' ORDER BY id ASC")
     fun getTask() : LiveData<List<Task>>
 
-    @Query("SELECT * FROM taskTable WHERE isDone")
+    @Query("SELECT * FROM taskTable WHERE isDone = 'true' ")
     fun getCheckedTask() : LiveData<List<Task>>
 
 

@@ -1,13 +1,15 @@
 package com.sendiko.justdoit.ui.home
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,12 +26,11 @@ import com.sendiko.justdoit.repository.preferences.AuthViewModel
 import com.sendiko.justdoit.repository.preferences.AuthViewModelFactory
 import com.sendiko.justdoit.ui.task.TaskViewModel
 
+private const val TAG = "HomeFragment"
 class HomeFragment : Fragment() {
 
    private var _binding: FragmentHomeBinding? = null
    private val binding get() = _binding!!
-
-   private val homeViewModel : HomeViewModel by activityViewModels()
 
    private val taskViewModel : TaskViewModel by lazy {
       val activity = requireNotNull(this.activity)
@@ -60,6 +61,7 @@ class HomeFragment : Fragment() {
       return binding.root
    }
 
+   @SuppressLint("SetTextI18n")
    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
       super.onViewCreated(view, savedInstanceState)
 
@@ -108,7 +110,7 @@ class HomeFragment : Fragment() {
       buttonSubmit.setOnClickListener {
          val t = inputTask.text.toString()
          val s = inputSubject.text.toString()
-         val task = Task(t, s, false)
+         val task = Task(t, s, "false")
          taskViewModel.insertTask(task)
          inputSheet.dismiss()
       }
@@ -116,9 +118,22 @@ class HomeFragment : Fragment() {
    }
 
    private fun setupRecyclerView(taskList : List<Task>){
-      val task = arrayListOf<Task>()
       val rv = binding.rvTask
-      val rvAdapter = TaskAdapter(task, requireContext())
+      val rvAdapter = TaskAdapter(arrayListOf(), requireContext(), object : TaskAdapter.onItemClickListener{
+         override fun onCheckListener(task: Task) {
+            taskViewModel.updateTask(Task(task.task, task.subject, "true"))
+            taskViewModel.allTasks.observe(viewLifecycleOwner){
+               Toast.makeText(context, "$it", Toast.LENGTH_SHORT).show()
+            }
+            Log.d(TAG, "onCheckListener: ${task.task}, ${task.subject}, ${task.isDone}")
+         }
+
+         override fun onDeleteListener(task: Task) {
+            taskViewModel.deleteTask(task)
+            Log.d(TAG, "onDeleteListener: $task")
+         }
+
+      })
       rvAdapter.updateList(taskList)
       rv.apply {
          adapter = rvAdapter

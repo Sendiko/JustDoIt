@@ -11,7 +11,7 @@ import com.sendiko.justdoit.databinding.CardItemTaskCheckedBinding
 import com.sendiko.justdoit.repository.model.Task
 
 private const val TAG = "TaskCheckedAdapter"
-class TaskCheckedAdapter(private val task : ArrayList<Task>, context: Context) :
+class TaskCheckedAdapter(private val task : ArrayList<Task>, context: Context, private val onClick : onItemClickListener) :
    RecyclerView.Adapter<TaskCheckedAdapter.Task2ViewHolder>() {
 
    class Task2ViewHolder(var binding : CardItemTaskCheckedBinding) : RecyclerView.ViewHolder(binding.root)
@@ -29,11 +29,11 @@ class TaskCheckedAdapter(private val task : ArrayList<Task>, context: Context) :
       holder.binding.subjectTask.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
 
       holder.binding.checkbox.setOnClickListener {
-         // TODO: UNCHECK TASK
+         onClick.onUncheckListener(currentItem)
       }
 
       holder.binding.delete.setOnClickListener {
-         // TODO: DELETE TASK
+         onClick.onDeleteListener(currentItem)
       }
 
    }
@@ -50,5 +50,9 @@ class TaskCheckedAdapter(private val task : ArrayList<Task>, context: Context) :
       Log.d(TAG, "updateList: $newList")
    }
 
+   interface onItemClickListener {
+      fun onUncheckListener(task: Task)
+      fun onDeleteListener(task: Task)
+   }
 
 }
