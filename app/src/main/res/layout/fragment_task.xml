@@ -88,7 +88,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/layout_subject"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="86dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
@@ -104,7 +104,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/input_subject"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="top|start"
             android:background="@drawable/box_background"
             android:fontFamily="@font/nunito_semibold"
             android:hint="@string/subject_hint"

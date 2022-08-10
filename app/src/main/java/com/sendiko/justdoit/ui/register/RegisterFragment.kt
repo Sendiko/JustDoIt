@@ -38,10 +38,6 @@ class RegisterFragment : Fragment() {
          toLoginFragment()
       }
 
-      binding.buttonRegister.setOnClickListener {
-         // TODO : VALIDATION AND NAVIGATE TO LOGIN FRAGMENT
-      }
-
       registerViewModel.isFailed.observe(viewLifecycleOwner){
          when (it.isFailed) {
             true -> showSnackbar(it.errorMessage.toString())

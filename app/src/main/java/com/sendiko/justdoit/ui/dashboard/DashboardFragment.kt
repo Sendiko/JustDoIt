@@ -1,33 +1,42 @@
 package com.sendiko.justdoit.ui.dashboard
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.sendiko.justdoit.R
 import com.sendiko.justdoit.dataStore1
 import com.sendiko.justdoit.databinding.FragmentDashboardBinding
+import com.sendiko.justdoit.repository.ViewModelFactory
 import com.sendiko.justdoit.repository.model.Task
 import com.sendiko.justdoit.repository.preferences.AuthPreferences
 import com.sendiko.justdoit.repository.preferences.AuthViewModel
 import com.sendiko.justdoit.repository.preferences.AuthViewModelFactory
+import com.sendiko.justdoit.ui.task.TaskViewModel
 
 class DashboardFragment : Fragment() {
 
    private var _binding: FragmentDashboardBinding? = null
    private val binding get() = _binding!!
 
-   private val dashboardViewModel : DashboardViewModel by activityViewModels()
+   private val taskViewModel : TaskViewModel by lazy {
+      val activity = requireNotNull(this.activity)
+      getViewModel(activity)
+   }
+
+   private fun getViewModel(activity: FragmentActivity) : TaskViewModel {
+      val factory = ViewModelFactory.getInstance(activity.application)
+      return ViewModelProvider(this, factory)[TaskViewModel::class.java]
+   }
 
    private val pref by lazy{
       val context = requireNotNull(this.context)
@@ -38,6 +47,7 @@ class DashboardFragment : Fragment() {
       ViewModelProvider(this, AuthViewModelFactory(pref))[AuthViewModel::class.java]
    }
 
+   @SuppressLint("SetTextI18n")
    override fun onCreateView(
       inflater: LayoutInflater,
       container: ViewGroup?,
@@ -56,42 +66,17 @@ class DashboardFragment : Fragment() {
 
    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
       super.onViewCreated(view, savedInstanceState)
-      setupRecyclerView()
 
-      dashboardViewModel.isFailed.observe(viewLifecycleOwner){
-         when(it.isFailed){
-            true -> showSnackbar(it.errorMessage.toString())
-            else -> null
-         }
+      taskViewModel.allCheckTasks.observe(viewLifecycleOwner){
+         setupRecyclerView(it)
       }
 
-      dashboardViewModel.isLoading.observe(viewLifecycleOwner){
-         when{
-            it -> binding.progressBar2.isVisible = true
-            else -> binding.progressBar2.isVisible = false
-         }
-      }
-
-      dashboardViewModel.isEmpty.observe(viewLifecycleOwner){
-         when{
-            it -> {
-               binding.imageView3.isVisible = true
-               binding.textSwipe3.isVisible = true
-               binding.rvTaskChecked.isVisible = false
-            }
-            else -> {
-               binding.imageView3.isVisible = false
-               binding.textSwipe3.isVisible = false
-               binding.rvTaskChecked.isVisible = true
-            }
-         }
-      }
 
       binding.swipeRefresh.setOnRefreshListener {
          requireActivity().recreate()
       }
 
-      binding.buttonAdd.setOnClickListener {
+      binding.buttonAdd2.setOnClickListener {
          showInputSheet()
       }
 
@@ -99,10 +84,6 @@ class DashboardFragment : Fragment() {
          findNavController().navigate(R.id.action_navigation_dashboard_to_navigation_notifications)
       }
 
-   }
-
-   private fun showSnackbar(message : String){
-      Snackbar.make(requireView(), message, Snackbar.LENGTH_LONG).show()
    }
 
    private fun showInputSheet(){
@@ -123,14 +104,28 @@ class DashboardFragment : Fragment() {
       buttonSubmit.setOnClickListener {
          val t = inputTask.text.toString()
          val s = inputSubject.text.toString()
+         val task = Task(t, s, "true")
+         taskViewModel.insertTask(task)
+         inputSheet.dismiss()
       }
 
    }
 
-   private fun setupRecyclerView(){
-      val taskList = arrayListOf<Task>()
+   private fun setupRecyclerView(taskList : List<Task>){
       val rv = binding.rvTaskChecked
       rv.layoutManager = LinearLayoutManager(context)
+      val rvAdapter = TaskCheckedAdapter(arrayListOf(), requireContext(), object : TaskCheckedAdapter.onItemClickListener{
+         override fun onUncheckListener(task: Task) {
+            taskViewModel.updateTask(Task(task.task, task.subject, "false"))
+         }
+
+         override fun onDeleteListener(task: Task) {
+            taskViewModel.deleteTask(task)
+         }
+
+      })
+      rv.adapter = rvAdapter
+      rvAdapter.updateList(taskList)
       rv.setHasFixedSize(true)
    }
 

@@ -4,12 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:backgroundTint="@color/white"
     tools:context="com.sendiko.justdoit.ui.home.HomeFragment">
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:backgroundTint="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,13 +27,11 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
                 android:fontFamily="@font/nunito_extrabold"
                 android:text="@string/greeting"
                 android:textColor="@color/indigo_dye"
                 android:textSize="20sp"
-                app:layout_constraintEnd_toStartOf="@+id/button_add"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintEnd_toStartOf="@+id/button_settings"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -49,27 +49,14 @@
                 app:layout_constraintTop_toBottomOf="@id/greeting" />
 
             <ImageView
-                android:id="@+id/button_add"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="8dp"
-                android:src="@drawable/ic_add_square"
-                app:layout_constraintBottom_toBottomOf="@+id/greeting2"
-                app:layout_constraintEnd_toStartOf="@+id/button_settings"
-                app:layout_constraintTop_toTopOf="@+id/greeting"
-                app:layout_constraintVertical_bias="0.0"
-                app:tint="@color/lighter_ming" />
-
-            <ImageView
                 android:id="@+id/button_settings"
                 android:layout_width="42dp"
                 android:layout_height="42dp"
                 android:layout_marginEnd="16dp"
-                android:src="@drawable/ic_settings"
-                app:layout_constraintBottom_toBottomOf="@+id/button_add"
+                android:src="@drawable/ic_user_illustration_small"
+                app:layout_constraintBottom_toBottomOf="@+id/greeting2"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/button_add" />
+                app:layout_constraintTop_toTopOf="@+id/greeting" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_task"
@@ -80,6 +67,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
                 android:visibility="visible"
+                tools:listitem="@layout/card_item_task"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -113,17 +101,30 @@
                 android:id="@+id/text_swipe"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableEnd="@drawable/ic_refresh"
                 android:fontFamily="@font/nunito_regular"
-                android:text="swipe to refresh"
+                android:text="@string/swipe_to_refresh"
                 android:textAlignment="center"
                 android:textColor="@color/darket_gainsboro"
                 android:textSize="16sp"
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="@+id/imageView"
                 app:layout_constraintStart_toStartOf="@+id/imageView"
-                app:layout_constraintTop_toBottomOf="@+id/imageView" />
+                app:layout_constraintTop_toBottomOf="@+id/imageView"
+                app:drawableEndCompat="@drawable/ic_refresh" />
 
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/button_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/indigo_dye"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_margin="16dp"
+                android:src="@drawable/ic_add"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:tint="@color/white"
+                android:contentDescription="@string/add_new_task" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

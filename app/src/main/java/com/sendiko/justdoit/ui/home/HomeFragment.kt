@@ -1,11 +1,13 @@
 package com.sendiko.justdoit.ui.home
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.core.view.isVisible
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
@@ -17,16 +19,28 @@ import com.google.android.material.textfield.TextInputEditText
 import com.sendiko.justdoit.R
 import com.sendiko.justdoit.dataStore1
 import com.sendiko.justdoit.databinding.FragmentHomeBinding
-import com.sendiko.justdoit.repository.model.Task
 import com.sendiko.justdoit.repository.ViewModelFactory
+import com.sendiko.justdoit.repository.model.Task
 import com.sendiko.justdoit.repository.preferences.AuthPreferences
 import com.sendiko.justdoit.repository.preferences.AuthViewModel
 import com.sendiko.justdoit.repository.preferences.AuthViewModelFactory
+import com.sendiko.justdoit.ui.task.TaskViewModel
 
+private const val TAG = "HomeFragment"
 class HomeFragment : Fragment() {
 
    private var _binding: FragmentHomeBinding? = null
    private val binding get() = _binding!!
+
+   private val taskViewModel : TaskViewModel by lazy {
+      val activity = requireNotNull(this.activity)
+      getViewModel(activity)
+   }
+
+   private fun getViewModel(activity: FragmentActivity) : TaskViewModel {
+      val factory = ViewModelFactory.getInstance(activity.application)
+      return ViewModelProvider(this, factory)[TaskViewModel::class.java]
+   }
 
    private val pref by lazy{
       val context = requireNotNull(this.context)
@@ -37,59 +51,24 @@ class HomeFragment : Fragment() {
       ViewModelProvider(this, AuthViewModelFactory(pref))[AuthViewModel::class.java]
    }
 
-   private val homeViewModel by lazy {
-      val activity = requireNotNull(this.activity)
-      getViewModel(activity)
-   }
-
-   private fun getViewModel(activity: FragmentActivity) :HomeViewModel {
-      val factory = ViewModelFactory.getInstance(activity.application)
-      return ViewModelProvider(this, factory)[HomeViewModel::class.java]
-   }
-
    override fun onCreateView(
       inflater: LayoutInflater,
       container: ViewGroup?,
       savedInstanceState: Bundle?
    ): View {
-
       _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
       return binding.root
    }
 
+   @SuppressLint("SetTextI18n")
    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
       super.onViewCreated(view, savedInstanceState)
-      setupRecyclerView()
 
-      homeViewModel.isLoading.observe(viewLifecycleOwner){
-         when{
-            it -> binding.progressBar.isVisible = true
-            else -> binding.progressBar.isVisible = false
-         }
+      taskViewModel.allTasks.observe(viewLifecycleOwner){
+         setupRecyclerView(it)
       }
 
-      homeViewModel.isEmpty.observe(viewLifecycleOwner){
-         when{
-            it -> {
-               binding.imageView.isVisible = true
-               binding.textSwipe.isVisible = true
-               binding.rvTask.isVisible = false
-            }
-            else -> {
-               binding.imageView.isVisible = false
-               binding.textSwipe.isVisible = false
-               binding.rvTask.isVisible = true
-            }
-         }
-      }
-
-      homeViewModel.isFailed.observe(viewLifecycleOwner){
-         when (it.isFailed) {
-            true -> showSnackbar(it.errorMessage.toString())
-            else -> null
-         }
-      }
 
       authViewModel.getUser().observe(viewLifecycleOwner){
          binding.greeting.text = "Hi, $it!"
@@ -131,15 +110,36 @@ class HomeFragment : Fragment() {
       buttonSubmit.setOnClickListener {
          val t = inputTask.text.toString()
          val s = inputSubject.text.toString()
+         val task = Task(t, s, "false")
+         taskViewModel.insertTask(task)
+         inputSheet.dismiss()
       }
 
    }
 
-   private fun setupRecyclerView(){
-      val taskList = arrayListOf<Task>()
+   private fun setupRecyclerView(taskList : List<Task>){
       val rv = binding.rvTask
-      rv.layoutManager = LinearLayoutManager(context)
-      rv.setHasFixedSize(true)
+      val rvAdapter = TaskAdapter(arrayListOf(), requireContext(), object : TaskAdapter.onItemClickListener{
+         override fun onCheckListener(task: Task) {
+            taskViewModel.updateTask(Task(task.task, task.subject, "true"))
+            taskViewModel.allTasks.observe(viewLifecycleOwner){
+               Toast.makeText(context, "$it", Toast.LENGTH_SHORT).show()
+            }
+            Log.d(TAG, "onCheckListener: ${task.task}, ${task.subject}, ${task.isDone}")
+         }
+
+         override fun onDeleteListener(task: Task) {
+            taskViewModel.deleteTask(task)
+            Log.d(TAG, "onDeleteListener: $task")
+         }
+
+      })
+      rvAdapter.updateList(taskList)
+      rv.apply {
+         adapter = rvAdapter
+         layoutManager = LinearLayoutManager(context)
+         setHasFixedSize(true)
+      }
    }
 
    override fun onDestroyView() {

@@ -4,16 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:backgroundTint="@color/white"
     tools:context="com.sendiko.justdoit.ui.dashboard.DashboardFragment">
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:backgroundTint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintVertical_bias="0.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -25,13 +29,10 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
                 android:fontFamily="@font/nunito_extrabold"
                 android:text="@string/greeting3"
                 android:textColor="@color/indigo_dye"
                 android:textSize="20sp"
-                app:layout_constraintEnd_toStartOf="@+id/button_add"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -41,37 +42,22 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
                 android:fontFamily="@font/nunito_bold"
                 android:text="@string/greeting4"
                 android:textColor="@color/indigo_dye"
                 android:textSize="16sp"
-                app:layout_constraintEnd_toStartOf="@+id/button_add"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/greeting" />
-
-            <ImageView
-                android:id="@+id/button_add"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="8dp"
-                android:src="@drawable/ic_add_square"
-                app:layout_constraintBottom_toBottomOf="@+id/greeting2"
-                app:layout_constraintEnd_toStartOf="@+id/button_settings"
-                app:layout_constraintTop_toTopOf="@+id/greeting"
-                app:layout_constraintVertical_bias="0.0"
-                app:tint="@color/lighter_ming" />
 
             <ImageView
                 android:id="@+id/button_settings"
                 android:layout_width="42dp"
                 android:layout_height="42dp"
                 android:layout_marginEnd="16dp"
-                android:src="@drawable/ic_settings"
-                app:layout_constraintBottom_toBottomOf="@+id/button_add"
+                android:src="@drawable/ic_user_illustration_small"
+                app:layout_constraintBottom_toBottomOf="@+id/greeting2"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/button_add" />
+                app:layout_constraintTop_toTopOf="@+id/greeting" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_task_checked"
@@ -85,7 +71,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/greeting2" />
+                app:layout_constraintTop_toBottomOf="@+id/greeting2"
+                tools:listitem="@layout/card_item_task_checked" />
 
             <ProgressBar
                 android:id="@+id/progressBar2"
@@ -126,6 +113,21 @@
                 app:layout_constraintStart_toStartOf="@+id/imageView3"
                 app:layout_constraintTop_toBottomOf="@+id/imageView3"
                 tools:ignore="UseCompatTextViewDrawableXml" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/button_add_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:backgroundTint="@color/indigo_dye"
+                android:clickable="true"
+                android:src="@drawable/ic_add"
+                app:tint="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:focusable="true"
+                android:contentDescription="@string/add" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

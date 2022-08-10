@@ -59,11 +59,12 @@
 
             <ImageView
                 android:id="@+id/update"
-                android:layout_width="36dp"
-                android:layout_height="36dp"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
+                android:src="@drawable/ic_trash_icon"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/checkbox"
                 app:layout_constraintTop_toTopOf="parent" />
