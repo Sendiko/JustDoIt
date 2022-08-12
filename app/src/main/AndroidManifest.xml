@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.sendiko.justdoit">
+    package="com.sendiko.justdoit" >
 
     <application
         android:allowBackup="true"
@@ -12,14 +12,18 @@
         android:roundIcon="@mipmap/ic_launcher_app_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.JusDoIt"
-        tools:targetApi="31">
+        tools:targetApi="31" >
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.container.SettingActivity"
             android:exported="false"
-            android:theme="@style/MainActivityTheme"/>
+            android:theme="@style/SettingActivityTheme"/>
         <activity
-            android:name=".FirstActivity"
-            android:exported="true">
+            android:name=".ui.container.MainActivity"
+            android:exported="false"
+            android:theme="@style/MainActivityTheme" />
+        <activity
+            android:name=".ui.container.FirstActivity"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

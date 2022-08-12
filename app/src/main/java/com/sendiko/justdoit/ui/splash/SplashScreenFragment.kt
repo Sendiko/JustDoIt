@@ -12,13 +12,13 @@ import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.sendiko.justdoit.MainActivity
 import com.sendiko.justdoit.R
-import com.sendiko.justdoit.dataStore1
 import com.sendiko.justdoit.databinding.FragmentSplashScreenBinding
 import com.sendiko.justdoit.repository.preferences.AuthPreferences
 import com.sendiko.justdoit.repository.preferences.AuthViewModel
 import com.sendiko.justdoit.repository.preferences.AuthViewModelFactory
+import com.sendiko.justdoit.ui.container.MainActivity
+import com.sendiko.justdoit.ui.container.dataStore1
 
 @SuppressLint("CustomSplashScreen")
 class SplashScreenFragment : Fragment() {
@@ -66,7 +66,7 @@ class SplashScreenFragment : Fragment() {
             }
             else -> {
                Handler(Looper.getMainLooper()).postDelayed({
-                  findNavController().navigate(R.id.action_splashScreenFragment2_to_loginFragment2)
+                  findNavController().navigate(R.id.action_splashScreenFragment_to_loginFragment)
                }, 1000)
             }
          }

@@ -27,7 +27,8 @@
         <entry key="app/src/main/res/drawable/ic_settings_bg.xml" value="0.3175" />
         <entry key="app/src/main/res/drawable/ic_task_bg.xml" value="0.298" />
         <entry key="app/src/main/res/layout/activity_first.xml" value="0.2941427960666952" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.37130801687763715" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.2749094202898551" />
+        <entry key="app/src/main/res/layout/activity_setting.xml" value="0.29243266353142366" />
         <entry key="app/src/main/res/layout/card_item_task.xml" value="0.67" />
         <entry key="app/src/main/res/layout/card_item_task_checked.xml" value="0.67" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.3899657924743444" />
@@ -42,7 +43,9 @@
         <entry key="app/src/main/res/layout/fragment_task.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_update_dialog.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_update_dialog_list_dialog.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/settings_activity.xml" value="0.29243266353142366" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.35833333333333334" />
+        <entry key="app/src/main/res/xml/root_preferences.xml" value="0.67" />
       </map>
     </option>
   </component>

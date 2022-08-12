@@ -2,21 +2,18 @@ package com.sendiko.justdoit.ui.settings
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
-import com.sendiko.justdoit.FirstActivity
-import com.sendiko.justdoit.R
-import com.sendiko.justdoit.dataStore
 import com.sendiko.justdoit.databinding.FragmentSettingsBinding
 import com.sendiko.justdoit.repository.preferences.AuthPreferences
 import com.sendiko.justdoit.repository.preferences.AuthViewModel
 import com.sendiko.justdoit.repository.preferences.AuthViewModelFactory
+import com.sendiko.justdoit.ui.container.FirstActivity
+import com.sendiko.justdoit.ui.container.MainActivity
+import com.sendiko.justdoit.ui.container.dataStore3
 
 class SettingsFragment : Fragment() {
 
@@ -25,7 +22,7 @@ class SettingsFragment : Fragment() {
 
    private val pref by lazy{
       val context = requireNotNull(this.context)
-      AuthPreferences.getInstance(context.dataStore)
+      AuthPreferences.getInstance(context.dataStore3)
    }
 
    private val authViewModel : AuthViewModel by lazy {
@@ -44,7 +41,8 @@ class SettingsFragment : Fragment() {
       val root: View = binding.root
 
       binding.icCancel.setOnClickListener {
-         findNavController().navigate(R.id.action_navigation_notifications_to_navigation_home)
+         val intent = Intent(requireActivity(), MainActivity::class.java)
+         startActivity(intent)
       }
 
       authViewModel.getUser().observe(viewLifecycleOwner){
@@ -54,12 +52,8 @@ class SettingsFragment : Fragment() {
       binding.icLogout.setOnClickListener {
          authViewModel.setLoginState(false)
          authViewModel.clearUser()
-         binding.progressBar4.visibility = View.VISIBLE
-         Handler(Looper.getMainLooper()).postDelayed({
-            binding.progressBar4.visibility = View.GONE
-            val intent = Intent(requireActivity(), FirstActivity::class.java)
-            startActivity(intent)
-         }, 1000)
+         val intent = Intent(requireActivity(), FirstActivity::class.java)
+         startActivity(intent)
       }
 
       return root
@@ -69,4 +63,5 @@ class SettingsFragment : Fragment() {
       super.onDestroyView()
       _binding = null
    }
+
 }

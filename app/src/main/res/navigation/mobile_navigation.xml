@@ -11,13 +11,6 @@
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" >
         <action
-            android:id="@+id/action_navigation_home_to_navigation_notifications"
-            app:destination="@id/navigation_settings"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out"
-            app:popUpTo="@id/navigation_home"
-            app:popUpToInclusive="true" />
-        <action
             android:id="@+id/action_navigation_home_to_taskFragment2"
             app:destination="@id/navigation_task"
             app:enterAnim="@android:anim/fade_in"
@@ -32,13 +25,6 @@
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_dashboard" >
         <action
-            android:id="@+id/action_navigation_dashboard_to_navigation_notifications"
-            app:destination="@id/navigation_settings"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out"
-            app:popUpTo="@id/navigation_dashboard"
-            app:popUpToInclusive="true" />
-        <action
             android:id="@+id/action_navigation_dashboard_to_taskFragment2"
             app:destination="@id/navigation_task"
             app:enterAnim="@android:anim/fade_out"
@@ -46,19 +32,6 @@
             app:popUpToInclusive="true" />
     </fragment>
 
-    <fragment
-        android:id="@+id/navigation_settings"
-        android:name="com.sendiko.justdoit.ui.settings.SettingsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_settings" >
-        <action
-            android:id="@+id/action_navigation_notifications_to_navigation_home"
-            app:destination="@id/navigation_home"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out"
-            app:popUpTo="@id/navigation_settings"
-            app:popUpToInclusive="true" />
-    </fragment>
     <fragment
         android:id="@+id/navigation_task"
         android:name="com.sendiko.justdoit.ui.task.TaskFragment"

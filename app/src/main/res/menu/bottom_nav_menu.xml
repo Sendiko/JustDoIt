@@ -7,6 +7,10 @@
         android:title="@string/title_home" />
 
     <item
+        android:id="@+id/placeholder"
+        android:title=""/>
+
+    <item
         android:id="@+id/navigation_dashboard"
         android:icon="@drawable/ic_check_nav"
         android:title="@string/title_dashboard" />

@@ -1,29 +1,26 @@
 package com.sendiko.justdoit.ui.home
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.textfield.TextInputEditText
-import com.sendiko.justdoit.R
-import com.sendiko.justdoit.dataStore1
 import com.sendiko.justdoit.databinding.FragmentHomeBinding
 import com.sendiko.justdoit.repository.ViewModelFactory
 import com.sendiko.justdoit.repository.model.Task
 import com.sendiko.justdoit.repository.preferences.AuthPreferences
 import com.sendiko.justdoit.repository.preferences.AuthViewModel
 import com.sendiko.justdoit.repository.preferences.AuthViewModelFactory
+import com.sendiko.justdoit.ui.container.SettingActivity
+import com.sendiko.justdoit.ui.container.dataStore
 import com.sendiko.justdoit.ui.task.TaskViewModel
 
 private const val TAG = "HomeFragment"
@@ -44,7 +41,7 @@ class HomeFragment : Fragment() {
 
    private val pref by lazy{
       val context = requireNotNull(this.context)
-      AuthPreferences.getInstance(context.dataStore1)
+      AuthPreferences.getInstance(context.dataStore)
    }
 
    private val authViewModel : AuthViewModel by lazy {
@@ -57,7 +54,6 @@ class HomeFragment : Fragment() {
       savedInstanceState: Bundle?
    ): View {
       _binding = FragmentHomeBinding.inflate(inflater, container, false)
-
       return binding.root
    }
 
@@ -74,12 +70,9 @@ class HomeFragment : Fragment() {
          binding.greeting.text = "Hi, $it!"
       }
 
-      binding.buttonAdd.setOnClickListener {
-         showInputSheet()
-      }
-
       binding.buttonSettings.setOnClickListener {
-         findNavController().navigate(R.id.action_navigation_home_to_navigation_notifications)
+         val intent = Intent(requireActivity(), SettingActivity::class.java)
+         startActivity(intent)
       }
 
       binding.swipeRefresh.setOnRefreshListener {
@@ -90,31 +83,6 @@ class HomeFragment : Fragment() {
 
    private fun showSnackbar(message : String){
       Snackbar.make(requireView(), message, Snackbar.LENGTH_LONG).show()
-   }
-
-   private fun showInputSheet(){
-      val inputSheet = BottomSheetDialog(requireContext())
-      val view = layoutInflater.inflate(R.layout.fragment_task, null)
-      inputSheet.setContentView(view)
-      inputSheet.show()
-
-      val inputTask = view.findViewById<TextInputEditText>(R.id.input_task)
-      val inputSubject = view.findViewById<TextInputEditText>(R.id.input_subject)
-      val buttonCancel = view.findViewById<Button>(R.id.button_cancel)
-      val buttonSubmit = view.findViewById<Button>(R.id.button_submit)
-
-      buttonCancel.setOnClickListener {
-         inputSheet.dismiss()
-      }
-
-      buttonSubmit.setOnClickListener {
-         val t = inputTask.text.toString()
-         val s = inputSubject.text.toString()
-         val task = Task(t, s, "false")
-         taskViewModel.insertTask(task)
-         inputSheet.dismiss()
-      }
-
    }
 
    private fun setupRecyclerView(taskList : List<Task>){

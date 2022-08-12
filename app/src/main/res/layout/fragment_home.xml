@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:backgroundTint="@color/white"
+    android:background="@color/white"
     tools:context="com.sendiko.justdoit.ui.home.HomeFragment">
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -111,20 +111,6 @@
                 app:layout_constraintStart_toStartOf="@+id/imageView"
                 app:layout_constraintTop_toBottomOf="@+id/imageView"
                 app:drawableEndCompat="@drawable/ic_refresh" />
-
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/button_add"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/indigo_dye"
-                android:clickable="true"
-                android:focusable="true"
-                android:layout_margin="16dp"
-                android:src="@drawable/ic_add"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:tint="@color/white"
-                android:contentDescription="@string/add_new_task" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
