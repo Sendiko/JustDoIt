@@ -1,4 +1,4 @@
-package com.sendiko.justdoit
+package com.sendiko.justdoit.ui.container
 
 import android.content.Context
 import android.os.Bundle

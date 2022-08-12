@@ -13,13 +13,13 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
-import com.sendiko.justdoit.MainActivity
 import com.sendiko.justdoit.R
-import com.sendiko.justdoit.dataStore1
 import com.sendiko.justdoit.databinding.FragmentLoginBinding
 import com.sendiko.justdoit.repository.preferences.AuthPreferences
 import com.sendiko.justdoit.repository.preferences.AuthViewModel
 import com.sendiko.justdoit.repository.preferences.AuthViewModelFactory
+import com.sendiko.justdoit.ui.container.MainActivity
+import com.sendiko.justdoit.ui.container.dataStore1
 
 class LoginFragment : Fragment() {
 
@@ -90,7 +90,7 @@ class LoginFragment : Fragment() {
          binding.layoutToolbar.visibility = View.INVISIBLE
          binding.buttonLogin.visibility = View.INVISIBLE
          binding.textView.visibility = View.INVISIBLE
-         findNavController().navigate(R.id.action_loginFragment2_to_registerFragment2)
+         findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
       }, 350)
    }
 
