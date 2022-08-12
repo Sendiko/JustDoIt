@@ -89,16 +89,16 @@ class HomeFragment : Fragment() {
       val rv = binding.rvTask
       val rvAdapter = TaskAdapter(arrayListOf(), requireContext(), object : TaskAdapter.onItemClickListener{
          override fun onCheckListener(task: Task) {
-            taskViewModel.updateTask(Task(task.task, task.subject, "true"))
+            taskViewModel.updateTask(Task(task.id, task.task, task.subject, "true"))
             taskViewModel.allTasks.observe(viewLifecycleOwner){
-               Toast.makeText(context, "$it", Toast.LENGTH_SHORT).show()
+               Toast.makeText(context, "${task.id}, ${task.task}, ${task.subject}, ${task.isDone}", Toast.LENGTH_SHORT).show()
             }
-            Log.d(TAG, "onCheckListener: ${task.task}, ${task.subject}, ${task.isDone}")
+            Log.d(TAG, "onCheckListener: ${task.id}, ${task.task}, ${task.subject}, ${task.isDone}")
          }
 
          override fun onDeleteListener(task: Task) {
             taskViewModel.deleteTask(task)
-            Log.d(TAG, "onDeleteListener: $task")
+            Log.d(TAG, "onDeleteListener: ${task.id}, ${task.task}, ${task.subject}, ${task.isDone}")
          }
 
       })

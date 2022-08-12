@@ -3,9 +3,11 @@ package com.sendiko.justdoit.ui.dashboard
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
@@ -20,6 +22,7 @@ import com.sendiko.justdoit.ui.container.SettingActivity
 import com.sendiko.justdoit.ui.container.dataStore1
 import com.sendiko.justdoit.ui.task.TaskViewModel
 
+private const val TAG = "DashboardFragment"
 class DashboardFragment : Fragment() {
 
    private var _binding: FragmentDashboardBinding? = null
@@ -85,11 +88,14 @@ class DashboardFragment : Fragment() {
       rv.layoutManager = LinearLayoutManager(context)
       val rvAdapter = TaskCheckedAdapter(arrayListOf(), requireContext(), object : TaskCheckedAdapter.onItemClickListener{
          override fun onUncheckListener(task: Task) {
-            taskViewModel.updateTask(Task(task.task, task.subject, "false"))
+            taskViewModel.updateTask(Task(task.id, task.task, task.subject, "false"))
+            Toast.makeText(context, "${task.id}, ${task.task}, ${task.subject}, ${task.isDone}", Toast.LENGTH_SHORT).show()
+            Log.d(TAG, "onUncheckListener: ${task.id}, ${task.task}, ${task.subject}, ${task.isDone}")
          }
 
          override fun onDeleteListener(task: Task) {
             taskViewModel.deleteTask(task)
+            Log.d(TAG, "onUncheckListener: ${task.id}, ${task.task}, ${task.subject}, ${task.isDone}")
          }
 
       })

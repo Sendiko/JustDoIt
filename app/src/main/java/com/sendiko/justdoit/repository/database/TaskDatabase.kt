@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.sendiko.justdoit.repository.model.Task
 
-@Database(entities = [Task::class], version = 1)
+@Database(entities = [Task::class], version = 2)
 abstract class TaskDatabase : RoomDatabase() {
 
     abstract fun taskDao() : TaskDataAccessObject

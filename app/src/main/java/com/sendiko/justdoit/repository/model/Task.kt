@@ -5,7 +5,10 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "taskTable")
-class Task(
+data class Task(
+
+   @PrimaryKey(autoGenerate = true)
+   var id: Int?= null,
 
    @ColumnInfo(name = "task")
    var task : String?= null,
@@ -16,7 +19,4 @@ class Task(
    @ColumnInfo(name = "isDone")
    var isDone : String?= null
 
-) {
-   @PrimaryKey(autoGenerate = true)
-   var id = 0
-}
+)
