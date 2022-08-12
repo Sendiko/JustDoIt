@@ -8,15 +8,15 @@ import androidx.room.PrimaryKey
 data class Task(
 
    @PrimaryKey(autoGenerate = true)
-   var id: Int?= null,
+   val id: Int,
 
    @ColumnInfo(name = "task")
-   var task : String?= null,
+   val task : String?= null,
 
    @ColumnInfo(name = "subject")
-   var subject: String?= null,
+   val subject: String?= null,
 
    @ColumnInfo(name = "isDone")
-   var isDone : String?= null
+   val isDone : String?= null
 
 )
