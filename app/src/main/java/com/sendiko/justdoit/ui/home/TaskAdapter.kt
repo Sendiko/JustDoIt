@@ -32,10 +32,6 @@ class TaskAdapter(private val task : ArrayList<Task>, context : Context, private
          onClick.onCheckListener(currentItem)
       }
 
-      holder.binding.update.setOnClickListener {
-         onClick.onDeleteListener(currentItem)
-      }
-
    }
 
    override fun getItemCount(): Int {
