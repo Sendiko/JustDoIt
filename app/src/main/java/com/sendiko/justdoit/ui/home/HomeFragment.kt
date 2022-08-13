@@ -10,10 +10,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.snackbar.Snackbar
 import com.sendiko.justdoit.databinding.FragmentHomeBinding
+import com.sendiko.justdoit.repository.SharedViewModel
 import com.sendiko.justdoit.repository.ViewModelFactory
 import com.sendiko.justdoit.repository.model.Task
 import com.sendiko.justdoit.repository.preferences.AuthPreferences
@@ -28,6 +29,8 @@ class HomeFragment : Fragment() {
 
    private var _binding: FragmentHomeBinding? = null
    private val binding get() = _binding!!
+
+   private val sharedViewModel : SharedViewModel by activityViewModels()
 
    private val taskViewModel : TaskViewModel by lazy {
       val activity = requireNotNull(this.activity)
@@ -79,10 +82,23 @@ class HomeFragment : Fragment() {
          requireActivity().recreate()
       }
 
+      checkIfEmpty()
+
    }
 
-   private fun showSnackbar(message : String){
-      Snackbar.make(requireView(), message, Snackbar.LENGTH_LONG).show()
+   private fun checkIfEmpty() {
+      taskViewModel.checkIfEmpty.observe(viewLifecycleOwner){
+         when(it){
+            0 -> {
+               binding.imageView.visibility = View.VISIBLE
+               binding.textSwipe.visibility = View.VISIBLE
+            }
+            else -> {
+               binding.imageView.visibility = View.GONE
+               binding.textSwipe.visibility = View.GONE
+            }
+         }
+      }
    }
 
    private fun setupRecyclerView(taskList : List<Task>){

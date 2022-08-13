@@ -22,5 +22,10 @@ interface TaskDataAccessObject {
     @Query("select * from taskTable where isDone = 'true' order by id asc")
     fun getCheckedTask() : LiveData<List<Task>>
 
+    @Query("select count (*) from taskTable as tableTask where isDone = 'false' ")
+    fun checkIfEmpty() : LiveData<Int>
+
+    @Query("select count (*) from taskTable as tableTask where isDone = 'true' ")
+    fun alsoCheckIfEmpty() : LiveData<Int>
 
 }
