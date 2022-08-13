@@ -31,7 +31,7 @@
         <entry key="app/src/main/res/layout/activity_first.xml" value="0.2941427960666952" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2749094202898551" />
         <entry key="app/src/main/res/layout/activity_setting.xml" value="0.29243266353142366" />
-        <entry key="app/src/main/res/layout/card_item_task.xml" value="0.67" />
+        <entry key="app/src/main/res/layout/card_item_task.xml" value="0.5" />
         <entry key="app/src/main/res/layout/card_item_task_checked.xml" value="0.67" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.3826754385964912" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.5" />

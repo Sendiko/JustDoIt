@@ -38,7 +38,8 @@
         android:layout_gravity="bottom"
         android:backgroundTint="@color/indigo_dye"
         app:fabCradleMargin="8dp"
-        app:fabAlignmentModeEndMargin="64dp"
+        app:fabAlignmentMode="end"
+        app:fabAlignmentModeEndMargin="48dp"
         app:fabCradleRoundedCornerRadius="12dp"
         style="@style/Widget.MaterialComponents.BottomAppBar">
 
