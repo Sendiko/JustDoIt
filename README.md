@@ -1,2 +1,2 @@
 # JustDoIt
-## branch for small update without an issue
+## your everyday task manager
