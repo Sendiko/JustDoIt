@@ -87,9 +87,16 @@ class MainActivity : AppCompatActivity() {
       buttonSubmit.setOnClickListener {
          val t = inputTask.text.toString()
          val s = inputSubject.text.toString()
-         val task = Task(0, t, s, "false")
-         taskViewModel.insertTask(task)
-         inputSheet.dismiss()
+         when {
+            t.isNotEmpty() -> {
+               val task = Task(0, t, s, "false")
+               taskViewModel.insertTask(task)
+               inputSheet.dismiss()
+            }
+            else -> {
+               inputTask.error = "Task can't be empty"
+            }
+         }
       }
 
    }
