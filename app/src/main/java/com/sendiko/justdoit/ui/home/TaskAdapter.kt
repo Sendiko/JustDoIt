@@ -24,6 +24,10 @@ class TaskAdapter(private val task : ArrayList<Task>, context : Context, private
       holder.binding.task.text = currentItem.task
       holder.binding.subjectTask.text = currentItem.subject
 
+      holder.binding.cardTask.setOnClickListener {
+         onClick.onTaskClickListener(currentItem)
+      }
+
       holder.binding.checkbox.setOnClickListener {
          onClick.onCheckListener(currentItem)
       }
@@ -49,6 +53,7 @@ class TaskAdapter(private val task : ArrayList<Task>, context : Context, private
    interface onItemClickListener {
       fun onCheckListener(task: Task)
       fun onDeleteListener(task: Task)
+      fun onTaskClickListener(task: Task)
    }
 
 }

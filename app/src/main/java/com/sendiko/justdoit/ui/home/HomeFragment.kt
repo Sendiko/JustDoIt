@@ -7,12 +7,17 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.textfield.TextInputEditText
+import com.sendiko.justdoit.R
 import com.sendiko.justdoit.databinding.FragmentHomeBinding
 import com.sendiko.justdoit.repository.SharedViewModel
 import com.sendiko.justdoit.repository.ViewModelFactory
@@ -101,6 +106,38 @@ class HomeFragment : Fragment() {
       }
    }
 
+   @SuppressLint("SetTextI18n")
+   private fun showUpdateSheet(tasks: Task, u : String){
+      val inputSheet = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)
+      val view = layoutInflater.inflate(R.layout.fragment_task, null)
+      inputSheet.setContentView(view)
+      inputSheet.show()
+
+      val inputTask = view.findViewById<TextInputEditText>(R.id.input_task)
+      val inputSubject = view.findViewById<TextInputEditText>(R.id.input_subject)
+      val buttonCancel = view.findViewById<Button>(R.id.button_cancel)
+      val buttonSubmit = view.findViewById<Button>(R.id.button_submit)
+      val headerTitle = view.findViewById<TextView>(R.id.header_title)
+
+      inputTask.setText(tasks.task)
+      inputSubject.setText(tasks.subject)
+      buttonSubmit.text = u
+      headerTitle.text = "Update task"
+
+      buttonCancel.setOnClickListener {
+         inputSheet.dismiss()
+      }
+
+      buttonSubmit.setOnClickListener {
+         val task = inputTask.text.toString()
+         val sub = inputSubject.text.toString()
+         val tasks = Task(tasks.id, task, sub, "false")
+         taskViewModel.insertTask(tasks)
+         inputSheet.dismiss()
+      }
+
+   }
+
    private fun setupRecyclerView(taskList : List<Task>){
       val rv = binding.rvTask
       val rvAdapter = TaskAdapter(arrayListOf(), requireContext(), object : TaskAdapter.onItemClickListener{
@@ -115,6 +152,10 @@ class HomeFragment : Fragment() {
          override fun onDeleteListener(task: Task) {
             taskViewModel.deleteTask(task)
             Log.d(TAG, "onDeleteListener: $task")
+         }
+
+         override fun onTaskClickListener(task: Task) {
+            showUpdateSheet(task, "Update")
          }
 
       })
