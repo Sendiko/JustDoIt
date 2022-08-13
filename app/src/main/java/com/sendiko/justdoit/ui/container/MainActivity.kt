@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
       navView.setupWithNavController(navController)
       navView.itemActiveIndicatorColor = null
       navView.background = null
-      navView.menu.getItem(1).isEnabled = false
+      navView.menu.getItem(2).isEnabled = false
 
       binding.buttonAddTask.setOnClickListener {
          showInputSheet()
