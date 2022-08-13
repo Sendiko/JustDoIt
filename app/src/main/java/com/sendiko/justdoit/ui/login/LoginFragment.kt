@@ -15,6 +15,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.sendiko.justdoit.R
 import com.sendiko.justdoit.databinding.FragmentLoginBinding
+import com.sendiko.justdoit.repository.SharedViewModel
 import com.sendiko.justdoit.repository.preferences.AuthPreferences
 import com.sendiko.justdoit.repository.preferences.AuthViewModel
 import com.sendiko.justdoit.repository.preferences.AuthViewModelFactory
@@ -27,6 +28,7 @@ class LoginFragment : Fragment() {
    private val binding get() = _binding!!
 
    private val loginViewModel : LoginViewModel by activityViewModels()
+   private val sharedViewModel : SharedViewModel by activityViewModels()
 
    private val pref by lazy{
       val context = requireNotNull(this.context)
@@ -121,6 +123,7 @@ class LoginFragment : Fragment() {
    private fun postLogin(u : String){
       authViewModel.saveUsername(u)
       authViewModel.setLoginState(true)
+      sharedViewModel.saveUsername(u)
       val intent = Intent(requireActivity(), MainActivity::class.java)
       startActivity(intent)
    }

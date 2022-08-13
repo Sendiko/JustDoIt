@@ -78,6 +78,23 @@ class DashboardFragment : Fragment() {
          startActivity(intent)
       }
 
+      alsoCheckIfEmpty()
+
+   }
+
+   private fun alsoCheckIfEmpty(){
+      taskViewModel.alsoCheckIfEmpty.observe(viewLifecycleOwner){
+         when(it){
+            0 -> {
+               binding.imageView3.visibility = View.VISIBLE
+               binding.textSwipe3.visibility = View.VISIBLE
+            }
+            else -> {
+               binding.imageView3.visibility = View.GONE
+               binding.textSwipe3.visibility = View.GONE
+            }
+         }
+      }
    }
 
    private fun setupRecyclerView(taskList : List<Task>){

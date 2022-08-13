@@ -70,7 +70,7 @@ class MainActivity : AppCompatActivity() {
    }
 
    private fun showInputSheet(){
-      val inputSheet = BottomSheetDialog(this)
+      val inputSheet = BottomSheetDialog(this, R.style.BottomSheetDialogTheme)
       val view = layoutInflater.inflate(R.layout.fragment_task, null)
       inputSheet.setContentView(view)
       inputSheet.show()

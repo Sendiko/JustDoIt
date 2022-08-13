@@ -10,6 +10,10 @@ class TaskRepository(private val taskDao : TaskDataAccessObject) {
 
     val allCheckTask : LiveData<List<Task>> = taskDao.getCheckedTask()
 
+    val checkIfEmpty : LiveData<Int> = taskDao.checkIfEmpty()
+
+    val alsoCheckIfEmpty : LiveData<Int> = taskDao.alsoCheckIfEmpty()
+
     suspend fun insertTask(task: Task) = taskDao.insertTask(task)
 
     suspend fun updateTask(task: Task) = taskDao.updateTask(task)
