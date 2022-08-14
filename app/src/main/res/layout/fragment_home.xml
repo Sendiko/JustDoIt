@@ -53,7 +53,7 @@
                 android:layout_width="42dp"
                 android:layout_height="42dp"
                 android:layout_marginEnd="16dp"
-                android:src="@drawable/ic_user_illustration_small"
+                android:src="@drawable/ic_settings"
                 app:layout_constraintBottom_toBottomOf="@+id/greeting2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/greeting" />
@@ -63,15 +63,13 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
                 android:visibility="visible"
-                tools:listitem="@layout/card_item_task"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/greeting2" />
+                app:layout_constraintTop_toBottomOf="@+id/layout_sort"
+                tools:listitem="@layout/card_item_task" />
 
             <ProgressBar
                 android:id="@+id/progressBar"
@@ -111,6 +109,32 @@
                 app:layout_constraintStart_toStartOf="@+id/imageView"
                 app:layout_constraintTop_toBottomOf="@+id/imageView"
                 app:drawableEndCompat="@drawable/ic_refresh" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_sort"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                app:boxStrokeColor="@android:color/transparent"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp"
+                app:endIconDrawable="@drawable/ic_sort"
+                app:endIconTint="@color/indigo_dye"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/button_settings">
+
+                <AutoCompleteTextView
+                    android:id="@+id/input_sort"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito_bold"
+                    android:inputType="none"
+                    android:text="@string/sort_a_z"
+                    android:textColor="@color/indigo_dye"
+                    android:textSize="12sp"
+                    tools:ignore="TouchTargetSizeCheck" />
+            </com.google.android.material.textfield.TextInputLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:defaultNavHost="true"
+        android:layout_marginBottom="48dp"
         app:layout_constraintBottom_toTopOf="@id/coordinator"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -38,7 +39,7 @@
         android:layout_gravity="bottom"
         android:backgroundTint="@color/indigo_dye"
         app:fabCradleMargin="8dp"
-        app:fabAlignmentMode="end"
+        app:fabAlignmentMode="center"
         app:fabAlignmentModeEndMargin="48dp"
         app:fabCradleRoundedCornerRadius="12dp"
         style="@style/Widget.MaterialComponents.BottomAppBar">
