@@ -1,6 +1,7 @@
 package com.sendiko.justdoit.repository.preferences
 
 import androidx.lifecycle.*
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class AuthViewModel(private val auth : AuthPreferences) : ViewModel() {
@@ -26,7 +27,7 @@ class AuthViewModel(private val auth : AuthPreferences) : ViewModel() {
    }
 
    fun setLoginState(isLoggedIn : Boolean){
-      viewModelScope.launch {
+      viewModelScope.launch(Dispatchers.IO) {
          auth.setLoginState(isLoggedIn)
       }
    }

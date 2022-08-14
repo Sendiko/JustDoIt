@@ -14,6 +14,10 @@ class TaskRepository(private val taskDao : TaskDataAccessObject) {
 
     val alsoCheckIfEmpty : LiveData<Int> = taskDao.alsoCheckIfEmpty()
 
+    val sortAZ : LiveData<List<Task>> = taskDao.sortAZ()
+
+    val sortZA : LiveData<List<Task>> = taskDao.sortZA()
+
     suspend fun insertTask(task: Task) = taskDao.insertTask(task)
 
     suspend fun updateTask(task: Task) = taskDao.updateTask(task)

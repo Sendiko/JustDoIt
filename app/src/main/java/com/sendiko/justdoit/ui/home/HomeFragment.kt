@@ -7,9 +7,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.activityViewModels
@@ -25,8 +27,10 @@ import com.sendiko.justdoit.repository.model.Task
 import com.sendiko.justdoit.repository.preferences.AuthPreferences
 import com.sendiko.justdoit.repository.preferences.AuthViewModel
 import com.sendiko.justdoit.repository.preferences.AuthViewModelFactory
+import com.sendiko.justdoit.repository.preferences.DataPreferences
 import com.sendiko.justdoit.ui.container.SettingActivity
 import com.sendiko.justdoit.ui.container.dataStore
+import com.sendiko.justdoit.ui.container.dataStore1
 import com.sendiko.justdoit.ui.task.TaskViewModel
 
 private const val TAG = "HomeFragment"
@@ -56,6 +60,15 @@ class HomeFragment : Fragment() {
       ViewModelProvider(this, AuthViewModelFactory(pref))[AuthViewModel::class.java]
    }
 
+   private val dataPref by lazy{
+      val context = requireNotNull(this.context)
+      DataPreferences.getInstance(context.dataStore1)
+   }
+
+   private val homeViewModel : HomeViewModel by lazy {
+      ViewModelProvider(this, HomeViewModel.HomeViewModelFactory(dataPref))[HomeViewModel::class.java]
+   }
+
    override fun onCreateView(
       inflater: LayoutInflater,
       container: ViewGroup?,
@@ -69,10 +82,33 @@ class HomeFragment : Fragment() {
    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
       super.onViewCreated(view, savedInstanceState)
 
-      taskViewModel.allTasks.observe(viewLifecycleOwner){
-         setupRecyclerView(it)
+      val arraySort = resources.getStringArray(R.array.sort)
+
+      binding.inputSort.setAdapter(ArrayAdapter(requireContext(), R.layout.text_dropdown, arraySort))
+
+      binding.inputSort.addTextChangedListener {
+         homeViewModel.setSortKey(it.toString())
       }
 
+      homeViewModel.getSortKey().observe(viewLifecycleOwner){ key ->
+         when(key) {
+            null -> taskViewModel.allTasks.observe(viewLifecycleOwner){
+               setupRecyclerView(it)
+            }
+             "ID" -> taskViewModel.allTasks.observe(viewLifecycleOwner){
+                setupRecyclerView(it)
+                Toast.makeText(context, "sort by id", Toast.LENGTH_SHORT).show()
+             }
+             "A-Z" -> taskViewModel.sortAZ.observe(viewLifecycleOwner){
+                setupRecyclerView(it)
+                Toast.makeText(context, "sort A-Z", Toast.LENGTH_SHORT).show()
+             }
+             "Z-A" -> taskViewModel.sortZA.observe(viewLifecycleOwner){
+                setupRecyclerView(it)
+                Toast.makeText(context, "sort Z-A", Toast.LENGTH_SHORT).show()
+             }
+         }
+      }
 
       authViewModel.getUser().observe(viewLifecycleOwner){
          binding.greeting.text = "Hi, $it!"
