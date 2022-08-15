@@ -3,13 +3,13 @@ package com.sendiko.justdoit.ui.home
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -89,6 +89,7 @@ class HomeFragment : Fragment() {
       }
 
       checkIfEmpty()
+      onBackPressed()
 
    }
 
@@ -152,13 +153,11 @@ class HomeFragment : Fragment() {
       val rvAdapter = TaskAdapter(arrayListOf(), object : TaskAdapter.OnItemClickListener{
          override fun onCheckListener(task: Task) {
             taskViewModel.updateTask(Task(task.id, task.task, task.subject, "true"))
-            Log.d(TAG, "onCheckListener: $task")
             Toast.makeText(context, "${task.task} is checked", Toast.LENGTH_SHORT).show()
          }
 
          override fun onTaskClickListener(task: Task) {
             showUpdateSheet(task, "Update")
-            Log.d(TAG, "onTaskClickListener: $task")
          }
 
       })
@@ -167,6 +166,12 @@ class HomeFragment : Fragment() {
          adapter = rvAdapter
          layoutManager = LinearLayoutManager(context)
          setHasFixedSize(true)
+      }
+   }
+
+   private fun onBackPressed(){
+      requireActivity().onBackPressedDispatcher.addCallback {
+         Toast.makeText(context, "use home button to exit the app", Toast.LENGTH_SHORT).show()
       }
    }
 

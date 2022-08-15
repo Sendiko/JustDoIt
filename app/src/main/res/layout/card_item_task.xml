@@ -10,7 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        app:cardCornerRadius="14dp"
+        app:cardCornerRadius="12dp"
+        app:cardBackgroundColor="@color/ming"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -18,8 +19,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/box_background">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/task"
@@ -27,11 +27,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="130dp"
+                android:layout_marginEnd="32dp"
                 android:fontFamily="@font/nunito_bold"
                 android:text="@string/task_list_example"
                 android:textAlignment="textStart"
-                android:textColor="@color/indigo_dye"
+                android:textColor="@color/white"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toStartOf="@+id/update"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -44,12 +44,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="114dp"
+                android:layout_marginEnd="32dp"
                 android:layout_marginBottom="16dp"
                 android:fontFamily="@font/nunito_regular"
                 android:text="@string/subject_task_list_example"
                 android:textAlignment="textStart"
-                android:textColor="@color/indigo_dye"
+                android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/update"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -67,7 +67,9 @@
                 android:src="@drawable/ic_edit"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/checkbox"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.473"
+                app:tint="@color/white" />
 
             <ImageView
                 android:id="@+id/checkbox"
@@ -79,8 +81,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.473"
                 app:srcCompat="@drawable/ic_checked_empty" />
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
