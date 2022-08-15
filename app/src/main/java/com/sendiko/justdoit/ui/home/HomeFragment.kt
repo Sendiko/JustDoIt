@@ -3,7 +3,6 @@ package com.sendiko.justdoit.ui.home
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -154,13 +153,11 @@ class HomeFragment : Fragment() {
       val rvAdapter = TaskAdapter(arrayListOf(), object : TaskAdapter.OnItemClickListener{
          override fun onCheckListener(task: Task) {
             taskViewModel.updateTask(Task(task.id, task.task, task.subject, "true"))
-            Log.d(TAG, "onCheckListener: $task")
             Toast.makeText(context, "${task.task} is checked", Toast.LENGTH_SHORT).show()
          }
 
          override fun onTaskClickListener(task: Task) {
             showUpdateSheet(task, "Update")
-            Log.d(TAG, "onTaskClickListener: $task")
          }
 
       })

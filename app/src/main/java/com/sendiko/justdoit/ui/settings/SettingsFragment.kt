@@ -38,11 +38,12 @@ class SettingsFragment : Fragment() {
       container: ViewGroup?,
       savedInstanceState: Bundle?
    ): View {
-      val settingsViewModel =
-         ViewModelProvider(this)[SettingsViewModel::class.java]
-
       _binding = FragmentSettingsBinding.inflate(layoutInflater)
-      val root: View = binding.root
+      return binding.root
+   }
+
+   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+      super.onViewCreated(view, savedInstanceState)
 
       binding.icCancel.setOnClickListener {
          val intent = Intent(requireActivity(), MainActivity::class.java)
@@ -61,7 +62,6 @@ class SettingsFragment : Fragment() {
          startActivity(intent)
       }
 
-      return root
    }
 
    override fun onDestroyView() {

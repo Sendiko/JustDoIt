@@ -10,7 +10,12 @@
         <entry key="app/src/main/res/drawable/box_background_error.xml" value="0.3275" />
         <entry key="app/src/main/res/drawable/box_background_reversed.xml" value="0.3175" />
         <entry key="app/src/main/res/drawable/ic_add.xml" value="0.3175" />
+        <entry key="app/src/main/res/drawable/ic_add_square.xml" value="0.3275" />
+        <entry key="app/src/main/res/drawable/ic_blob.xml" value="0.3275" />
+        <entry key="app/src/main/res/drawable/ic_blob_2.xml" value="0.3275" />
+        <entry key="app/src/main/res/drawable/ic_cancel.xml" value="0.3275" />
         <entry key="app/src/main/res/drawable/ic_check_nav.xml" value="0.3175" />
+        <entry key="app/src/main/res/drawable/ic_check_task.xml" value="0.3275" />
         <entry key="app/src/main/res/drawable/ic_checkbox_filled.xml" value="0.3175" />
         <entry key="app/src/main/res/drawable/ic_checked_empty.xml" value="0.1915" />
         <entry key="app/src/main/res/drawable/ic_edit.xml" value="0.19" />

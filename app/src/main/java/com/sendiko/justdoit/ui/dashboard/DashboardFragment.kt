@@ -3,7 +3,6 @@ package com.sendiko.justdoit.ui.dashboard
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -104,13 +103,11 @@ class DashboardFragment : Fragment() {
          override fun onUncheckListener(task: Task) {
             taskViewModel.updateTask(Task(task.id, task.task, task.subject, "false"))
             Toast.makeText(context, "${task.task} is unchecked", Toast.LENGTH_SHORT).show()
-            Log.d(TAG, "onUncheckListener: ${task.id}, ${task.task}, ${task.subject}, ${task.isDone}")
          }
 
          override fun onDeleteListener(task: Task) {
             taskViewModel.deleteTask(task)
             Toast.makeText(context, "${task.task} is deleted", Toast.LENGTH_SHORT).show()
-            Log.d(TAG, "onUncheckListener: ${task.id}, ${task.task}, ${task.subject}, ${task.isDone}")
          }
 
       })

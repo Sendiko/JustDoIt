@@ -38,7 +38,7 @@ class AuthViewModelFactory(private val auth : AuthPreferences) : ViewModelProvid
    override fun <T : ViewModel> create(modelClass: Class<T>): T {
       when{
          modelClass.isAssignableFrom(AuthViewModel::class.java) -> return AuthViewModel(auth) as T
-         else -> throw IllegalArgumentException("Unkown model class : " + modelClass.name)
+         else -> throw IllegalArgumentException("Unknown model class : " + modelClass.name)
       }
    }
 }

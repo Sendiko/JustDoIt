@@ -26,7 +26,6 @@ class LoginFragment : Fragment() {
    private var _binding : FragmentLoginBinding?= null
    private val binding get() = _binding!!
 
-   private val loginViewModel : LoginViewModel by activityViewModels()
    private val sharedViewModel : SharedViewModel by activityViewModels()
 
    private val pref by lazy{
@@ -58,13 +57,6 @@ class LoginFragment : Fragment() {
          val p = binding.inputUsername.text.toString()
          when{
             validation(u, p) -> postLogin(u)
-         }
-      }
-
-      loginViewModel.isFailed.observe(viewLifecycleOwner){
-         when(it.isFailed){
-            true -> showSnackbar(it.errorMessage.toString())
-            else -> null
          }
       }
 

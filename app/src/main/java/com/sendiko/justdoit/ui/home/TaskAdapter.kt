@@ -1,7 +1,6 @@
 package com.sendiko.justdoit.ui.home
 
 import android.annotation.SuppressLint
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -42,7 +41,6 @@ class TaskAdapter(private val task: ArrayList<Task>, private val onClick: OnItem
       task.clear()
       task.addAll(newList)
       notifyDataSetChanged()
-      Log.d(TAG, "updateList: $newList")
    }
 
    interface OnItemClickListener {
