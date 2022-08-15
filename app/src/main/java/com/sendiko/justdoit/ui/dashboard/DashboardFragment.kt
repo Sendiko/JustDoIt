@@ -47,23 +47,17 @@ class DashboardFragment : Fragment() {
       ViewModelProvider(this, AuthViewModelFactory(pref))[AuthViewModel::class.java]
    }
 
-   @SuppressLint("SetTextI18n")
    override fun onCreateView(
       inflater: LayoutInflater,
       container: ViewGroup?,
       savedInstanceState: Bundle?
    ): View {
-
       _binding = FragmentDashboardBinding.inflate(inflater, container, false)
-      val root: View = binding.root
 
-      authViewModel.getUser().observe(viewLifecycleOwner){
-         binding.greeting.text = "Great job, $it!"
-      }
-
-      return root
+      return binding.root
    }
 
+   @SuppressLint("SetTextI18n")
    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
       super.onViewCreated(view, savedInstanceState)
 
@@ -71,6 +65,9 @@ class DashboardFragment : Fragment() {
          setupRecyclerView(it)
       }
 
+      authViewModel.getUser().observe(viewLifecycleOwner){
+         binding.greeting.text = "Great job, $it!"
+      }
 
       binding.swipeRefresh.setOnRefreshListener {
          requireActivity().recreate()
@@ -103,15 +100,16 @@ class DashboardFragment : Fragment() {
    private fun setupRecyclerView(taskList : List<Task>){
       val rv = binding.rvTaskChecked
       rv.layoutManager = LinearLayoutManager(context)
-      val rvAdapter = TaskCheckedAdapter(arrayListOf(), requireContext(), object : TaskCheckedAdapter.onItemClickListener{
+      val rvAdapter = TaskCheckedAdapter(arrayListOf(), object : TaskCheckedAdapter.OnItemClickListener{
          override fun onUncheckListener(task: Task) {
             taskViewModel.updateTask(Task(task.id, task.task, task.subject, "false"))
-            Toast.makeText(context, "${task.id}, ${task.task}, ${task.subject}, ${task.isDone}", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "${task.task} is unchecked", Toast.LENGTH_SHORT).show()
             Log.d(TAG, "onUncheckListener: ${task.id}, ${task.task}, ${task.subject}, ${task.isDone}")
          }
 
          override fun onDeleteListener(task: Task) {
             taskViewModel.deleteTask(task)
+            Toast.makeText(context, "${task.id} is deleted", Toast.LENGTH_SHORT).show()
             Log.d(TAG, "onUncheckListener: ${task.id}, ${task.task}, ${task.subject}, ${task.isDone}")
          }
 

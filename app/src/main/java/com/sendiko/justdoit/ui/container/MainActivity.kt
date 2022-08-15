@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.animation.AnimationUtils
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.view.isVisible
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -16,6 +17,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import com.sendiko.justdoit.R
 import com.sendiko.justdoit.databinding.ActivityMainBinding
 import com.sendiko.justdoit.repository.ViewModelFactory
@@ -51,7 +53,7 @@ class MainActivity : AppCompatActivity() {
       navView.setupWithNavController(navController)
       navView.itemActiveIndicatorColor = null
       navView.background = null
-      navView.menu.getItem(2).isEnabled = false
+      navView.menu.getItem(1).isEnabled = false
 
       binding.buttonAddTask.setOnClickListener {
          showInputSheet()
@@ -75,6 +77,7 @@ class MainActivity : AppCompatActivity() {
       inputSheet.setContentView(view)
       inputSheet.show()
 
+      val layoutTask = view.findViewById<TextInputLayout>(R.id.layout_task)
       val inputTask = view.findViewById<TextInputEditText>(R.id.input_task)
       val inputSubject = view.findViewById<TextInputEditText>(R.id.input_subject)
       val buttonCancel = view.findViewById<Button>(R.id.button_cancel)
@@ -87,9 +90,17 @@ class MainActivity : AppCompatActivity() {
       buttonSubmit.setOnClickListener {
          val t = inputTask.text.toString()
          val s = inputSubject.text.toString()
-         val task = Task(0, t, s, "false")
-         taskViewModel.insertTask(task)
-         inputSheet.dismiss()
+         when {
+            t.isNotEmpty() -> {
+               val task = Task(0, t, s, "false")
+               taskViewModel.insertTask(task)
+               inputSheet.dismiss()
+            }
+            else -> {
+               layoutTask.error = "Task can't be empty"
+               inputTask.background = AppCompatResources.getDrawable(this, R.drawable.box_background_error)
+            }
+         }
       }
 
    }

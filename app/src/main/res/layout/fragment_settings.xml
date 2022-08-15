@@ -24,6 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
+        android:layout_marginTop="24dp"
         android:fontFamily="@font/nunito_extrabold"
         android:text="@string/settings"
         android:textColor="@color/indigo_dye"
@@ -35,7 +36,7 @@
         android:id="@+id/ic_cancel"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
         android:src="@drawable/ic_cancel"
         app:layout_constraintEnd_toEndOf="parent"
@@ -46,7 +47,7 @@
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="24dp"
         android:src="@drawable/ic_user_illustration_small"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/greeting" />
@@ -71,41 +72,44 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="32dp"
-        android:background="@drawable/ic_settings_bg"
+        android:background="@drawable/settings_frag_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imageView2">
+        app:layout_constraintTop_toBottomOf="@id/imageView2"
+        app:layout_constraintVertical_bias="1.0">
 
         <TextView
             android:id="@+id/label_theme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:fontFamily="@font/nunito_bold"
+            android:layout_marginTop="48dp"
+            android:fontFamily="@font/nunito_regular"
             android:text="@string/theme"
             android:textColor="@color/white"
             android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="@id/ic_theme"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/ic_theme" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/ic_theme"
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:layout_marginTop="48dp"
             android:layout_marginEnd="16dp"
             android:contentDescription="@string/theme"
             android:src="@drawable/ic_icon_theme"
+            app:layout_constraintBottom_toBottomOf="@+id/label_theme"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/label_theme" />
 
         <View
             android:id="@+id/border_1"
             android:layout_width="0dp"
-            android:layout_height="2dp"
+            android:layout_height="1dp"
             android:layout_margin="16dp"
+            android:layout_marginTop="24dp"
             android:background="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -116,33 +120,57 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:fontFamily="@font/nunito_bold"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/nunito_regular"
             android:text="@string/logout"
             android:textColor="@color/white"
             android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="@id/ic_logout"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/ic_logout" />
+            app:layout_constraintTop_toBottomOf="@+id/border_1" />
 
         <ImageView
             android:id="@+id/ic_logout"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_margin="16dp"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginEnd="16dp"
             android:src="@drawable/ic_logout"
-            app:layout_constraintBottom_toTopOf="@id/border_2"
+            app:layout_constraintBottom_toBottomOf="@+id/label_logout"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/border_1" />
+            app:layout_constraintTop_toTopOf="@+id/label_logout" />
 
         <View
             android:id="@+id/border_2"
             android:layout_width="0dp"
-            android:layout_height="2dp"
+            android:layout_height="1dp"
             android:layout_margin="16dp"
+            android:layout_marginTop="24dp"
             android:background="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/label_logout" />
+            app:layout_constraintTop_toBottomOf="@+id/label_logout" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/nunito_regular"
+            android:text="@string/about_us"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/border_2" />
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ic_info"
+            app:layout_constraintBottom_toBottomOf="@+id/textView3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView3" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

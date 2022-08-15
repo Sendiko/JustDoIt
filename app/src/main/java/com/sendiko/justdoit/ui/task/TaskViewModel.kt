@@ -12,20 +12,12 @@ import kotlinx.coroutines.launch
 
 class TaskViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val repo : TaskRepository
-    val allTasks : LiveData<List<Task>>
-    val allCheckTasks : LiveData<List<Task>>
-    val checkIfEmpty : LiveData<Int>
-    val alsoCheckIfEmpty : LiveData<Int>
-
-    init {
-        val dao = TaskDatabase.getDatabase(application).taskDao()
-        repo = TaskRepository(dao)
-        allTasks = repo.allTask
-        allCheckTasks = repo.allCheckTask
-        checkIfEmpty = repo.checkIfEmpty
-        alsoCheckIfEmpty = repo.alsoCheckIfEmpty
-    }
+    private val dao = TaskDatabase.getDatabase(application).taskDao()
+    private val repo : TaskRepository = TaskRepository(dao)
+    val allTasks : LiveData<List<Task>> = repo.allTask
+    val allCheckTasks : LiveData<List<Task>> = repo.allCheckTask
+    val checkIfEmpty : LiveData<Int> = repo.checkIfEmpty
+    val alsoCheckIfEmpty : LiveData<Int> = repo.alsoCheckIfEmpty
 
     fun insertTask(task: Task) = viewModelScope.launch(Dispatchers.IO){
         repo.insertTask(task)

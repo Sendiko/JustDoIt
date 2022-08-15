@@ -46,7 +46,7 @@ class SettingsFragment : Fragment() {
 
       binding.icCancel.setOnClickListener {
          val intent = Intent(requireActivity(), MainActivity::class.java)
-         startActivity(intent)
+         requireActivity().navigateUpTo(intent)
       }
 
       authViewModel.getUser().observe(viewLifecycleOwner){

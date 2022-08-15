@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.activityViewModels
@@ -17,6 +18,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import com.sendiko.justdoit.R
 import com.sendiko.justdoit.databinding.FragmentHomeBinding
 import com.sendiko.justdoit.repository.SharedViewModel
@@ -73,7 +75,6 @@ class HomeFragment : Fragment() {
          setupRecyclerView(it)
       }
 
-
       authViewModel.getUser().observe(viewLifecycleOwner){
          binding.greeting.text = "Hi, $it!"
       }
@@ -113,6 +114,7 @@ class HomeFragment : Fragment() {
       inputSheet.setContentView(view)
       inputSheet.show()
 
+      val layoutTask = view.findViewById<TextInputLayout>(R.id.layout_task)
       val inputTask = view.findViewById<TextInputEditText>(R.id.input_task)
       val inputSubject = view.findViewById<TextInputEditText>(R.id.input_subject)
       val buttonCancel = view.findViewById<Button>(R.id.button_cancel)
@@ -131,31 +133,32 @@ class HomeFragment : Fragment() {
       buttonSubmit.setOnClickListener {
          val task = inputTask.text.toString()
          val sub = inputSubject.text.toString()
-         val tasks = Task(tasks.id, task, sub, "false")
-         taskViewModel.insertTask(tasks)
-         inputSheet.dismiss()
+         when {
+            task.isNotEmpty() -> {
+               val task = Task(tasks.id, task, sub, "false")
+               taskViewModel.insertTask(task)
+               inputSheet.dismiss()
+            }
+            else -> {
+               layoutTask.error = "Task can't be empty"
+               inputTask.background = AppCompatResources.getDrawable(requireContext(), R.drawable.box_background_error)
+            }
+         }
       }
-
    }
 
    private fun setupRecyclerView(taskList : List<Task>){
       val rv = binding.rvTask
-      val rvAdapter = TaskAdapter(arrayListOf(), requireContext(), object : TaskAdapter.onItemClickListener{
+      val rvAdapter = TaskAdapter(arrayListOf(), object : TaskAdapter.OnItemClickListener{
          override fun onCheckListener(task: Task) {
             taskViewModel.updateTask(Task(task.id, task.task, task.subject, "true"))
-            taskViewModel.allTasks.observe(viewLifecycleOwner){
-               Toast.makeText(context, "${task.id}, ${task.task}, ${task.subject}, ${task.isDone}", Toast.LENGTH_SHORT).show()
-            }
-            Log.d(TAG, "onCheckListener: ${task.id}, ${task.task}, ${task.subject}, ${task.isDone}")
-         }
-
-         override fun onDeleteListener(task: Task) {
-            taskViewModel.deleteTask(task)
-            Log.d(TAG, "onDeleteListener: ${task.id}, ${task.task}, ${task.subject}, ${task.isDone}")
+            Log.d(TAG, "onCheckListener: $task")
+            Toast.makeText(context, "${task.task} is checked", Toast.LENGTH_SHORT).show()
          }
 
          override fun onTaskClickListener(task: Task) {
             showUpdateSheet(task, "Update")
+            Log.d(TAG, "onTaskClickListener: $task")
          }
 
       })
