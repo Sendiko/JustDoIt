@@ -37,10 +37,4 @@
     <string name="app_developer">Sendiko</string>
     <string name="save">save</string>
     <string name="swipe_to_refresh">swipe to refresh</string>
-    <string name="sort_a_z">ID</string>
-    <string-array name="sort">
-        <item>ID</item>
-        <item>A-Z</item>
-        <item>Z-A</item>
-    </string-array>
 </resources>

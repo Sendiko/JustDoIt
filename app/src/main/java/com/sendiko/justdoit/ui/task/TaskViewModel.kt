@@ -18,8 +18,6 @@ class TaskViewModel(application: Application) : AndroidViewModel(application) {
     val allCheckTasks : LiveData<List<Task>> = repo.allCheckTask
     val checkIfEmpty : LiveData<Int> = repo.checkIfEmpty
     val alsoCheckIfEmpty : LiveData<Int> = repo.alsoCheckIfEmpty
-    val sortAZ : LiveData<List<Task>> = repo.sortAZ
-    val sortZA : LiveData<List<Task>> = repo.sortZA
 
     fun insertTask(task: Task) = viewModelScope.launch(Dispatchers.IO){
         repo.insertTask(task)

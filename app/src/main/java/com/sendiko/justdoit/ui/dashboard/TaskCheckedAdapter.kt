@@ -1,7 +1,6 @@
 package com.sendiko.justdoit.ui.dashboard
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.graphics.Paint
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,7 +10,10 @@ import com.sendiko.justdoit.databinding.CardItemTaskCheckedBinding
 import com.sendiko.justdoit.repository.model.Task
 
 private const val TAG = "TaskCheckedAdapter"
-class TaskCheckedAdapter(private val task : ArrayList<Task>, context: Context, private val onClick : onItemClickListener) :
+class TaskCheckedAdapter(
+   private val task: ArrayList<Task>,
+   private val onClick: OnItemClickListener
+) :
    RecyclerView.Adapter<TaskCheckedAdapter.Task2ViewHolder>() {
 
    class Task2ViewHolder(var binding : CardItemTaskCheckedBinding) : RecyclerView.ViewHolder(binding.root)
@@ -50,7 +52,7 @@ class TaskCheckedAdapter(private val task : ArrayList<Task>, context: Context, p
       Log.d(TAG, "updateList: $newList")
    }
 
-   interface onItemClickListener {
+   interface OnItemClickListener {
       fun onUncheckListener(task: Task)
       fun onDeleteListener(task: Task)
    }
