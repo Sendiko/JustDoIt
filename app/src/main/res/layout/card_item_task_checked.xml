@@ -9,6 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         app:cardCornerRadius="12dp"
+        app:cardBackgroundColor="@color/ming"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -17,8 +18,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/box_background">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/task"
@@ -30,7 +30,7 @@
                 android:fontFamily="@font/nunito_bold"
                 android:text="@string/task_list_example"
                 android:textAlignment="textStart"
-                android:textColor="@color/indigo_dye"
+                android:textColor="@color/white"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toStartOf="@+id/delete"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -48,7 +48,7 @@
                 android:fontFamily="@font/nunito_regular"
                 android:text="@string/subject_task_list_example"
                 android:textAlignment="textStart"
-                android:textColor="@color/indigo_dye"
+                android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/delete"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -58,11 +58,12 @@
 
             <ImageView
                 android:id="@+id/delete"
-                android:layout_width="34dp"
-                android:layout_height="34dp"
+                android:layout_width="32dp"
+                android:layout_height="33dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
+                app:tint="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/checkbox"
                 app:layout_constraintTop_toTopOf="parent"
@@ -70,19 +71,18 @@
 
             <ImageView
                 android:id="@+id/checkbox"
-                android:layout_width="36dp"
-                android:layout_height="36dp"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_checkbox_filled" />
-
+                app:srcCompat="@drawable/ic_checkbox_filled"
+                app:tint="@color/gainsboro" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
 
     </androidx.cardview.widget.CardView>
 

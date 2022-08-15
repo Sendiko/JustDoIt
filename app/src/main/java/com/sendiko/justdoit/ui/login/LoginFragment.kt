@@ -11,7 +11,6 @@ import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.sendiko.justdoit.R
 import com.sendiko.justdoit.databinding.FragmentLoginBinding
@@ -62,10 +61,6 @@ class LoginFragment : Fragment() {
          }
       }
 
-      binding.textView.setOnClickListener {
-         toRegisterFragment()
-      }
-
       loginViewModel.isFailed.observe(viewLifecycleOwner){
          when(it.isFailed){
             true -> showSnackbar(it.errorMessage.toString())
@@ -75,44 +70,17 @@ class LoginFragment : Fragment() {
 
    }
 
-   private fun toRegisterFragment(){
-      val fadeOut = AnimationUtils.loadAnimation(context, R.anim.fade_out)
-      binding.labelUsername.startAnimation(fadeOut)
-      binding.layoutUsername.startAnimation(fadeOut)
-      binding.labelPassword.startAnimation(fadeOut)
-      binding.layoutPassword.startAnimation(fadeOut)
-      binding.layoutToolbar.startAnimation(fadeOut)
-      binding.buttonLogin.startAnimation(fadeOut)
-      binding.textView.startAnimation(fadeOut)
-      Handler(Looper.getMainLooper()).postDelayed({
-         binding.labelUsername.visibility = View.INVISIBLE
-         binding.layoutUsername.visibility = View.INVISIBLE
-         binding.labelPassword.visibility = View.INVISIBLE
-         binding.layoutPassword.visibility = View.INVISIBLE
-         binding.layoutToolbar.visibility = View.INVISIBLE
-         binding.buttonLogin.visibility = View.INVISIBLE
-         binding.textView.visibility = View.INVISIBLE
-         findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
-      }, 350)
-   }
-
    private fun toThisFragment(){
       val fadeIn = AnimationUtils.loadAnimation(context, R.anim.fade_in)
       binding.labelUsername.startAnimation(fadeIn)
       binding.layoutUsername.startAnimation(fadeIn)
-      binding.labelPassword.startAnimation(fadeIn)
-      binding.layoutPassword.startAnimation(fadeIn)
       binding.layoutToolbar.startAnimation(fadeIn)
       binding.buttonLogin.startAnimation(fadeIn)
-      binding.textView.startAnimation(fadeIn)
       Handler(Looper.getMainLooper()).postDelayed({
          binding.labelUsername.visibility = View.VISIBLE
          binding.layoutUsername.visibility = View.VISIBLE
-         binding.labelPassword.visibility = View.VISIBLE
-         binding.layoutPassword.visibility = View.VISIBLE
          binding.layoutToolbar.visibility = View.VISIBLE
          binding.buttonLogin.visibility = View.VISIBLE
-         binding.textView.visibility = View.VISIBLE
       }, 2000)
    }
 
@@ -134,19 +102,10 @@ class LoginFragment : Fragment() {
          username.isNotBlank() && password.isNotBlank() -> {
             valid = true
             binding.layoutUsername.error = null
-            binding.layoutPassword.error = null
          }
          username.isEmpty() -> {
             valid = false
             binding.layoutUsername.error = "Username can't be empty"
-         }
-         password.isBlank() -> {
-            valid = false
-            binding.layoutPassword.error = "Password can't be empty"
-         }
-         password.length < 8 -> {
-            valid = false
-            binding.layoutPassword.error = "Password must be at least 8 characters"
          }
       }
       return valid

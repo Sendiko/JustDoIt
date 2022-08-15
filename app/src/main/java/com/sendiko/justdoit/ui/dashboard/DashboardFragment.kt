@@ -109,7 +109,7 @@ class DashboardFragment : Fragment() {
 
          override fun onDeleteListener(task: Task) {
             taskViewModel.deleteTask(task)
-            Toast.makeText(context, "${task.id} is deleted", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "${task.task} is deleted", Toast.LENGTH_SHORT).show()
             Log.d(TAG, "onUncheckListener: ${task.id}, ${task.task}, ${task.subject}, ${task.isDone}")
          }
 

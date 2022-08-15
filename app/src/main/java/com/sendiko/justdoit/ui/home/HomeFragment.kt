@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -89,6 +90,7 @@ class HomeFragment : Fragment() {
       }
 
       checkIfEmpty()
+      onBackPressed()
 
    }
 
@@ -167,6 +169,12 @@ class HomeFragment : Fragment() {
          adapter = rvAdapter
          layoutManager = LinearLayoutManager(context)
          setHasFixedSize(true)
+      }
+   }
+
+   private fun onBackPressed(){
+      requireActivity().onBackPressedDispatcher.addCallback {
+         Toast.makeText(context, "use home button to exit the app", Toast.LENGTH_SHORT).show()
       }
    }
 

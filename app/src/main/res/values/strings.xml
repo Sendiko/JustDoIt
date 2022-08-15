@@ -37,4 +37,6 @@
     <string name="app_developer">Sendiko</string>
     <string name="save">save</string>
     <string name="swipe_to_refresh">swipe to refresh</string>
+    <string name="your_name">Your name</string>
+    <string name="may_we_know_your_name">May we know your name?</string>
 </resources>
