@@ -10,7 +10,7 @@
         <item name="colorSecondaryVariant">@color/ming</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" >@color/indigo_dye</item>
+        <item name="android:statusBarColor" >@color/white</item>
         <item name="android:navigationBarColor">@color/indigo_dye</item>
         <!-- Customize your theme here. -->
         <item name="android:windowSplashScreenBackground" tools:targetApi="s">@color/indigo_dye</item>
