@@ -28,9 +28,8 @@ class LoginFragment : Fragment() {
 
    private val sharedViewModel : SharedViewModel by activityViewModels()
 
-   private val pref by lazy{
-      val context = requireNotNull(this.context)
-      AuthPreferences.getInstance(context.dataStore1)
+   private val pref by lazy {
+      AuthPreferences.getInstance(requireNotNull(this.context).dataStore1)
    }
 
    private val authViewModel : AuthViewModel by lazy {

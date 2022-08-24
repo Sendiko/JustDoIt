@@ -21,22 +21,5 @@
         android:id="@+id/loginFragment"
         android:name="com.sendiko.justdoit.ui.login.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" >
-        <action
-            android:id="@+id/action_loginFragment_to_registerFragment"
-            app:destination="@id/registerFragment2"
-            app:enterAnim="@anim/slide_in_up"
-            app:exitAnim="@anim/slide_out_down" />
-    </fragment>
-    <fragment
-        android:id="@+id/registerFragment2"
-        android:name="com.sendiko.justdoit.ui.register.RegisterFragment"
-        android:label="fragment_register"
-        tools:layout="@layout/fragment_register" >
-        <action
-            android:id="@+id/action_registerFragment2_to_loginFragment2"
-            app:destination="@id/loginFragment"
-            app:enterAnim="@anim/slide_in_up"
-            app:exitAnim="@anim/slide_out_down" />
-    </fragment>
+        tools:layout="@layout/fragment_login" />
 </navigation>

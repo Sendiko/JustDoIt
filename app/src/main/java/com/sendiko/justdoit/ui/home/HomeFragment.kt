@@ -29,6 +29,7 @@ import com.sendiko.justdoit.repository.preferences.AuthViewModel
 import com.sendiko.justdoit.repository.preferences.AuthViewModelFactory
 import com.sendiko.justdoit.ui.container.SettingActivity
 import com.sendiko.justdoit.ui.container.dataStore
+import com.sendiko.justdoit.ui.home.TaskAdapter.*
 import com.sendiko.justdoit.ui.task.TaskViewModel
 
 private const val TAG = "HomeFragment"
@@ -76,7 +77,7 @@ class HomeFragment : Fragment() {
       }
 
       authViewModel.getUser().observe(viewLifecycleOwner){
-         binding.greeting.text = "Hi, $it!"
+         binding.toolbar.title = "Hi, $it!"
       }
 
       binding.buttonSettings.setOnClickListener {
@@ -150,7 +151,7 @@ class HomeFragment : Fragment() {
 
    private fun setupRecyclerView(taskList : List<Task>){
       val rv = binding.rvTask
-      val rvAdapter = TaskAdapter(arrayListOf(), object : TaskAdapter.OnItemClickListener{
+      val rvAdapter = TaskAdapter(arrayListOf(), object : OnItemClickListener{
          override fun onCheckListener(task: Task) {
             taskViewModel.updateTask(Task(task.id, task.task, task.subject, "true"))
             Toast.makeText(context, "${task.task} is checked", Toast.LENGTH_SHORT).show()

@@ -65,7 +65,7 @@ class DashboardFragment : Fragment() {
       }
 
       authViewModel.getUser().observe(viewLifecycleOwner){
-         binding.greeting.text = "Great job, $it!"
+         binding.toolbar.title = "Great job, $it!"
       }
 
       binding.swipeRefresh.setOnRefreshListener {
