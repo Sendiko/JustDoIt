@@ -17,4 +17,16 @@
         <item name="android:background">@android:color/transparent</item>
     </style>
 
+    <style name="TitleToolbar">
+        <item name="fontFamily">@font/nunito_bold</item>
+        <item name="android:textColor">@color/indigo_dye</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="SubTitleToolbar">
+        <item name="fontFamily">@font/nunito_bold</item>
+        <item name="android:textColor">@color/indigo_dye</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
 </resources>
