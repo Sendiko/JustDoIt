@@ -11,25 +11,37 @@
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bottom_sheet_header_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="64dp"
+            android:layout_height="8dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/squircle"
+            app:layout_constraintBottom_toTopOf="@+id/header_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="TODO" />
 
         <TextView
             android:id="@+id/header_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
             android:layout_marginBottom="24dp"
             android:fontFamily="@font/nunito_bold"
             android:text="@string/add_new_task"
-            android:textColor="@color/white"
+            android:textColor="@color/indigo_dye"
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toStartOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -39,7 +51,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
         android:fontFamily="@font/nunito_bold"
         android:text="@string/task"
         android:textColor="@color/indigo_dye"
@@ -116,28 +127,125 @@
 
     <Button
         android:id="@+id/button_submit"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="32dp"
         android:fontFamily="@font/nunito_bold"
         android:text="@string/add"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layout_subject" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
-    <Button
-        android:id="@+id/button_cancel"
-        android:layout_width="wrap_content"
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="16dp"
-        android:fontFamily="@font/nunito_bold"
-        android:text="@string/cancel"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toStartOf="@+id/button_submit"
-        app:layout_constraintTop_toBottomOf="@+id/layout_subject" />
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="@+id/layout_subject"
+        app:layout_constraintStart_toStartOf="@+id/layout_subject"
+        app:layout_constraintTop_toBottomOf="@+id/layout_subject">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/radioButton1"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:background="@drawable/button_selectable"
+                android:button="@android:color/transparent"
+                android:fontFamily="@font/nunito_medium"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp"
+                android:text="Sport"
+                android:checked="true"
+                android:textColor="@drawable/text_selectables"
+                app:layout_constraintBottom_toTopOf="@id/radioButton4"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <RadioButton
+                android:id="@+id/radioButton2"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/button_selectable"
+                android:button="@android:color/transparent"
+                android:fontFamily="@font/nunito_medium"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp"
+                android:text="Work"
+                android:textColor="@drawable/text_selectables"
+                app:layout_constraintBottom_toTopOf="@+id/radioButton4"
+                app:layout_constraintStart_toEndOf="@id/radioButton1"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <RadioButton
+                android:id="@+id/radioButton3"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:layout_marginStart="4dp"
+                android:background="@drawable/button_selectable"
+                android:button="@android:color/transparent"
+                android:fontFamily="@font/nunito_medium"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp"
+                android:text="E-sports"
+                android:textColor="@drawable/text_selectables"
+                app:layout_constraintBottom_toTopOf="@+id/radioButton4"
+                app:layout_constraintStart_toEndOf="@id/radioButton2"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <RadioButton
+                android:id="@+id/radioButton4"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/button_selectable"
+                android:button="@android:color/transparent"
+                android:fontFamily="@font/nunito_medium"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp"
+                android:text="Academic"
+                android:textColor="@drawable/text_selectables"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/radioButton1"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <RadioButton
+                android:id="@+id/radioButton5"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/button_selectable"
+                android:button="@android:color/transparent"
+                android:fontFamily="@font/nunito_medium"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp"
+                android:text="Fun time"
+                android:textColor="@drawable/text_selectables"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/radioButton4"
+                app:layout_constraintTop_toBottomOf="@+id/radioButton1"
+                app:layout_constraintVertical_bias="1.0"
+                tools:ignore="TouchTargetSizeCheck" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </RadioGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
