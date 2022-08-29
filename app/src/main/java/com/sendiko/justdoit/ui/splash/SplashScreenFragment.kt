@@ -30,7 +30,7 @@ class SplashScreenFragment : Fragment() {
    private var _binding : FragmentSplashScreenBinding?= null
    private val binding get() = _binding!!
 
-   val sharedViewModel : SharedViewModel by activityViewModels()
+   private val sharedViewModel : SharedViewModel by activityViewModels()
 
    private val pref by lazy{
       val context = requireNotNull(this.context)
