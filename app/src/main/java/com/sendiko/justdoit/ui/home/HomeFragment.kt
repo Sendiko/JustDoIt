@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.addCallback
@@ -23,6 +24,7 @@ import com.sendiko.justdoit.R
 import com.sendiko.justdoit.databinding.FragmentHomeBinding
 import com.sendiko.justdoit.repository.SharedViewModel
 import com.sendiko.justdoit.repository.ViewModelFactory
+import com.sendiko.justdoit.repository.model.StringConstants
 import com.sendiko.justdoit.repository.model.Task
 import com.sendiko.justdoit.repository.preferences.AuthPreferences
 import com.sendiko.justdoit.repository.preferences.AuthViewModel
@@ -110,7 +112,7 @@ class HomeFragment : Fragment() {
    }
 
    @SuppressLint("SetTextI18n")
-   private fun showUpdateSheet(tasks: Task, u : String){
+   private fun showUpdateSheet(tasks: Task){
       val inputSheet = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)
       val view = layoutInflater.inflate(R.layout.fragment_task, null)
       inputSheet.setContentView(view)
@@ -119,17 +121,24 @@ class HomeFragment : Fragment() {
       val layoutTask = view.findViewById<TextInputLayout>(R.id.layout_task)
       val inputTask = view.findViewById<TextInputEditText>(R.id.input_task)
       val inputSubject = view.findViewById<TextInputEditText>(R.id.input_subject)
-      val buttonCancel = view.findViewById<Button>(R.id.button_cancel)
       val buttonSubmit = view.findViewById<Button>(R.id.button_submit)
       val headerTitle = view.findViewById<TextView>(R.id.header_title)
+      val radioGroup = view.findViewById<RadioGroup>(R.id.radioGroup)
+      var categories = ""
 
       inputTask.setText(tasks.task)
       inputSubject.setText(tasks.subject)
-      buttonSubmit.text = u
-      headerTitle.text = "Update task"
+      buttonSubmit.text = StringConstants.update
+      headerTitle.text = StringConstants.updateTask
 
-      buttonCancel.setOnClickListener {
-         inputSheet.dismiss()
+      radioGroup.setOnCheckedChangeListener { _, item ->
+         when(item) {
+            R.id.button_sport -> categories = StringConstants.categoriesSport
+            R.id.button_work -> categories = StringConstants.categoriesWork
+            R.id.button_game -> categories = StringConstants.categoriesGame
+            R.id.button_school -> categories = StringConstants.categoriesSchool
+            R.id.button_chores -> categories = StringConstants.categoriesChores
+         }
       }
 
       buttonSubmit.setOnClickListener {
@@ -137,12 +146,12 @@ class HomeFragment : Fragment() {
          val sub = inputSubject.text.toString()
          when {
             task.isNotEmpty() -> {
-               val task = Task(tasks.id, task, sub, "false")
+               val task = Task(tasks.id, task, sub, categories, StringConstants.falsee)
                taskViewModel.insertTask(task)
                inputSheet.dismiss()
             }
             else -> {
-               layoutTask.error = "Task can't be empty"
+               layoutTask.error = StringConstants.emptyError
                inputTask.background = AppCompatResources.getDrawable(requireContext(), R.drawable.box_background_error)
             }
          }
@@ -153,12 +162,12 @@ class HomeFragment : Fragment() {
       val rv = binding.rvTask
       val rvAdapter = TaskAdapter(arrayListOf(), object : OnItemClickListener{
          override fun onCheckListener(task: Task) {
-            taskViewModel.updateTask(Task(task.id, task.task, task.subject, "true"))
+            taskViewModel.updateTask(Task(task.id, task.task, task.subject, task.categories, StringConstants.truee))
             Toast.makeText(context, "${task.task} is checked", Toast.LENGTH_SHORT).show()
          }
 
          override fun onTaskClickListener(task: Task) {
-            showUpdateSheet(task, "Update")
+            showUpdateSheet(task)
          }
 
       })
@@ -172,7 +181,7 @@ class HomeFragment : Fragment() {
 
    private fun onBackPressed(){
       requireActivity().onBackPressedDispatcher.addCallback {
-         Toast.makeText(context, "use home button to exit the app", Toast.LENGTH_SHORT).show()
+         Toast.makeText(context, StringConstants.backToast, Toast.LENGTH_SHORT).show()
       }
    }
 
