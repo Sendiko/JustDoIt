@@ -9,6 +9,7 @@
         <entry key="app/src/main/res/drawable/box_background.xml" value="0.3175" />
         <entry key="app/src/main/res/drawable/box_background_error.xml" value="0.3275" />
         <entry key="app/src/main/res/drawable/box_background_reversed.xml" value="0.3175" />
+        <entry key="app/src/main/res/drawable/box_sport.xml" value="0.2915" />
         <entry key="app/src/main/res/drawable/button_filled.xml" value="0.3085" />
         <entry key="app/src/main/res/drawable/button_selectable.xml" value="0.3085" />
         <entry key="app/src/main/res/drawable/gradient_red.xml" value="0.2925" />
@@ -35,6 +36,8 @@
         <entry key="app/src/main/res/drawable/ic_list_nav.xml" value="0.3175" />
         <entry key="app/src/main/res/drawable/ic_lock_light.xml" value="0.298" />
         <entry key="app/src/main/res/drawable/ic_login.xml" value="0.298" />
+        <entry key="app/src/main/res/drawable/ic_mask_group.xml" value="0.2915" />
+        <entry key="app/src/main/res/drawable/ic_mask_group_1.xml" value="0.2915" />
         <entry key="app/src/main/res/drawable/ic_menu.xml" value="0.2925" />
         <entry key="app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.298" />
         <entry key="app/src/main/res/drawable/ic_person_white.xml" value="0.298" />
@@ -42,6 +45,7 @@
         <entry key="app/src/main/res/drawable/ic_refresh.xml" value="0.298" />
         <entry key="app/src/main/res/drawable/ic_settings_bg.xml" value="0.3175" />
         <entry key="app/src/main/res/drawable/ic_sort.xml" value="0.3275" />
+        <entry key="app/src/main/res/drawable/ic_sport.xml" value="0.2915" />
         <entry key="app/src/main/res/drawable/ic_task_bg.xml" value="0.298" />
         <entry key="app/src/main/res/drawable/ic_union.xml" value="0.2925" />
         <entry key="app/src/main/res/drawable/ic_user_illustration.xml" value="0.3275" />
@@ -53,10 +57,10 @@
         <entry key="app/src/main/res/layout/activity_first.xml" value="0.2941427960666952" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.5" />
         <entry key="app/src/main/res/layout/activity_setting.xml" value="0.29243266353142366" />
-        <entry key="app/src/main/res/layout/card_item_task.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/card_item_task.xml" value="0.49582947173308617" />
         <entry key="app/src/main/res/layout/card_item_task_checked.xml" value="0.6251287332646756" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.5" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="1.0" />
         <entry key="app/src/main/res/layout/fragment_input_task.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_input_task_list_dialog.xml" value="0.2941427960666952" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.29243266353142366" />
@@ -64,7 +68,7 @@
         <entry key="app/src/main/res/layout/fragment_register.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.5377358490566038" />
         <entry key="app/src/main/res/layout/fragment_splash_screen.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/fragment_task.xml" value="0.75" />
+        <entry key="app/src/main/res/layout/fragment_task.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_update_dialog.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_update_dialog_list_dialog.xml" value="0.33" />
         <entry key="app/src/main/res/layout/settings_activity.xml" value="0.29243266353142366" />

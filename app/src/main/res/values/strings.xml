@@ -33,7 +33,6 @@
     <string name="theme">Theme</string>
     <string name="logout">Logout</string>
     <string name="about_us">About Us</string>
-    <string name="sarangtawon897_gmail_com">sarangtawon897@gmail.com</string>
     <string name="app_developer">Sendiko</string>
     <string name="save">save</string>
     <string name="swipe_to_refresh">swipe to refresh</string>
@@ -41,4 +40,12 @@
     <string name="may_we_know_your_name">May we know your name?</string>
     <string name="todo">Todo</string>
     <string name="checked">Checked</string>
+    <string name="categories">Categories</string>
+    <string name="sport">Sport</string>
+    <string name="work">Work</string>
+    <string name="game">Game</string>
+    <string name="school">School</string>
+    <string name="chores">Chores</string>
+    <string name="slider">slider</string>
+    <string name="illustration">illustration</string>
 </resources>
