@@ -29,7 +29,7 @@ import com.sendiko.justdoit.repository.preferences.AuthViewModel
 import com.sendiko.justdoit.repository.preferences.AuthViewModelFactory
 import com.sendiko.justdoit.ui.container.SettingActivity
 import com.sendiko.justdoit.ui.container.dataStore
-import com.sendiko.justdoit.ui.home.TaskAdapter.*
+import com.sendiko.justdoit.ui.home.TaskAdapter.OnItemClickListener
 import com.sendiko.justdoit.ui.task.TaskViewModel
 
 private const val TAG = "HomeFragment"
@@ -119,7 +119,6 @@ class HomeFragment : Fragment() {
       val layoutTask = view.findViewById<TextInputLayout>(R.id.layout_task)
       val inputTask = view.findViewById<TextInputEditText>(R.id.input_task)
       val inputSubject = view.findViewById<TextInputEditText>(R.id.input_subject)
-      val buttonCancel = view.findViewById<Button>(R.id.button_cancel)
       val buttonSubmit = view.findViewById<Button>(R.id.button_submit)
       val headerTitle = view.findViewById<TextView>(R.id.header_title)
 
@@ -127,10 +126,6 @@ class HomeFragment : Fragment() {
       inputSubject.setText(tasks.subject)
       buttonSubmit.text = u
       headerTitle.text = "Update task"
-
-      buttonCancel.setOnClickListener {
-         inputSheet.dismiss()
-      }
 
       buttonSubmit.setOnClickListener {
          val task = inputTask.text.toString()
