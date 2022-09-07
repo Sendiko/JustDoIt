@@ -80,12 +80,7 @@ class MainActivity : AppCompatActivity() {
       val layoutTask = view.findViewById<TextInputLayout>(R.id.layout_task)
       val inputTask = view.findViewById<TextInputEditText>(R.id.input_task)
       val inputSubject = view.findViewById<TextInputEditText>(R.id.input_subject)
-      val buttonCancel = view.findViewById<Button>(R.id.button_cancel)
       val buttonSubmit = view.findViewById<Button>(R.id.button_submit)
-
-      buttonCancel.setOnClickListener {
-         inputSheet.dismiss()
-      }
 
       buttonSubmit.setOnClickListener {
          val t = inputTask.text.toString()
