@@ -39,4 +39,17 @@
     <string name="swipe_to_refresh">swipe to refresh</string>
     <string name="your_name">Your name</string>
     <string name="may_we_know_your_name">May we know your name?</string>
+    <string name="change_name">Change name</string>
+    <string name="contact">Contact</string>
+    <string name="display_mode">Display Mode</string>
+    <string name="languages">Languages</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="change_language">Change language</string>
+    <string name="english">English</string>
+    <string name="indonesian">Indonesian</string>
+    <string name="change_theme">Change theme</string>
+    <string name="light">Light</string>
+    <string name="dark">Dark</string>
+    <string name="name">Name</string>
 </resources>
