@@ -41,18 +41,15 @@ class HomeFragment : Fragment() {
    private val sharedViewModel : SharedViewModel by activityViewModels()
 
    private val taskViewModel : TaskViewModel by lazy {
-      val activity = requireNotNull(this.activity)
-      getViewModel(activity)
+      getViewModel(requireNotNull(this.activity))
    }
 
    private fun getViewModel(activity: FragmentActivity) : TaskViewModel {
-      val factory = ViewModelFactory.getInstance(activity.application)
-      return ViewModelProvider(this, factory)[TaskViewModel::class.java]
+      return ViewModelProvider(this, ViewModelFactory.getInstance(activity.application))[TaskViewModel::class.java]
    }
 
    private val pref by lazy{
-      val context = requireNotNull(this.context)
-      AuthPreferences.getInstance(context.dataStore)
+      AuthPreferences.getInstance(requireNotNull(this.context).dataStore)
    }
 
    private val authViewModel : AuthViewModel by lazy {
@@ -77,7 +74,7 @@ class HomeFragment : Fragment() {
       }
 
       authViewModel.getUser().observe(viewLifecycleOwner){
-         binding.toolbar.title = "Hi, $it!"
+         binding.toolbar.title = getString(R.string.greeting) + it + "!"
       }
 
       binding.buttonSettings.setOnClickListener {

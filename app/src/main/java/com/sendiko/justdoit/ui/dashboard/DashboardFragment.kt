@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.sendiko.justdoit.R
 import com.sendiko.justdoit.databinding.FragmentDashboardBinding
 import com.sendiko.justdoit.repository.ViewModelFactory
 import com.sendiko.justdoit.repository.model.Task
@@ -65,7 +66,7 @@ class DashboardFragment : Fragment() {
       }
 
       authViewModel.getUser().observe(viewLifecycleOwner){
-         binding.toolbar.title = "Great job, $it!"
+         binding.toolbar.title = getString(R.string.greeting3) + it + "!"
       }
 
       binding.swipeRefresh.setOnRefreshListener {
