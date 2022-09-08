@@ -24,7 +24,7 @@
         android:layout_marginTop="16dp"
         android:fontFamily="@font/nunito_bold"
         android:text="@string/add_new_task"
-        android:textColor="@color/indigo_dye"
+        android:textColor="@color/white"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
@@ -45,7 +45,7 @@
                 android:layout_marginTop="32dp"
                 android:fontFamily="@font/nunito_bold"
                 android:text="@string/task"
-                android:textColor="@color/indigo_dye"
+                android:textColor="@color/white"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
@@ -74,7 +74,7 @@
                     android:fontFamily="@font/nunito_semibold"
                     android:hint="@string/task_hint"
                     android:singleLine="true"
-                    android:textColor="@color/indigo_dye" />
+                    android:textColor="@color/white" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
@@ -85,7 +85,7 @@
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/nunito_bold"
                 android:text="@string/subject"
-                android:textColor="@color/indigo_dye"
+                android:textColor="@color/white"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/layout_task" />
@@ -116,7 +116,7 @@
                     android:fontFamily="@font/nunito_semibold"
                     android:gravity="top|start"
                     android:hint="@string/subject_hint"
-                    android:textColor="@color/indigo_dye" />
+                    android:textColor="@color/white" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
@@ -128,7 +128,8 @@
                 android:layout_marginBottom="16dp"
                 android:fontFamily="@font/nunito_bold"
                 android:text="@string/add"
-                android:textColor="@color/white"
+                android:textColor="@color/indigo_dye"
+                android:backgroundTint="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />

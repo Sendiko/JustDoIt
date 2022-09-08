@@ -4,6 +4,26 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.17865707434052758" />
+        <entry key="app/src/main/res/drawable-night/bottom_sheet_background.xml" value="0.308" />
+        <entry key="app/src/main/res/drawable-night/box_background.xml" value="0.308" />
+        <entry key="app/src/main/res/drawable-night/drag_indicator.xml" value="0.308" />
+        <entry key="app/src/main/res/drawable-night/ic_arrow.xml" value="0.282" />
+        <entry key="app/src/main/res/drawable-night/ic_cancel.xml" value="0.308" />
+        <entry key="app/src/main/res/drawable-night/ic_checbox_empty.xml" value="0.308" />
+        <entry key="app/src/main/res/drawable-night/ic_checkbox_blue.xml" value="0.308" />
+        <entry key="app/src/main/res/drawable-night/ic_checkbox_empty.xml" value="0.308" />
+        <entry key="app/src/main/res/drawable-night/ic_checkbox_filled_blue.xml" value="0.308" />
+        <entry key="app/src/main/res/drawable-night/ic_checked_empty.xml" value="0.308" />
+        <entry key="app/src/main/res/drawable-night/ic_contacts.xml" value="0.282" />
+        <entry key="app/src/main/res/drawable-night/ic_globe.xml" value="0.282" />
+        <entry key="app/src/main/res/drawable-night/ic_language.xml" value="0.308" />
+        <entry key="app/src/main/res/drawable-night/ic_logout.xml" value="0.308" />
+        <entry key="app/src/main/res/drawable-night/ic_moon.xml" value="0.308" />
+        <entry key="app/src/main/res/drawable-night/ic_moon2.xml" value="0.308" />
+        <entry key="app/src/main/res/drawable-night/ic_person.xml" value="0.308" />
+        <entry key="app/src/main/res/drawable-night/ic_person2.xml" value="0.282" />
+        <entry key="app/src/main/res/drawable-night/ic_person_2.xml" value="0.282" />
+        <entry key="app/src/main/res/drawable-night/ic_sun.xml" value="0.308" />
         <entry key="app/src/main/res/drawable/bottom_sheet_background.xml" value="0.3275" />
         <entry key="app/src/main/res/drawable/bottom_sheet_header_background.xml" value="0.3275" />
         <entry key="app/src/main/res/drawable/box_background.xml" value="0.3175" />
@@ -15,14 +35,19 @@
         <entry key="app/src/main/res/drawable/gradient_red.xml" value="0.2925" />
         <entry key="app/src/main/res/drawable/ic_add.xml" value="0.3175" />
         <entry key="app/src/main/res/drawable/ic_add_square.xml" value="0.3275" />
+        <entry key="app/src/main/res/drawable/ic_arrow.xml" value="0.308" />
         <entry key="app/src/main/res/drawable/ic_blob.xml" value="0.3275" />
         <entry key="app/src/main/res/drawable/ic_blob_2.xml" value="0.3275" />
         <entry key="app/src/main/res/drawable/ic_cancel.xml" value="0.3275" />
         <entry key="app/src/main/res/drawable/ic_checbox_filled_blue.xml" value="0.308" />
+        <entry key="app/src/main/res/drawable/ic_check_fluid.xml" value="0.308" />
         <entry key="app/src/main/res/drawable/ic_check_nav.xml" value="0.3175" />
         <entry key="app/src/main/res/drawable/ic_check_task.xml" value="0.3275" />
+        <entry key="app/src/main/res/drawable/ic_checkbox_empty.xml" value="0.308" />
         <entry key="app/src/main/res/drawable/ic_checkbox_filled.xml" value="0.3175" />
+        <entry key="app/src/main/res/drawable/ic_checkbox_filled_blue.xml" value="0.308" />
         <entry key="app/src/main/res/drawable/ic_checked_empty.xml" value="0.1915" />
+        <entry key="app/src/main/res/drawable/ic_contacts.xml" value="0.308" />
         <entry key="app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.308" />
         <entry key="app/src/main/res/drawable/ic_edit.xml" value="0.19" />
         <entry key="app/src/main/res/drawable/ic_empty_folder.xml" value="0.308" />
@@ -46,6 +71,7 @@
         <entry key="app/src/main/res/drawable/ic_login.xml" value="0.298" />
         <entry key="app/src/main/res/drawable/ic_logout.xml" value="0.308" />
         <entry key="app/src/main/res/drawable/ic_menu.xml" value="0.2925" />
+        <entry key="app/src/main/res/drawable/ic_moon.xml" value="0.308" />
         <entry key="app/src/main/res/drawable/ic_moon2.xml" value="0.308" />
         <entry key="app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.298" />
         <entry key="app/src/main/res/drawable/ic_person.xml" value="0.308" />
@@ -64,8 +90,16 @@
         <entry key="app/src/main/res/drawable/ic_user_illustration.xml" value="0.3275" />
         <entry key="app/src/main/res/drawable/ic_user_illustration_small.xml" value="0.3275" />
         <entry key="app/src/main/res/drawable/settings_frag_background.xml" value="0.308" />
+        <entry key="app/src/main/res/layout-night/activity_main.xml" value="0.2419837537409149" />
         <entry key="app/src/main/res/layout-night/card_item_task.xml" value="0.67" />
+        <entry key="app/src/main/res/layout-night/card_item_task_checked.xml" value="0.5" />
+        <entry key="app/src/main/res/layout-night/fragment_change_name_dialog.xml" value="0.5" />
+        <entry key="app/src/main/res/layout-night/fragment_dashboard.xml" value="0.29157759726378796" />
+        <entry key="app/src/main/res/layout-night/fragment_display_dialog.xml" value="0.25" />
         <entry key="app/src/main/res/layout-night/fragment_home.xml" value="0.3899657924743444" />
+        <entry key="app/src/main/res/layout-night/fragment_language_dialog.xml" value="0.5" />
+        <entry key="app/src/main/res/layout-night/fragment_settings.xml" value="0.29157759726378796" />
+        <entry key="app/src/main/res/layout-night/fragment_task.xml" value="0.2419837537409149" />
         <entry key="app/src/main/res/layout/activity_first.xml" value="0.2941427960666952" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/activity_setting.xml" value="0.29243266353142366" />
@@ -87,9 +121,9 @@
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.29243266353142366" />
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.3582427536231884" />
         <entry key="app/src/main/res/layout/fragment_register.xml" value="0.5" />
-        <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.29243266353142366" />
+        <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.75" />
         <entry key="app/src/main/res/layout/fragment_splash_screen.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/fragment_task.xml" value="0.67" />
+        <entry key="app/src/main/res/layout/fragment_task.xml" value="0.5849639546858908" />
         <entry key="app/src/main/res/layout/fragment_update_dialog.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_update_dialog_list_dialog.xml" value="0.33" />
         <entry key="app/src/main/res/layout/settings_activity.xml" value="0.29243266353142366" />
