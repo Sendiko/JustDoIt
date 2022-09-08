@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.JusDoIt" parent="Theme.Material3.Light.NoActionBar">
+    <style name="Theme.JusDoIt" parent="Theme.Material3.Dark.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/indigo_dye</item>
         <item name="colorPrimaryVariant">@color/indigo_dye</item>
@@ -17,9 +17,10 @@
     </style>
 
     <style name="MainActivityTheme" parent="Theme.JusDoIt">
-        <item name="android:statusBarColor">@color/white</item>
-        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
-        <item name="android:navigationBarColor">@color/indigo_dye</item>
+        <item name="android:statusBarColor">@color/indigo_dye</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+        <item name="android:navigationBarColor">@color/white</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
     </style>
 
     <style name="SplashScreenTheme" parent="Theme.JusDoIt">
@@ -29,10 +30,10 @@
     </style>
 
     <style name="SettingActivityTheme" parent="Theme.JusDoIt">
-        <item name="android:statusBarColor">@color/white</item>
-        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
-        <item name="android:navigationBarColor">@color/white</item>
-        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
+        <item name="android:statusBarColor">@color/indigo_dye</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+        <item name="android:navigationBarColor">@color/indigo_dye</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">false</item>
     </style>
 
 </resources>
