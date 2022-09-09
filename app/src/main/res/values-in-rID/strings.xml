@@ -51,7 +51,9 @@
     <string name="dark">Gelap</string>
     <string name="name">Nama</string>
     <string name="update_title">Edit tugas</string>
+    <string name="update_button">Edit</string>
     <string name="task_empty_error">Tugas tidak boleh kosong</string>
     <string name="update">Ubah</string>
     <string name="nama_error_empty">Name tidak boleh kosong</string>
+    <string name="close_dialog">Tutup</string>
 </resources>

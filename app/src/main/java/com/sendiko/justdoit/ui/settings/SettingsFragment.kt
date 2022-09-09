@@ -148,20 +148,14 @@ class SettingsFragment : Fragment() {
       }
 
       when(isItNightMode){
-         true -> settingsViewModel.setDarkTheme(true)
-         else -> settingsViewModel.setDarkTheme(false)
+         true ->  view.findViewById<RadioButton>(R.id.theme_dark).isChecked = true
+         else -> view.findViewById<RadioButton>(R.id.theme_light).isChecked = true
       }
 
       settingsViewModel.getDarkTheme().observe(viewLifecycleOwner){
          when(it){
-            true -> {
-               view.findViewById<RadioButton>(R.id.theme_dark).isChecked = true
-               AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            }
-            false -> {
-               view.findViewById<RadioButton>(R.id.theme_light).isChecked = true
-               AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            }
+            true -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            false -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
          }
       }
 
