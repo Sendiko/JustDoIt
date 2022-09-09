@@ -138,7 +138,7 @@ class HomeFragment : Fragment() {
    }
 
    @SuppressLint("SetTextI18n")
-   private fun showUpdateSheet(tasks: Task, u : String){
+   private fun showUpdateSheet(tasks: Task, title : String, button : String){
       val inputSheet = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)
       val view = layoutInflater.inflate(R.layout.fragment_task, null)
       inputSheet.setContentView(view)
@@ -152,8 +152,8 @@ class HomeFragment : Fragment() {
 
       inputTask.setText(tasks.task)
       inputSubject.setText(tasks.subject)
-      buttonSubmit.text = u
-      headerTitle.text = getString(R.string.update_title)
+      headerTitle.text = title
+      buttonSubmit.text = button
 
       buttonSubmit.setOnClickListener {
          val task = inputTask.text.toString()
@@ -174,14 +174,14 @@ class HomeFragment : Fragment() {
 
    private fun setupRecyclerView(taskList : List<Task>){
       val rv = binding.rvTask
-      val rvAdapter = TaskAdapter(arrayListOf(), object : OnItemClickListener{
+      val rvAdapter = TaskAdapter(arrayListOf(), object : OnItemClickListener {
          override fun onCheckListener(task: Task) {
             taskViewModel.updateTask(Task(task.id, task.task, task.subject, "true"))
             Toast.makeText(context, "${task.task} is checked", Toast.LENGTH_SHORT).show()
          }
 
-         override fun onTaskClickListener(task: Task) {
-            showUpdateSheet(task, getString(R.string.update))
+         override fun onUpdateClickListener(task: Task) {
+            showUpdateSheet(task, getString(R.string.update_title), getString(R.string.update_button))
          }
 
       })

@@ -23,7 +23,7 @@ class TaskAdapter(private val task: ArrayList<Task>, private val onClick: OnItem
       holder.binding.subjectTask.text = currentItem.subject
 
       holder.binding.cardTask.setOnClickListener {
-         onClick.onTaskClickListener(currentItem)
+         onClick.onUpdateClickListener(currentItem)
       }
 
       holder.binding.checkbox.setOnClickListener {
@@ -45,7 +45,7 @@ class TaskAdapter(private val task: ArrayList<Task>, private val onClick: OnItem
 
    interface OnItemClickListener {
       fun onCheckListener(task: Task)
-      fun onTaskClickListener(task: Task)
+      fun onUpdateClickListener(task: Task)
    }
 
 }

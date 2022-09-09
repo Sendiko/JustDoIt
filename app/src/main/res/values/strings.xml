@@ -51,7 +51,9 @@
     <string name="dark">Dark</string>
     <string name="name">Name</string>
     <string name="update_title">Update task</string>
+    <string name="update_button">Update</string>
     <string name="task_empty_error">Task can\'t be empty</string>
     <string name="update">Update</string>
     <string name="nama_error_empty">Name can\'t be empty</string>
+    <string name="close_dialog">Close</string>
 </resources>
