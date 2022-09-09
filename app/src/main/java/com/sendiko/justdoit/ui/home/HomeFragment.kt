@@ -1,6 +1,7 @@
 package com.sendiko.justdoit.ui.home
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -27,10 +28,14 @@ import com.sendiko.justdoit.repository.model.Task
 import com.sendiko.justdoit.repository.preferences.AuthPreferences
 import com.sendiko.justdoit.repository.preferences.AuthViewModel
 import com.sendiko.justdoit.repository.preferences.AuthViewModelFactory
+import com.sendiko.justdoit.repository.preferences.SettingsPreference
 import com.sendiko.justdoit.ui.container.SettingActivity
 import com.sendiko.justdoit.ui.container.dataStore
-import com.sendiko.justdoit.ui.home.TaskAdapter.*
+import com.sendiko.justdoit.ui.container.dataStore1
+import com.sendiko.justdoit.ui.home.TaskAdapter.OnItemClickListener
+import com.sendiko.justdoit.ui.settings.SettingsViewModel
 import com.sendiko.justdoit.ui.task.TaskViewModel
+import java.util.*
 
 private const val TAG = "HomeFragment"
 class HomeFragment : Fragment() {
@@ -41,22 +46,29 @@ class HomeFragment : Fragment() {
    private val sharedViewModel : SharedViewModel by activityViewModels()
 
    private val taskViewModel : TaskViewModel by lazy {
-      val activity = requireNotNull(this.activity)
-      getViewModel(activity)
+      getViewModel(requireNotNull(this.activity))
    }
 
    private fun getViewModel(activity: FragmentActivity) : TaskViewModel {
-      val factory = ViewModelFactory.getInstance(activity.application)
-      return ViewModelProvider(this, factory)[TaskViewModel::class.java]
+      return ViewModelProvider(this, ViewModelFactory.getInstance(activity.application))[TaskViewModel::class.java]
    }
 
    private val pref by lazy{
-      val context = requireNotNull(this.context)
-      AuthPreferences.getInstance(context.dataStore)
+      AuthPreferences.getInstance(requireNotNull(this.context).dataStore)
    }
 
    private val authViewModel : AuthViewModel by lazy {
       ViewModelProvider(this, AuthViewModelFactory(pref))[AuthViewModel::class.java]
+   }
+
+   private val settingsPref by lazy {
+      SettingsPreference.getInstance(requireNotNull(this.context).dataStore1)
+   }
+
+   private val settingsViewModel : SettingsViewModel by lazy {
+      ViewModelProvider(this,
+         SettingsViewModel.SettingsViewModelFactory(settingsPref)
+      )[SettingsViewModel::class.java]
    }
 
    override fun onCreateView(
@@ -72,12 +84,16 @@ class HomeFragment : Fragment() {
    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
       super.onViewCreated(view, savedInstanceState)
 
+      settingsViewModel.getLanguage().observe(viewLifecycleOwner){
+         setAppLocale(requireContext(), it)
+      }
+
       taskViewModel.allTasks.observe(viewLifecycleOwner){
          setupRecyclerView(it)
       }
 
       authViewModel.getUser().observe(viewLifecycleOwner){
-         binding.toolbar.title = "Hi, $it!"
+         binding.toolbar.title = getString(R.string.greeting) + it + "!"
       }
 
       binding.buttonSettings.setOnClickListener {
@@ -119,18 +135,13 @@ class HomeFragment : Fragment() {
       val layoutTask = view.findViewById<TextInputLayout>(R.id.layout_task)
       val inputTask = view.findViewById<TextInputEditText>(R.id.input_task)
       val inputSubject = view.findViewById<TextInputEditText>(R.id.input_subject)
-      val buttonCancel = view.findViewById<Button>(R.id.button_cancel)
       val buttonSubmit = view.findViewById<Button>(R.id.button_submit)
       val headerTitle = view.findViewById<TextView>(R.id.header_title)
 
       inputTask.setText(tasks.task)
       inputSubject.setText(tasks.subject)
       buttonSubmit.text = u
-      headerTitle.text = "Update task"
-
-      buttonCancel.setOnClickListener {
-         inputSheet.dismiss()
-      }
+      headerTitle.text = getString(R.string.update_title)
 
       buttonSubmit.setOnClickListener {
          val task = inputTask.text.toString()
@@ -142,7 +153,7 @@ class HomeFragment : Fragment() {
                inputSheet.dismiss()
             }
             else -> {
-               layoutTask.error = "Task can't be empty"
+               layoutTask.error = getString(R.string.task_empty_error)
                inputTask.background = AppCompatResources.getDrawable(requireContext(), R.drawable.box_background_error)
             }
          }
@@ -158,7 +169,7 @@ class HomeFragment : Fragment() {
          }
 
          override fun onTaskClickListener(task: Task) {
-            showUpdateSheet(task, "Update")
+            showUpdateSheet(task, getString(R.string.update))
          }
 
       })
@@ -168,6 +179,15 @@ class HomeFragment : Fragment() {
          layoutManager = LinearLayoutManager(context)
          setHasFixedSize(true)
       }
+   }
+
+   private fun setAppLocale(context: Context, language: String) {
+      val locale = Locale(language)
+      Locale.setDefault(locale)
+      val config = context.resources.configuration
+      config.setLocale(locale)
+      context.createConfigurationContext(config)
+      context.resources.updateConfiguration(config, context.resources.displayMetrics)
    }
 
    private fun onBackPressed(){

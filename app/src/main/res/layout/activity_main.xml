@@ -5,14 +5,20 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".ui.container.MainActivity">
+
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="52dp"
+    android:fillViewport="true">
 
     <fragment
         android:id="@+id/nav_host_fragment_activity_main"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="52dp"
+        android:layout_height="wrap_content"
         app:defaultNavHost="true"
         app:layout_constraintBottom_toTopOf="@id/coordinator"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -21,12 +27,14 @@
         app:navGraph="@navigation/mobile_navigation"
         tools:ignore="FragmentTagUsage" />
 
+</ScrollView>
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/button_add_task"
         style="@style/Widget.MaterialComponents.FloatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/lighter_ming"
+        android:backgroundTint="@color/even_lighter_ming"
         android:src="@drawable/ic_add"
         app:layout_anchor="@id/bottom_app_bar"
         app:tint="@color/white"
@@ -51,7 +59,6 @@
             android:layout_marginEnd="16dp"
             app:labelVisibilityMode="unlabeled"
             app:itemIconTint="@color/white"
-            app:itemTextColor="@color/white"
             app:itemIconSize="32dp"
             app:itemRippleColor="@android:color/transparent"
             app:itemTextAppearanceActive="@style/BottomNavigationTextStyleActive"
