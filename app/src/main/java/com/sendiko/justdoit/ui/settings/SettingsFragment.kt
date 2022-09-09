@@ -3,6 +3,7 @@ package com.sendiko.justdoit.ui.settings
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.RadioButton
 import android.widget.RadioGroup
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -120,7 +122,6 @@ class SettingsFragment : Fragment() {
             R.id.language_indonesian -> settingsViewModel.setLanguage("id")
          }
          languageDialog.dismiss()
-
          startActivity(Intent(requireActivity(), FirstActivity::class.java))
       }
 
@@ -139,12 +140,38 @@ class SettingsFragment : Fragment() {
       displayDialog.setContentView(view)
       displayDialog.show()
 
+      val isItNightMode = when {
+          Build.VERSION.SDK_INT >= Build.VERSION_CODES.R -> {
+             requireContext().resources.configuration.isNightModeActive
+          }
+         else -> null
+      }
+
+      when(isItNightMode){
+         true -> settingsViewModel.setDarkTheme(true)
+         else -> settingsViewModel.setDarkTheme(false)
+      }
+
+      settingsViewModel.getDarkTheme().observe(viewLifecycleOwner){
+         when(it){
+            true -> {
+               view.findViewById<RadioButton>(R.id.theme_dark).isChecked = true
+               AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            }
+            false -> {
+               view.findViewById<RadioButton>(R.id.theme_light).isChecked = true
+               AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
+         }
+      }
+
       val radioGroup = view.findViewById<RadioGroup>(R.id.display_checkbox)
-      radioGroup.setOnCheckedChangeListener { _, i ->
-         when(i){
+      view.findViewById<Button>(R.id.button_submit).setOnClickListener {
+         when(radioGroup.checkedRadioButtonId){
             R.id.theme_light -> settingsViewModel.setDarkTheme(false)
             R.id.theme_dark -> settingsViewModel.setDarkTheme(true)
          }
+         displayDialog.dismiss()
       }
    }
 
@@ -156,13 +183,12 @@ class SettingsFragment : Fragment() {
 
       val layoutName = view.findViewById<TextInputLayout>(R.id.layout_name)
       val inputName = view.findViewById<TextInputEditText>(R.id.input_name)
-      val buttonSubmit = view.findViewById<Button>(R.id.button_submit)
 
       authViewModel.getUser().observe(viewLifecycleOwner){
          inputName.setText(it)
       }
 
-      buttonSubmit.setOnClickListener {
+      view.findViewById<Button>(R.id.button_submit).setOnClickListener {
          when{
             inputName.text.isNullOrEmpty() -> {
                inputName?.background = AppCompatResources.getDrawable(requireContext(), R.drawable.box_background_error)
