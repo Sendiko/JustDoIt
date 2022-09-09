@@ -11,9 +11,9 @@
       "type": "SINGLE",
       "filters": [],
       "attributes": [],
-      "versionCode": 1.05,
-      "versionName": "1.05",
-      "outputFile": "justdoit-release.apk"
+      "versionCode": 1,
+      "versionName": "1.0",
+      "outputFile": "app-release.apk"
     }
   ],
   "elementType": "File"
