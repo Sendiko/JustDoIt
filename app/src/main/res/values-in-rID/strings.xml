@@ -15,14 +15,14 @@
     <string name="confirm_password">Konfirmasi Kata Sandi</string>
     <string name="login_here"><u><![CDATA[<- Masuk disini]]></u></string>
     <string name="greeting">Hai, </string>
-    <string name="greeting2">Berikut beberapa hal yang harus dilakukan</string>
+    <string name="greeting2">Berikut tugas-tugas anda</string>
     <string name="subject_task_list_example">Subject task list example</string>
     <string name="task_list_example">Task list example</string>
     <string name="edit">Ubah</string>
-    <string name="greeting4">Berikut daftar hal-hal yang telah Anda lakukan</string>
+    <string name="greeting4">Berikut tugas-tugas yang sudah selesai</string>
     <string name="greeting3">Kerja bagus, </string>
     <string name="ic_add">ic_add</string>
-    <string name="add_new_task">Add new task</string>
+    <string name="add_new_task">Tambah tugas baru</string>
     <string name="task">Tugas</string>
     <string name="task_hint">Hal yang ingin kamu lakukan....</string>
     <string name="subject">Subjek</string>
@@ -50,4 +50,8 @@
     <string name="light">Terang</string>
     <string name="dark">Gelap</string>
     <string name="name">Nama</string>
+    <string name="update_title">Edit tugas</string>
+    <string name="task_empty_error">Tugas tidak boleh kosong</string>
+    <string name="update">Ubah</string>
+    <string name="nama_error_empty">Name tidak boleh kosong</string>
 </resources>

@@ -92,7 +92,7 @@ class MainActivity : AppCompatActivity() {
                inputSheet.dismiss()
             }
             else -> {
-               layoutTask.error = "Task can't be empty"
+               layoutTask.error = getString(R.string.task_empty_error)
                inputTask.background = AppCompatResources.getDrawable(this, R.drawable.box_background_error)
             }
          }

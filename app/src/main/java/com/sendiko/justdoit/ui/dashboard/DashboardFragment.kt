@@ -1,6 +1,7 @@
 package com.sendiko.justdoit.ui.dashboard
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -18,9 +19,12 @@ import com.sendiko.justdoit.repository.model.Task
 import com.sendiko.justdoit.repository.preferences.AuthPreferences
 import com.sendiko.justdoit.repository.preferences.AuthViewModel
 import com.sendiko.justdoit.repository.preferences.AuthViewModelFactory
+import com.sendiko.justdoit.repository.preferences.SettingsPreference
 import com.sendiko.justdoit.ui.container.SettingActivity
 import com.sendiko.justdoit.ui.container.dataStore1
+import com.sendiko.justdoit.ui.settings.SettingsViewModel
 import com.sendiko.justdoit.ui.task.TaskViewModel
+import java.util.*
 
 private const val TAG = "DashboardFragment"
 class DashboardFragment : Fragment() {
@@ -47,6 +51,16 @@ class DashboardFragment : Fragment() {
       ViewModelProvider(this, AuthViewModelFactory(pref))[AuthViewModel::class.java]
    }
 
+   private val settingsPref by lazy {
+      SettingsPreference.getInstance(requireNotNull(this.context).dataStore1)
+   }
+
+   private val settingsViewModel : SettingsViewModel by lazy {
+      ViewModelProvider(this,
+         SettingsViewModel.SettingsViewModelFactory(settingsPref)
+      )[SettingsViewModel::class.java]
+   }
+
    override fun onCreateView(
       inflater: LayoutInflater,
       container: ViewGroup?,
@@ -60,6 +74,10 @@ class DashboardFragment : Fragment() {
    @SuppressLint("SetTextI18n")
    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
       super.onViewCreated(view, savedInstanceState)
+
+      settingsViewModel.getLanguage().observe(viewLifecycleOwner){
+         setAppLocale(requireContext(), it)
+      }
 
       taskViewModel.allCheckTasks.observe(viewLifecycleOwner){
          setupRecyclerView(it)
@@ -115,6 +133,15 @@ class DashboardFragment : Fragment() {
       rv.adapter = rvAdapter
       rvAdapter.updateList(taskList)
       rv.setHasFixedSize(true)
+   }
+
+   private fun setAppLocale(context: Context, language: String) {
+      val locale = Locale(language)
+      Locale.setDefault(locale)
+      val config = context.resources.configuration
+      config.setLocale(locale)
+      context.createConfigurationContext(config)
+      context.resources.updateConfiguration(config, context.resources.displayMetrics)
    }
 
    override fun onDestroyView() {

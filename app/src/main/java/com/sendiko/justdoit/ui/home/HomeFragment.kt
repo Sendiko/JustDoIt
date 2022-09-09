@@ -1,6 +1,7 @@
 package com.sendiko.justdoit.ui.home
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -27,10 +28,14 @@ import com.sendiko.justdoit.repository.model.Task
 import com.sendiko.justdoit.repository.preferences.AuthPreferences
 import com.sendiko.justdoit.repository.preferences.AuthViewModel
 import com.sendiko.justdoit.repository.preferences.AuthViewModelFactory
+import com.sendiko.justdoit.repository.preferences.SettingsPreference
 import com.sendiko.justdoit.ui.container.SettingActivity
 import com.sendiko.justdoit.ui.container.dataStore
+import com.sendiko.justdoit.ui.container.dataStore1
 import com.sendiko.justdoit.ui.home.TaskAdapter.OnItemClickListener
+import com.sendiko.justdoit.ui.settings.SettingsViewModel
 import com.sendiko.justdoit.ui.task.TaskViewModel
+import java.util.*
 
 private const val TAG = "HomeFragment"
 class HomeFragment : Fragment() {
@@ -56,6 +61,16 @@ class HomeFragment : Fragment() {
       ViewModelProvider(this, AuthViewModelFactory(pref))[AuthViewModel::class.java]
    }
 
+   private val settingsPref by lazy {
+      SettingsPreference.getInstance(requireNotNull(this.context).dataStore1)
+   }
+
+   private val settingsViewModel : SettingsViewModel by lazy {
+      ViewModelProvider(this,
+         SettingsViewModel.SettingsViewModelFactory(settingsPref)
+      )[SettingsViewModel::class.java]
+   }
+
    override fun onCreateView(
       inflater: LayoutInflater,
       container: ViewGroup?,
@@ -68,6 +83,10 @@ class HomeFragment : Fragment() {
    @SuppressLint("SetTextI18n")
    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
       super.onViewCreated(view, savedInstanceState)
+
+      settingsViewModel.getLanguage().observe(viewLifecycleOwner){
+         setAppLocale(requireContext(), it)
+      }
 
       taskViewModel.allTasks.observe(viewLifecycleOwner){
          setupRecyclerView(it)
@@ -122,7 +141,7 @@ class HomeFragment : Fragment() {
       inputTask.setText(tasks.task)
       inputSubject.setText(tasks.subject)
       buttonSubmit.text = u
-      headerTitle.text = "Update task"
+      headerTitle.text = getString(R.string.update_title)
 
       buttonSubmit.setOnClickListener {
          val task = inputTask.text.toString()
@@ -134,7 +153,7 @@ class HomeFragment : Fragment() {
                inputSheet.dismiss()
             }
             else -> {
-               layoutTask.error = "Task can't be empty"
+               layoutTask.error = getString(R.string.task_empty_error)
                inputTask.background = AppCompatResources.getDrawable(requireContext(), R.drawable.box_background_error)
             }
          }
@@ -150,7 +169,7 @@ class HomeFragment : Fragment() {
          }
 
          override fun onTaskClickListener(task: Task) {
-            showUpdateSheet(task, "Update")
+            showUpdateSheet(task, getString(R.string.update))
          }
 
       })
@@ -160,6 +179,15 @@ class HomeFragment : Fragment() {
          layoutManager = LinearLayoutManager(context)
          setHasFixedSize(true)
       }
+   }
+
+   private fun setAppLocale(context: Context, language: String) {
+      val locale = Locale(language)
+      Locale.setDefault(locale)
+      val config = context.resources.configuration
+      config.setLocale(locale)
+      context.createConfigurationContext(config)
+      context.resources.updateConfiguration(config, context.resources.displayMetrics)
    }
 
    private fun onBackPressed(){
