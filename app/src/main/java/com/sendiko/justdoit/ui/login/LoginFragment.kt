@@ -1,5 +1,6 @@
 package com.sendiko.justdoit.ui.login
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -19,8 +20,11 @@ import com.sendiko.justdoit.repository.model.StringConstants
 import com.sendiko.justdoit.repository.preferences.AuthPreferences
 import com.sendiko.justdoit.repository.preferences.AuthViewModel
 import com.sendiko.justdoit.repository.preferences.AuthViewModelFactory
+import com.sendiko.justdoit.repository.preferences.SettingsPreference
 import com.sendiko.justdoit.ui.container.MainActivity
 import com.sendiko.justdoit.ui.container.dataStore1
+import com.sendiko.justdoit.ui.settings.SettingsViewModel
+import java.util.*
 
 class LoginFragment : Fragment() {
 
@@ -37,6 +41,16 @@ class LoginFragment : Fragment() {
       ViewModelProvider(this, AuthViewModelFactory(pref))[AuthViewModel::class.java]
    }
 
+   private val settingsPref by lazy {
+      SettingsPreference.getInstance(requireNotNull(this.context).dataStore1)
+   }
+
+   private val settingsViewModel : SettingsViewModel by lazy {
+      ViewModelProvider(this,
+         SettingsViewModel.SettingsViewModelFactory(settingsPref)
+      )[SettingsViewModel::class.java]
+   }
+
    override fun onCreateView(
       inflater: LayoutInflater, container: ViewGroup?,
       savedInstanceState: Bundle?
@@ -51,6 +65,10 @@ class LoginFragment : Fragment() {
 
       val fadeIn = AnimationUtils.loadAnimation(context, R.anim.fade_in)
       binding.root.startAnimation(fadeIn)
+
+      settingsViewModel.getLanguage().observe(viewLifecycleOwner){
+         setAppLocale(requireContext(), it)
+      }
 
       binding.buttonLogin.setOnClickListener {
          val u = binding.inputUsername.text.toString()
@@ -101,6 +119,15 @@ class LoginFragment : Fragment() {
          }
       }
       return valid
+   }
+
+   private fun setAppLocale(context: Context, language: String) {
+      val locale = Locale(language)
+      Locale.setDefault(locale)
+      val config = context.resources.configuration
+      config.setLocale(locale)
+      context.createConfigurationContext(config)
+      context.resources.updateConfiguration(config, context.resources.displayMetrics)
    }
 
    override fun onDestroy() {

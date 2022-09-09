@@ -1,16 +1,17 @@
 package com.sendiko.justdoit.ui.home
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.addCallback
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -24,15 +25,18 @@ import com.sendiko.justdoit.R
 import com.sendiko.justdoit.databinding.FragmentHomeBinding
 import com.sendiko.justdoit.repository.SharedViewModel
 import com.sendiko.justdoit.repository.ViewModelFactory
-import com.sendiko.justdoit.repository.model.StringConstants
 import com.sendiko.justdoit.repository.model.Task
 import com.sendiko.justdoit.repository.preferences.AuthPreferences
 import com.sendiko.justdoit.repository.preferences.AuthViewModel
 import com.sendiko.justdoit.repository.preferences.AuthViewModelFactory
+import com.sendiko.justdoit.repository.preferences.SettingsPreference
 import com.sendiko.justdoit.ui.container.SettingActivity
 import com.sendiko.justdoit.ui.container.dataStore
-import com.sendiko.justdoit.ui.home.TaskAdapter.*
+import com.sendiko.justdoit.ui.container.dataStore1
+import com.sendiko.justdoit.ui.home.TaskAdapter.OnItemClickListener
+import com.sendiko.justdoit.ui.settings.SettingsViewModel
 import com.sendiko.justdoit.ui.task.TaskViewModel
+import java.util.*
 
 private const val TAG = "HomeFragment"
 class HomeFragment : Fragment() {
@@ -43,22 +47,29 @@ class HomeFragment : Fragment() {
    private val sharedViewModel : SharedViewModel by activityViewModels()
 
    private val taskViewModel : TaskViewModel by lazy {
-      val activity = requireNotNull(this.activity)
-      getViewModel(activity)
+      getViewModel(requireNotNull(this.activity))
    }
 
    private fun getViewModel(activity: FragmentActivity) : TaskViewModel {
-      val factory = ViewModelFactory.getInstance(activity.application)
-      return ViewModelProvider(this, factory)[TaskViewModel::class.java]
+      return ViewModelProvider(this, ViewModelFactory.getInstance(activity.application))[TaskViewModel::class.java]
    }
 
    private val pref by lazy{
-      val context = requireNotNull(this.context)
-      AuthPreferences.getInstance(context.dataStore)
+      AuthPreferences.getInstance(requireNotNull(this.context).dataStore)
    }
 
    private val authViewModel : AuthViewModel by lazy {
       ViewModelProvider(this, AuthViewModelFactory(pref))[AuthViewModel::class.java]
+   }
+
+   private val settingsPref by lazy {
+      SettingsPreference.getInstance(requireNotNull(this.context).dataStore1)
+   }
+
+   private val settingsViewModel : SettingsViewModel by lazy {
+      ViewModelProvider(this,
+         SettingsViewModel.SettingsViewModelFactory(settingsPref)
+      )[SettingsViewModel::class.java]
    }
 
    override fun onCreateView(
@@ -74,12 +85,27 @@ class HomeFragment : Fragment() {
    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
       super.onViewCreated(view, savedInstanceState)
 
+      settingsViewModel.getDarkTheme().observe(viewLifecycleOwner){
+         when(it){
+            true -> {
+               AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            }
+            false -> {
+               AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
+         }
+      }
+
+      settingsViewModel.getLanguage().observe(viewLifecycleOwner){
+         setAppLocale(requireContext(), it)
+      }
+
       taskViewModel.allTasks.observe(viewLifecycleOwner){
          setupRecyclerView(it)
       }
 
       authViewModel.getUser().observe(viewLifecycleOwner){
-         binding.toolbar.title = "Hi, $it!"
+         binding.toolbar.title = getString(R.string.greeting) + it + "!"
       }
 
       binding.buttonSettings.setOnClickListener {
@@ -112,7 +138,7 @@ class HomeFragment : Fragment() {
    }
 
    @SuppressLint("SetTextI18n")
-   private fun showUpdateSheet(tasks: Task){
+   private fun showUpdateSheet(tasks: Task, title : String, button : String){
       val inputSheet = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)
       val view = layoutInflater.inflate(R.layout.fragment_task, null)
       inputSheet.setContentView(view)
@@ -123,35 +149,23 @@ class HomeFragment : Fragment() {
       val inputSubject = view.findViewById<TextInputEditText>(R.id.input_subject)
       val buttonSubmit = view.findViewById<Button>(R.id.button_submit)
       val headerTitle = view.findViewById<TextView>(R.id.header_title)
-      val radioGroup = view.findViewById<RadioGroup>(R.id.radioGroup)
-      var categories = ""
 
       inputTask.setText(tasks.task)
       inputSubject.setText(tasks.subject)
-      buttonSubmit.text = StringConstants.update
-      headerTitle.text = StringConstants.updateTask
-
-      radioGroup.setOnCheckedChangeListener { _, item ->
-         when(item) {
-            R.id.button_sport -> categories = StringConstants.categoriesSport
-            R.id.button_work -> categories = StringConstants.categoriesWork
-            R.id.button_game -> categories = StringConstants.categoriesGame
-            R.id.button_school -> categories = StringConstants.categoriesSchool
-            R.id.button_chores -> categories = StringConstants.categoriesChores
-         }
-      }
+      headerTitle.text = title
+      buttonSubmit.text = button
 
       buttonSubmit.setOnClickListener {
          val task = inputTask.text.toString()
          val sub = inputSubject.text.toString()
          when {
             task.isNotEmpty() -> {
-               val task = Task(tasks.id, task, sub, categories, StringConstants.falsee)
+               val task = Task(tasks.id, task, sub, "false")
                taskViewModel.insertTask(task)
                inputSheet.dismiss()
             }
             else -> {
-               layoutTask.error = StringConstants.emptyError
+               layoutTask.error = getString(R.string.task_empty_error)
                inputTask.background = AppCompatResources.getDrawable(requireContext(), R.drawable.box_background_error)
             }
          }
@@ -160,14 +174,14 @@ class HomeFragment : Fragment() {
 
    private fun setupRecyclerView(taskList : List<Task>){
       val rv = binding.rvTask
-      val rvAdapter = TaskAdapter(arrayListOf(), object : OnItemClickListener{
+      val rvAdapter = TaskAdapter(arrayListOf(), object : OnItemClickListener {
          override fun onCheckListener(task: Task) {
-            taskViewModel.updateTask(Task(task.id, task.task, task.subject, task.categories, StringConstants.truee))
+            taskViewModel.updateTask(Task(task.id, task.task, task.subject, "true"))
             Toast.makeText(context, "${task.task} is checked", Toast.LENGTH_SHORT).show()
          }
 
-         override fun onTaskClickListener(task: Task) {
-            showUpdateSheet(task)
+         override fun onUpdateClickListener(task: Task) {
+            showUpdateSheet(task, getString(R.string.update_title), getString(R.string.update_button))
          }
 
       })
@@ -179,9 +193,18 @@ class HomeFragment : Fragment() {
       }
    }
 
+   private fun setAppLocale(context: Context, language: String) {
+      val locale = Locale(language)
+      Locale.setDefault(locale)
+      val config = context.resources.configuration
+      config.setLocale(locale)
+      context.createConfigurationContext(config)
+      context.resources.updateConfiguration(config, context.resources.displayMetrics)
+   }
+
    private fun onBackPressed(){
       requireActivity().onBackPressedDispatcher.addCallback {
-         Toast.makeText(context, StringConstants.backToast, Toast.LENGTH_SHORT).show()
+         Toast.makeText(context, "use home button to exit the app", Toast.LENGTH_SHORT).show()
       }
    }
 

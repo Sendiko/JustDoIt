@@ -5,7 +5,6 @@ import android.content.Context
 import android.os.Bundle
 import android.view.animation.AnimationUtils
 import android.widget.Button
-import android.widget.RadioGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.view.isVisible
@@ -22,7 +21,6 @@ import com.google.android.material.textfield.TextInputLayout
 import com.sendiko.justdoit.R
 import com.sendiko.justdoit.databinding.ActivityMainBinding
 import com.sendiko.justdoit.repository.ViewModelFactory
-import com.sendiko.justdoit.repository.model.StringConstants
 import com.sendiko.justdoit.repository.model.Task
 import com.sendiko.justdoit.ui.task.TaskViewModel
 
@@ -83,30 +81,18 @@ class MainActivity : AppCompatActivity() {
       val inputTask = view.findViewById<TextInputEditText>(R.id.input_task)
       val inputSubject = view.findViewById<TextInputEditText>(R.id.input_subject)
       val buttonSubmit = view.findViewById<Button>(R.id.button_submit)
-      val radioGroup = view.findViewById<RadioGroup>(R.id.radioGroup)
-      var categories = ""
-
-      radioGroup.setOnCheckedChangeListener { _, item ->
-         when(item) {
-            R.id.button_sport -> categories = StringConstants.categoriesSport
-            R.id.button_work -> categories = StringConstants.categoriesWork
-            R.id.button_game -> categories = StringConstants.categoriesGame
-            R.id.button_school -> categories = StringConstants.categoriesSchool
-            R.id.button_chores -> categories = StringConstants.categoriesChores
-         }
-      }
 
       buttonSubmit.setOnClickListener {
          val t = inputTask.text.toString()
          val s = inputSubject.text.toString()
          when {
             t.isNotEmpty() -> {
-               val task = Task(0, t, s, categories, StringConstants.falsee)
+               val task = Task(0, t, s, "false")
                taskViewModel.insertTask(task)
                inputSheet.dismiss()
             }
             else -> {
-               layoutTask.error = StringConstants.emptyError
+               layoutTask.error = getString(R.string.task_empty_error)
                inputTask.background = AppCompatResources.getDrawable(this, R.drawable.box_background_error)
             }
          }
