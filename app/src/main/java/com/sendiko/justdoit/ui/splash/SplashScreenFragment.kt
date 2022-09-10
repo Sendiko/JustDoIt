@@ -93,6 +93,7 @@ class SplashScreenFragment : Fragment() {
                Handler(Looper.getMainLooper()).postDelayed({
                   val intent = Intent(requireActivity(), MainActivity::class.java)
                   startActivity(intent)
+                  requireActivity().overridePendingTransition(R.anim.faster_fade_in, R.anim.faster_fade_out)
                }, 500)
             }
             else -> {

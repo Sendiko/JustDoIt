@@ -15,7 +15,6 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -23,7 +22,6 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.sendiko.justdoit.R
 import com.sendiko.justdoit.databinding.FragmentHomeBinding
-import com.sendiko.justdoit.repository.SharedViewModel
 import com.sendiko.justdoit.repository.ViewModelFactory
 import com.sendiko.justdoit.repository.model.Task
 import com.sendiko.justdoit.repository.preferences.AuthPreferences
@@ -43,8 +41,6 @@ class HomeFragment : Fragment() {
 
    private var _binding: FragmentHomeBinding? = null
    private val binding get() = _binding!!
-
-   private val sharedViewModel : SharedViewModel by activityViewModels()
 
    private val taskViewModel : TaskViewModel by lazy {
       getViewModel(requireNotNull(this.activity))
@@ -109,8 +105,8 @@ class HomeFragment : Fragment() {
       }
 
       binding.buttonSettings.setOnClickListener {
-         val intent = Intent(requireActivity(), SettingActivity::class.java)
-         startActivity(intent)
+         startActivity(Intent(requireActivity(), SettingActivity::class.java))
+         requireActivity().overridePendingTransition(R.anim.faster_fade_in, R.anim.faster_fade_out)
       }
 
       binding.swipeRefresh.setOnRefreshListener {

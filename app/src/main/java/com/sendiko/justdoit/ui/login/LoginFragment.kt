@@ -82,12 +82,10 @@ class LoginFragment : Fragment() {
 
    private fun toThisFragment(){
       val fadeIn = AnimationUtils.loadAnimation(context, R.anim.fade_in)
-      binding.labelUsername.startAnimation(fadeIn)
       binding.layoutUsername.startAnimation(fadeIn)
       binding.layoutToolbar.startAnimation(fadeIn)
       binding.buttonLogin.startAnimation(fadeIn)
       Handler(Looper.getMainLooper()).postDelayed({
-         binding.labelUsername.visibility = View.VISIBLE
          binding.layoutUsername.visibility = View.VISIBLE
          binding.layoutToolbar.visibility = View.VISIBLE
          binding.buttonLogin.visibility = View.VISIBLE
@@ -102,8 +100,8 @@ class LoginFragment : Fragment() {
       authViewModel.saveUsername(u)
       authViewModel.setLoginState(true)
       sharedViewModel.saveUsername(u)
-      val intent = Intent(requireActivity(), MainActivity::class.java)
-      startActivity(intent)
+      startActivity(Intent(requireActivity(), MainActivity::class.java))
+      requireActivity().overridePendingTransition(R.anim.faster_fade_in, R.anim.faster_fade_out)
    }
 
    private fun validation(username : String, password : String): Boolean {

@@ -35,18 +35,15 @@ class DashboardFragment : Fragment() {
    private val binding get() = _binding!!
 
    private val taskViewModel : TaskViewModel by lazy {
-      val activity = requireNotNull(this.activity)
-      getViewModel(activity)
+      getViewModel(requireNotNull(this.activity))
    }
 
    private fun getViewModel(activity: FragmentActivity) : TaskViewModel {
-      val factory = ViewModelFactory.getInstance(activity.application)
-      return ViewModelProvider(this, factory)[TaskViewModel::class.java]
+      return ViewModelProvider(this, ViewModelFactory.getInstance(activity.application))[TaskViewModel::class.java]
    }
 
    private val pref by lazy{
-      val context = requireNotNull(this.context)
-      AuthPreferences.getInstance(context.dataStore1)
+      AuthPreferences.getInstance(requireNotNull(this.context).dataStore1)
    }
 
    private val authViewModel : AuthViewModel by lazy {
@@ -105,8 +102,8 @@ class DashboardFragment : Fragment() {
       }
 
       binding.buttonSettings.setOnClickListener {
-         val intent = Intent(requireActivity(), SettingActivity::class.java)
-         startActivity(intent)
+         startActivity(Intent(requireActivity(), SettingActivity::class.java))
+         requireActivity().overridePendingTransition(R.anim.faster_fade_in, R.anim.faster_fade_out)
       }
 
       alsoCheckIfEmpty()
