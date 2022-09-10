@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.sendiko.justdoit.R
 import com.sendiko.justdoit.databinding.FragmentDashboardBinding
 import com.sendiko.justdoit.repository.ViewModelFactory
+import com.sendiko.justdoit.repository.model.StringConstants
 import com.sendiko.justdoit.repository.model.Task
 import com.sendiko.justdoit.repository.preferences.AuthPreferences
 import com.sendiko.justdoit.repository.preferences.AuthViewModel
@@ -34,18 +35,15 @@ class DashboardFragment : Fragment() {
    private val binding get() = _binding!!
 
    private val taskViewModel : TaskViewModel by lazy {
-      val activity = requireNotNull(this.activity)
-      getViewModel(activity)
+      getViewModel(requireNotNull(this.activity))
    }
 
    private fun getViewModel(activity: FragmentActivity) : TaskViewModel {
-      val factory = ViewModelFactory.getInstance(activity.application)
-      return ViewModelProvider(this, factory)[TaskViewModel::class.java]
+      return ViewModelProvider(this, ViewModelFactory.getInstance(activity.application))[TaskViewModel::class.java]
    }
 
    private val pref by lazy{
-      val context = requireNotNull(this.context)
-      AuthPreferences.getInstance(context.dataStore1)
+      AuthPreferences.getInstance(requireNotNull(this.context).dataStore1)
    }
 
    private val authViewModel : AuthViewModel by lazy {
@@ -104,8 +102,8 @@ class DashboardFragment : Fragment() {
       }
 
       binding.buttonSettings.setOnClickListener {
-         val intent = Intent(requireActivity(), SettingActivity::class.java)
-         startActivity(intent)
+         startActivity(Intent(requireActivity(), SettingActivity::class.java))
+         requireActivity().overridePendingTransition(R.anim.faster_fade_in, R.anim.faster_fade_out)
       }
 
       alsoCheckIfEmpty()
@@ -132,7 +130,7 @@ class DashboardFragment : Fragment() {
       rv.layoutManager = LinearLayoutManager(context)
       val rvAdapter = TaskCheckedAdapter(arrayListOf(), object : TaskCheckedAdapter.OnItemClickListener{
          override fun onUncheckListener(task: Task) {
-            taskViewModel.updateTask(Task(task.id, task.task, task.subject, "false"))
+            taskViewModel.updateTask(Task(task.id, task.task, task.subject, task.categories, StringConstants.falsee))
             Toast.makeText(context, "${task.task} is unchecked", Toast.LENGTH_SHORT).show()
          }
 

@@ -58,13 +58,13 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
-                android:visibility="visible"
                 android:background="@color/indigo_dye"
+                android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:listitem="@layout/card_item_task_checked" />
 
             <ProgressBar
@@ -83,7 +83,7 @@
                 android:id="@+id/imageView3"
                 android:layout_width="256dp"
                 android:layout_height="256dp"
-                android:src="@drawable/ic_check_task"
+                android:src="@drawable/ic_customer_survey_rafiki"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

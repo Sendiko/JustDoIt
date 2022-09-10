@@ -34,7 +34,7 @@ class SplashScreenFragment : Fragment() {
    private var _binding : FragmentSplashScreenBinding?= null
    private val binding get() = _binding!!
 
-   val sharedViewModel : SharedViewModel by activityViewModels()
+   private val sharedViewModel : SharedViewModel by activityViewModels()
 
    private val pref by lazy{
       val context = requireNotNull(this.context)
@@ -93,6 +93,7 @@ class SplashScreenFragment : Fragment() {
                Handler(Looper.getMainLooper()).postDelayed({
                   val intent = Intent(requireActivity(), MainActivity::class.java)
                   startActivity(intent)
+                  requireActivity().overridePendingTransition(R.anim.faster_fade_in, R.anim.faster_fade_out)
                }, 500)
             }
             else -> {
