@@ -91,7 +91,20 @@
         <entry key="app/src/main/res/drawable/ic_union.xml" value="0.2925" />
         <entry key="app/src/main/res/drawable/ic_user_illustration.xml" value="0.3275" />
         <entry key="app/src/main/res/drawable/ic_user_illustration_small.xml" value="0.3275" />
+        <entry key="app/src/main/res/drawable/pill_candoitanytime.xml" value="0.3295" />
+        <entry key="app/src/main/res/drawable/pill_candoitanytime_empty.xml" value="0.3295" />
+        <entry key="app/src/main/res/drawable/pill_candoitanytime_filled.xml" value="0.3295" />
+        <entry key="app/src/main/res/drawable/pill_important.xml" value="0.3295" />
+        <entry key="app/src/main/res/drawable/pill_important_dark.xml" value="0.3295" />
+        <entry key="app/src/main/res/drawable/pill_important_empty.xml" value="0.3295" />
+        <entry key="app/src/main/res/drawable/pill_important_filled.xml" value="0.3295" />
+        <entry key="app/src/main/res/drawable/pill_needtobedone.xml" value="0.3295" />
+        <entry key="app/src/main/res/drawable/pill_needtobedone_empty.xml" value="0.3295" />
+        <entry key="app/src/main/res/drawable/pill_needtobedone_filled.xml" value="0.3295" />
         <entry key="app/src/main/res/drawable/settings_frag_background.xml" value="0.308" />
+        <entry key="app/src/main/res/drawable/text_candoitanytime.xml" value="0.3295" />
+        <entry key="app/src/main/res/drawable/text_important.xml" value="0.3295" />
+        <entry key="app/src/main/res/drawable/text_needtobedone.xml" value="0.3295" />
         <entry key="app/src/main/res/layout-night/activity_main.xml" value="0.2419837537409149" />
         <entry key="app/src/main/res/layout-night/card_item_task.xml" value="0.67" />
         <entry key="app/src/main/res/layout-night/card_item_task_checked.xml" value="0.5" />
@@ -100,8 +113,9 @@
         <entry key="app/src/main/res/layout-night/fragment_display_dialog.xml" value="0.25" />
         <entry key="app/src/main/res/layout-night/fragment_home.xml" value="0.3899657924743444" />
         <entry key="app/src/main/res/layout-night/fragment_language_dialog.xml" value="0.5" />
+        <entry key="app/src/main/res/layout-night/fragment_login.xml" value="0.32708333333333334" />
         <entry key="app/src/main/res/layout-night/fragment_settings.xml" value="0.29157759726378796" />
-        <entry key="app/src/main/res/layout-night/fragment_task.xml" value="0.2419837537409149" />
+        <entry key="app/src/main/res/layout-night/fragment_task.xml" value="0.67" />
         <entry key="app/src/main/res/layout/activity_first.xml" value="0.2941427960666952" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/activity_setting.xml" value="0.29243266353142366" />
@@ -120,7 +134,7 @@
         <entry key="app/src/main/res/layout/fragment_language_dialog_list_dialog.xml" value="0.29243266353142366" />
         <entry key="app/src/main/res/layout/fragment_languange.xml" value="0.29243266353142366" />
         <entry key="app/src/main/res/layout/fragment_languange_dialog_list.xml" value="0.29157759726378796" />
-        <entry key="app/src/main/res/layout/fragment_login.xml" value="0.29243266353142366" />
+        <entry key="app/src/main/res/layout/fragment_login.xml" value="0.4474431818181818" />
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.3582427536231884" />
         <entry key="app/src/main/res/layout/fragment_register.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.75" />

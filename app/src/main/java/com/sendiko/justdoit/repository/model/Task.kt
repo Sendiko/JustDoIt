@@ -16,6 +16,9 @@ data class Task(
    @ColumnInfo(name = "subject")
    val subject: String?= null,
 
+   @ColumnInfo(name = "priority")
+   val priority : String?= null,
+
    @ColumnInfo(name = "isDone")
    val isDone : String?= null
 

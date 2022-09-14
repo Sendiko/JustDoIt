@@ -18,5 +18,16 @@
     <color name="lighter_indigo_dye">#335D7A</color>
     <color name="lighter_ming">#39969C</color>
     <color name="even_lighter_ming">#36D3DD</color>
+    
+    <!-- Priority Level Palette -->
+    <color name="important">#FF0A0A</color>
+    <color name="need_to_be_done">#F2CE02</color>
+    <color name="can_do_it_anytime">#85E62C</color>
+
+    <!-- Categories Palette -->
+    <color name="sports">#EB5160</color>
+    <color name="school">#9CE37D</color>
+    <color name="work">#247BA0</color>
+    <color name="others">#504136</color>
 
 </resources>

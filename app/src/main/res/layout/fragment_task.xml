@@ -90,6 +90,19 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/layout_task" />
 
+            <TextView
+                android:id="@+id/label_subject2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/nunito_bold"
+                android:text="@string/priority"
+                android:textColor="@color/indigo_dye"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layout_subject" />
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/layout_subject"
                 android:layout_width="0dp"
@@ -97,7 +110,6 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginBottom="32dp"
                 app:boxStrokeWidth="0dp"
                 app:boxStrokeWidthFocused="0dp"
                 app:expandedHintEnabled="false"
@@ -105,8 +117,7 @@
                 app:hintEnabled="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/label_subject"
-                app:layout_constraintBottom_toTopOf="@id/button_submit">
+                app:layout_constraintTop_toBottomOf="@+id/label_subject">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/input_subject"
@@ -131,7 +142,69 @@
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
+
+            <HorizontalScrollView
+                android:id="@+id/horizontalScrollView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="32dp"
+                android:scrollbars="none"
+                app:layout_constraintBottom_toTopOf="@+id/button_submit"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/label_subject2">
+
+                <RadioGroup
+                    android:id="@+id/radio_categories"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/button_important"
+                        android:layout_width="wrap_content"
+                        android:layout_height="48dp"
+                        android:layout_marginEnd="4dp"
+                        android:background="@drawable/pill_important"
+                        android:button="@android:color/transparent"
+                        android:fontFamily="@font/nunito_bold"
+                        android:padding="16dp"
+                        android:text="@string/had_to_do_it_now"
+                        android:textAlignment="center"
+                        android:textColor="@drawable/text_important" />
+
+                    <RadioButton
+                        android:id="@+id/button_medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="4dp"
+                        android:background="@drawable/pill_needtobedone"
+                        android:button="@android:color/transparent"
+                        android:fontFamily="@font/nunito_bold"
+                        android:padding="16dp"
+                        android:text="@string/need_to_be_done"
+                        android:textAlignment="center"
+                        android:textColor="@drawable/text_needtobedone" />
+
+                    <RadioButton
+                        android:id="@+id/button_less"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/pill_candoitanytime"
+                        android:button="@android:color/transparent"
+                        android:fontFamily="@font/nunito_bold"
+                        android:padding="16dp"
+                        android:text="@string/can_do_it_anytime"
+                        android:textAlignment="center"
+                        android:textColor="@drawable/text_candoitanytime" />
+
+                </RadioGroup>
+            </HorizontalScrollView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

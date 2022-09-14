@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sendiko.justdoit.R
 import com.sendiko.justdoit.databinding.FragmentDashboardBinding
+import com.sendiko.justdoit.repository.Constant
 import com.sendiko.justdoit.repository.ViewModelFactory
 import com.sendiko.justdoit.repository.model.Task
 import com.sendiko.justdoit.repository.preferences.AuthPreferences
@@ -132,7 +133,7 @@ class DashboardFragment : Fragment() {
       rv.layoutManager = LinearLayoutManager(context)
       val rvAdapter = TaskCheckedAdapter(arrayListOf(), object : TaskCheckedAdapter.OnItemClickListener{
          override fun onUncheckListener(task: Task) {
-            taskViewModel.updateTask(Task(task.id, task.task, task.subject, "false"))
+            taskViewModel.updateTask(Task(task.id, task.task, task.subject, task.priority, Constant.mFalse))
             Toast.makeText(context, "${task.task} is unchecked", Toast.LENGTH_SHORT).show()
          }
 

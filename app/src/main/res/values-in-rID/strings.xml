@@ -56,4 +56,8 @@
     <string name="update">Ubah</string>
     <string name="nama_error_empty">Name tidak boleh kosong</string>
     <string name="close_dialog">Tutup</string>
+    <string name="had_to_do_it_now">PENTING BANGET</string>
+    <string name="need_to_be_done">Harus di selesein</string>
+    <string name="can_do_it_anytime">Kapan aja bisa</string>
+    <string name="priority">Prioritas</string>
 </resources>

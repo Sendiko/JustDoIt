@@ -1,10 +1,12 @@
-package com.sendiko.justdoit.ui.container
+   package com.sendiko.justdoit.ui.container
 
 import android.app.Application
 import android.content.Context
 import android.os.Bundle
 import android.view.animation.AnimationUtils
 import android.widget.Button
+import android.widget.RadioGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.view.isVisible
@@ -16,10 +18,12 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.sendiko.justdoit.R
 import com.sendiko.justdoit.databinding.ActivityMainBinding
+import com.sendiko.justdoit.repository.Constant
 import com.sendiko.justdoit.repository.ViewModelFactory
 import com.sendiko.justdoit.repository.model.Task
 import com.sendiko.justdoit.ui.task.TaskViewModel
@@ -81,14 +85,22 @@ class MainActivity : AppCompatActivity() {
       val inputTask = view.findViewById<TextInputEditText>(R.id.input_task)
       val inputSubject = view.findViewById<TextInputEditText>(R.id.input_subject)
       val buttonSubmit = view.findViewById<Button>(R.id.button_submit)
+      val radioCategories = view.findViewById<RadioGroup>(R.id.radio_categories)
 
       buttonSubmit.setOnClickListener {
          val t = inputTask.text.toString()
          val s = inputSubject.text.toString()
+         var c = "categories"
+         when(radioCategories.checkedRadioButtonId){
+            R.id.button_important -> c = Constant.mImportant
+            R.id.button_medium -> c = Constant.mNeedToBeDone
+            R.id.button_less -> c = Constant.mCanDoItAnytime
+         }
          when {
             t.isNotEmpty() -> {
-               val task = Task(0, t, s, "false")
+               val task = Task(0, t, s, c, Constant.mFalse)
                taskViewModel.insertTask(task)
+               Toast.makeText(this, "$task", Toast.LENGTH_SHORT).show()
                inputSheet.dismiss()
             }
             else -> {

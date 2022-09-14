@@ -7,9 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.content.res.AppCompatResources
@@ -23,6 +21,7 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.sendiko.justdoit.R
 import com.sendiko.justdoit.databinding.FragmentHomeBinding
+import com.sendiko.justdoit.repository.Constant
 import com.sendiko.justdoit.repository.SharedViewModel
 import com.sendiko.justdoit.repository.ViewModelFactory
 import com.sendiko.justdoit.repository.model.Task
@@ -149,18 +148,31 @@ class HomeFragment : Fragment() {
       val inputSubject = view.findViewById<TextInputEditText>(R.id.input_subject)
       val buttonSubmit = view.findViewById<Button>(R.id.button_submit)
       val headerTitle = view.findViewById<TextView>(R.id.header_title)
+      val radioCategories = view.findViewById<RadioGroup>(R.id.radio_categories)
 
       inputTask.setText(tasks.task)
       inputSubject.setText(tasks.subject)
       headerTitle.text = title
       buttonSubmit.text = button
 
+      when(tasks.priority){
+         Constant.mImportant -> view.findViewById<RadioButton>(R.id.button_important).isChecked = true
+         Constant.mNeedToBeDone -> view.findViewById<RadioButton>(R.id.button_medium).isChecked = true
+         Constant.mCanDoItAnytime -> view.findViewById<RadioButton>(R.id.button_less).isChecked = true
+      }
+
       buttonSubmit.setOnClickListener {
          val task = inputTask.text.toString()
          val sub = inputSubject.text.toString()
+         var c = "categories"
+         when(radioCategories.checkedRadioButtonId){
+            R.id.button_important -> c = Constant.mImportant
+            R.id.button_medium -> c = Constant.mNeedToBeDone
+            R.id.button_less -> c = Constant.mCanDoItAnytime
+         }
          when {
             task.isNotEmpty() -> {
-               val task = Task(tasks.id, task, sub, "false")
+               val task = Task(tasks.id, task, sub, c, Constant.mFalse)
                taskViewModel.insertTask(task)
                inputSheet.dismiss()
             }
@@ -176,7 +188,7 @@ class HomeFragment : Fragment() {
       val rv = binding.rvTask
       val rvAdapter = TaskAdapter(arrayListOf(), object : OnItemClickListener {
          override fun onCheckListener(task: Task) {
-            taskViewModel.updateTask(Task(task.id, task.task, task.subject, "true"))
+            taskViewModel.updateTask(Task(task.id, task.task, task.subject, task.priority, Constant.mTrue))
             Toast.makeText(context, "${task.task} is checked", Toast.LENGTH_SHORT).show()
          }
 
