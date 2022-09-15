@@ -74,8 +74,7 @@ class SettingsFragment : Fragment() {
       }
 
       binding.icCancel.setOnClickListener {
-         val intent = Intent(requireActivity(), MainActivity::class.java)
-         requireActivity().navigateUpTo(intent)
+         requireActivity().navigateUpTo(Intent(requireActivity(), MainActivity::class.java))
       }
 
       authViewModel.getUser().observe(viewLifecycleOwner){
@@ -123,6 +122,7 @@ class SettingsFragment : Fragment() {
          }
          languageDialog.dismiss()
          startActivity(Intent(requireActivity(), FirstActivity::class.java))
+         requireActivity().overridePendingTransition(R.anim.activity_fade_out, R.anim.activity_fade_in)
       }
 
       settingsViewModel.getLanguage().observe(viewLifecycleOwner){

@@ -91,8 +91,7 @@ class SplashScreenFragment : Fragment() {
          when(isLoggedIn){
             true -> {
                Handler(Looper.getMainLooper()).postDelayed({
-                  val intent = Intent(requireActivity(), MainActivity::class.java)
-                  startActivity(intent)
+                  startActivity(Intent(requireActivity(), MainActivity::class.java))
                }, 500)
             }
             else -> {

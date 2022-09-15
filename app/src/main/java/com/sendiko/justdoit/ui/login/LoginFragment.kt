@@ -101,8 +101,7 @@ class LoginFragment : Fragment() {
       authViewModel.saveUsername(u)
       authViewModel.setLoginState(true)
       sharedViewModel.saveUsername(u)
-      val intent = Intent(requireActivity(), MainActivity::class.java)
-      startActivity(intent)
+      startActivity(Intent(requireActivity(), MainActivity::class.java))
    }
 
    private fun validation(username : String, password : String): Boolean {

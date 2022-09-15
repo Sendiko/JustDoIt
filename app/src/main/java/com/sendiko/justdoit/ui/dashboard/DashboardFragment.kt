@@ -105,8 +105,7 @@ class DashboardFragment : Fragment() {
       }
 
       binding.buttonSettings.setOnClickListener {
-         val intent = Intent(requireActivity(), SettingActivity::class.java)
-         startActivity(intent)
+         startActivity(Intent(requireActivity(), SettingActivity::class.java))
       }
 
       alsoCheckIfEmpty()
