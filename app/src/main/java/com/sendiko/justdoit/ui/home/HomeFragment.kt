@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -185,9 +187,11 @@ class HomeFragment : Fragment() {
 
    private fun setupRecyclerView(taskList : List<Task>){
       val rv = binding.rvTask
-      val rvAdapter = TaskAdapter(arrayListOf(), object : OnItemClickListener {
+      val rvAdapter = TaskAdapter(arrayListOf(), requireContext(), object : OnItemClickListener {
          override fun onCheckListener(task: Task) {
-            taskViewModel.updateTask(Task(task.id, task.task, task.subject, task.priority, Constant.mTrue))
+            Handler(Looper.myLooper()!!).postDelayed({
+               taskViewModel.updateTask(Task(task.id, task.task, task.subject, task.priority, Constant.mTrue))
+            }, 200)
             Toast.makeText(context, "${task.task} is checked", Toast.LENGTH_SHORT).show()
          }
 

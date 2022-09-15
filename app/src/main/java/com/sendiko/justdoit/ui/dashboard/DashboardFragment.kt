@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -130,9 +132,11 @@ class DashboardFragment : Fragment() {
    private fun setupRecyclerView(taskList : List<Task>){
       val rv = binding.rvTaskChecked
       rv.layoutManager = LinearLayoutManager(context)
-      val rvAdapter = TaskCheckedAdapter(arrayListOf(), object : TaskCheckedAdapter.OnItemClickListener{
+      val rvAdapter = TaskCheckedAdapter(arrayListOf(), requireContext(), object : TaskCheckedAdapter.OnItemClickListener{
          override fun onUncheckListener(task: Task) {
-            taskViewModel.updateTask(Task(task.id, task.task, task.subject, task.priority, Constant.mFalse))
+            Handler(Looper.myLooper()!!).postDelayed({
+               taskViewModel.updateTask(Task(task.id, task.task, task.subject, task.priority, Constant.mFalse))
+            }, 200)
             Toast.makeText(context, "${task.task} is unchecked", Toast.LENGTH_SHORT).show()
          }
 
