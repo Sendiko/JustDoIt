@@ -16,7 +16,6 @@ import com.google.android.material.snackbar.Snackbar
 import com.sendiko.justdoit.R
 import com.sendiko.justdoit.databinding.FragmentLoginBinding
 import com.sendiko.justdoit.repository.SharedViewModel
-import com.sendiko.justdoit.repository.model.StringConstants
 import com.sendiko.justdoit.repository.preferences.AuthPreferences
 import com.sendiko.justdoit.repository.preferences.AuthViewModel
 import com.sendiko.justdoit.repository.preferences.AuthViewModelFactory
@@ -101,7 +100,6 @@ class LoginFragment : Fragment() {
       authViewModel.setLoginState(true)
       sharedViewModel.saveUsername(u)
       startActivity(Intent(requireActivity(), MainActivity::class.java))
-      requireActivity().overridePendingTransition(R.anim.faster_fade_in, R.anim.faster_fade_out)
    }
 
    private fun validation(username : String, password : String): Boolean {
@@ -113,7 +111,7 @@ class LoginFragment : Fragment() {
          }
          username.isEmpty() -> {
             valid = false
-            binding.layoutUsername.error = StringConstants.usernameError
+            binding.layoutUsername.error = "Username can't be empty"
          }
       }
       return valid

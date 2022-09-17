@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,8 +17,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sendiko.justdoit.R
 import com.sendiko.justdoit.databinding.FragmentDashboardBinding
+import com.sendiko.justdoit.repository.Constant
 import com.sendiko.justdoit.repository.ViewModelFactory
-import com.sendiko.justdoit.repository.model.StringConstants
 import com.sendiko.justdoit.repository.model.Task
 import com.sendiko.justdoit.repository.preferences.AuthPreferences
 import com.sendiko.justdoit.repository.preferences.AuthViewModel
@@ -35,15 +37,18 @@ class DashboardFragment : Fragment() {
    private val binding get() = _binding!!
 
    private val taskViewModel : TaskViewModel by lazy {
-      getViewModel(requireNotNull(this.activity))
+      val activity = requireNotNull(this.activity)
+      getViewModel(activity)
    }
 
    private fun getViewModel(activity: FragmentActivity) : TaskViewModel {
-      return ViewModelProvider(this, ViewModelFactory.getInstance(activity.application))[TaskViewModel::class.java]
+      val factory = ViewModelFactory.getInstance(activity.application)
+      return ViewModelProvider(this, factory)[TaskViewModel::class.java]
    }
 
    private val pref by lazy{
-      AuthPreferences.getInstance(requireNotNull(this.context).dataStore1)
+      val context = requireNotNull(this.context)
+      AuthPreferences.getInstance(context.dataStore1)
    }
 
    private val authViewModel : AuthViewModel by lazy {
@@ -103,7 +108,6 @@ class DashboardFragment : Fragment() {
 
       binding.buttonSettings.setOnClickListener {
          startActivity(Intent(requireActivity(), SettingActivity::class.java))
-         requireActivity().overridePendingTransition(R.anim.faster_fade_in, R.anim.faster_fade_out)
       }
 
       alsoCheckIfEmpty()
@@ -128,9 +132,11 @@ class DashboardFragment : Fragment() {
    private fun setupRecyclerView(taskList : List<Task>){
       val rv = binding.rvTaskChecked
       rv.layoutManager = LinearLayoutManager(context)
-      val rvAdapter = TaskCheckedAdapter(arrayListOf(), object : TaskCheckedAdapter.OnItemClickListener{
+      val rvAdapter = TaskCheckedAdapter(arrayListOf(), requireContext(), object : TaskCheckedAdapter.OnItemClickListener{
          override fun onUncheckListener(task: Task) {
-            taskViewModel.updateTask(Task(task.id, task.task, task.subject, task.categories, StringConstants.falsee))
+            Handler(Looper.myLooper()!!).postDelayed({
+               taskViewModel.updateTask(Task(task.id, task.task, task.subject, task.priority, Constant.mFalse))
+            }, 200)
             Toast.makeText(context, "${task.task} is unchecked", Toast.LENGTH_SHORT).show()
          }
 

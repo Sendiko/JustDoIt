@@ -12,6 +12,19 @@ class SettingsPreference private constructor(private val dataStore : DataStore<P
 
     private val isDarkThemeKey = booleanPreferencesKey("isDarkTheme")
     private val languageKey = stringPreferencesKey("language")
+    private val sortListKey = stringPreferencesKey("sort_list")
+
+    suspend fun setSortListKey(sortKey : String){
+        dataStore.edit { key ->
+            key[sortListKey] = sortKey
+        }
+    }
+
+    fun getSortListKey() : Flow<String> {
+        return dataStore.data.map { key ->
+            key[sortListKey]?: "none"
+        }
+    }
 
     suspend fun setDarkTheme(darkTheme : Boolean){
         dataStore.edit { key ->

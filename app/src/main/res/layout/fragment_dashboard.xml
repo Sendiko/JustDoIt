@@ -80,8 +80,8 @@
 
             <ImageView
                 android:id="@+id/imageView3"
-                android:layout_width="256dp"
-                android:layout_height="256dp"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:src="@drawable/ic_customer_survey_rafiki"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"

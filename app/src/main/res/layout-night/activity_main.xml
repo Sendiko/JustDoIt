@@ -51,22 +51,38 @@
         app:fabCradleRoundedCornerRadius="12dp"
         style="@style/Widget.MaterialComponents.BottomAppBar">
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/nav_view"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:background="@android:color/transparent"
-            android:layout_marginEnd="16dp"
-            app:labelVisibilityMode="unlabeled"
-            app:itemIconTint="@color/indigo_dye"
-            app:itemIconSize="32dp"
-            app:itemRippleColor="@android:color/transparent"
-            app:itemTextAppearanceActive="@style/BottomNavigationTextStyleActive"
-            app:itemTextAppearanceInactive="@style/BottomNavigationTextStyleInactive"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:menu="@menu/bottom_nav_menu" />
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/nav_view"
+                android:layout_width="0dp"
+                android:layout_height="52dp"
+                android:background="@android:color/transparent"
+                app:labelVisibilityMode="unlabeled"
+                app:itemIconTint="@color/indigo_dye"
+                app:itemIconSize="32dp"
+                app:itemRippleColor="@android:color/transparent"
+                app:itemTextAppearanceActive="@style/BottomNavigationTextStyleActive"
+                app:itemTextAppearanceInactive="@style/BottomNavigationTextStyleInactive"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/image_more"
+                app:layout_constraintTop_toTopOf="parent"
+                app:menu="@menu/bottom_nav_menu" />
+
+            <ImageView
+                android:id="@+id/image_more"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/ic_more"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:tint="@color/indigo_dye"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.bottomappbar.BottomAppBar>
 

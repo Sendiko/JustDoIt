@@ -75,7 +75,6 @@ class SettingsFragment : Fragment() {
 
       binding.icCancel.setOnClickListener {
          requireActivity().navigateUpTo(Intent(requireActivity(), MainActivity::class.java))
-         requireActivity().overridePendingTransition(R.anim.faster_fade_in, R.anim.faster_fade_out)
       }
 
       authViewModel.getUser().observe(viewLifecycleOwner){
@@ -87,7 +86,6 @@ class SettingsFragment : Fragment() {
          authViewModel.clearUser()
          sharedViewModel.removeUsername()
          startActivity(Intent(requireActivity(), FirstActivity::class.java))
-         requireActivity().overridePendingTransition(R.anim.faster_fade_in, R.anim.faster_fade_in)
       }
 
       binding.frameContacts.setOnClickListener {
@@ -124,7 +122,7 @@ class SettingsFragment : Fragment() {
          }
          languageDialog.dismiss()
          startActivity(Intent(requireActivity(), FirstActivity::class.java))
-         requireActivity().overridePendingTransition(R.anim.faster_fade_in, R.anim.faster_fade_out)
+         requireActivity().overridePendingTransition(R.anim.activity_fade_out, R.anim.activity_fade_in)
       }
 
       settingsViewModel.getLanguage().observe(viewLifecycleOwner){

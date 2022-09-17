@@ -56,4 +56,13 @@
     <string name="update">Ubah</string>
     <string name="nama_error_empty">Name tidak boleh kosong</string>
     <string name="close_dialog">Tutup</string>
+    <string name="had_to_do_it_now">PENTING BANGET</string>
+    <string name="need_to_be_done">Harus di selesein</string>
+    <string name="can_do_it_anytime">Kapan aja bisa</string>
+    <string name="priority">Prioritas</string>
+    <string name="priority_error">Anda harus memilih satu level prioritas</string>
+    <string name="clear_filter"><u>hapus filter</u></string>
+    <string name="filter_important">Filter : PENTING BANGET</string>
+    <string name="filter_need_to_be_done">Filter : Harus di selesein</string>
+    <string name="filter_can_do_it_anytime">Filter : Kapan aja bisa</string>
 </resources>

@@ -28,4 +28,13 @@ interface TaskDataAccessObject {
     @Query("select count (*) from taskTable as tableTask where isDone = 'true' ")
     fun alsoCheckIfEmpty() : LiveData<Int>
 
+    @Query("select * from taskTable where priority = 'high' ")
+    fun importantTask() : LiveData<List<Task>>
+
+    @Query("select * from taskTable where priority = 'medium' ")
+    fun mediumTask() : LiveData<List<Task>>
+
+    @Query("select * from taskTable where priority = 'low' ")
+    fun lowTask() : LiveData<List<Task>>
+
 }

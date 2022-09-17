@@ -1,17 +1,22 @@
 package com.sendiko.justdoit.ui.dashboard
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.graphics.Paint
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
+import com.sendiko.justdoit.R
 import com.sendiko.justdoit.databinding.CardItemTaskCheckedBinding
 import com.sendiko.justdoit.repository.model.Task
 
 private const val TAG = "TaskCheckedAdapter"
 class TaskCheckedAdapter(
    private val task: ArrayList<Task>,
+   private val context : Context,
    private val onClick: OnItemClickListener
 ) :
    RecyclerView.Adapter<TaskCheckedAdapter.Task2ViewHolder>() {
@@ -30,7 +35,9 @@ class TaskCheckedAdapter(
       holder.binding.task.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
       holder.binding.subjectTask.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
 
-      holder.binding.checkbox.setOnClickListener {
+      holder.binding.checkbox.setOnCheckedChangeListener { _, _ ->
+         holder.binding.root.startAnimation(AnimationUtils.loadAnimation(context, R.anim.activity_fade_out))
+         holder.binding.root.isVisible = false
          onClick.onUncheckListener(currentItem)
       }
 
