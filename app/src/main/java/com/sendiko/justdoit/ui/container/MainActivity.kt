@@ -155,7 +155,6 @@ class MainActivity : AppCompatActivity() {
                   else -> {
                      val task = Task(0, t, s, c, Constant.mFalse)
                      taskViewModel.insertTask(task)
-                     Toast.makeText(this, "$task", Toast.LENGTH_SHORT).show()
                      inputDialog.dismiss()
                   }
                }
