@@ -4,9 +4,7 @@ import android.app.Application
 import android.content.Context
 import android.os.Bundle
 import android.view.animation.AnimationUtils
-import android.widget.Button
-import android.widget.RadioGroup
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.view.isVisible
@@ -26,6 +24,8 @@ import com.sendiko.justdoit.databinding.ActivityMainBinding
 import com.sendiko.justdoit.repository.Constant
 import com.sendiko.justdoit.repository.ViewModelFactory
 import com.sendiko.justdoit.repository.model.Task
+import com.sendiko.justdoit.repository.preferences.SettingsPreference
+import com.sendiko.justdoit.ui.settings.SettingsViewModel
 import com.sendiko.justdoit.ui.task.TaskViewModel
 
 val Context.dataStore : DataStore<Preferences> by preferencesDataStore(name = "preferences")
@@ -43,6 +43,16 @@ class MainActivity : AppCompatActivity() {
       return ViewModelProvider(this, factory)[TaskViewModel::class.java]
    }
 
+   private val settingsPref by lazy {
+      SettingsPreference.getInstance(requireNotNull(this).dataStore1)
+   }
+
+   private val settingsViewModel : SettingsViewModel by lazy {
+      ViewModelProvider(this,
+         SettingsViewModel.SettingsViewModelFactory(settingsPref)
+      )[SettingsViewModel::class.java]
+   }
+
    override fun onCreate(savedInstanceState: Bundle?) {
       super.onCreate(savedInstanceState)
 
@@ -52,34 +62,76 @@ class MainActivity : AppCompatActivity() {
       val navView: BottomNavigationView = binding.navView
       val navController = findNavController(R.id.nav_host_fragment_activity_main)
 
-      val fadeOut = AnimationUtils.loadAnimation(this,R.anim.fade_out)
-
       navView.setupWithNavController(navController)
       navView.itemActiveIndicatorColor = null
       navView.background = null
       navView.menu.getItem(1).isEnabled = false
 
       binding.buttonAddTask.setOnClickListener {
-         showInputSheet()
+         showInputDialog()
       }
 
-      navController.addOnDestinationChangedListener{ _, destination, _, ->
-         when(destination.id){
-            R.id.navigation_task -> {
-               navView.startAnimation(fadeOut)
-               binding.bottomAppBar.isVisible = false
-            }
-            else -> navView.isVisible = true
-         }
+      binding.imageMore.setOnClickListener {
+         showSortListDialog()
       }
 
    }
 
-   private fun showInputSheet(){
-      val inputSheet = BottomSheetDialog(this, R.style.BottomSheetDialogTheme)
+   private fun showSortListDialog(){
+      val sortListDialog = BottomSheetDialog(this, R.style.BottomSheetDialogTheme)
+      val view = layoutInflater.inflate(R.layout.fragment_sort_dialog, null)
+      sortListDialog.setContentView(view)
+      sortListDialog.show()
+
+      val radioCategories = view.findViewById<RadioGroup>(R.id.radio_categories)
+      val buttonSubmit = view.findViewById<Button>(R.id.button_submit)
+      val clearFilter = view.findViewById<TextView>(R.id.clear_filter)
+
+      settingsViewModel.getSortListKey().observe(this){ sortKey ->
+         when(sortKey){
+            Constant.mImportant -> {
+               view.findViewById<RadioButton>(R.id.button_important).isChecked = true
+            }
+            Constant.mNeedToBeDone -> {
+               view.findViewById<RadioButton>(R.id.button_medium).isChecked = true
+            }
+            Constant.mCanDoItAnytime -> {
+               view.findViewById<RadioButton>(R.id.button_less).isChecked = true
+            }
+         }
+      }
+
+      clearFilter.setOnClickListener {
+         settingsViewModel.setSortListKey("none")
+         Toast.makeText(this, "Filter cleared", Toast.LENGTH_SHORT).show()
+         sortListDialog.dismiss()
+      }
+
+      buttonSubmit.setOnClickListener {
+         when(radioCategories.checkedRadioButtonId){
+            R.id.button_important -> {
+               settingsViewModel.setSortListKey(Constant.mImportant)
+               Toast.makeText(this, getString(R.string.filter_important), Toast.LENGTH_SHORT).show()
+            }
+            R.id.button_medium -> {
+               settingsViewModel.setSortListKey(Constant.mNeedToBeDone)
+               Toast.makeText(this, getString(R.string.filter_need_to_be_done), Toast.LENGTH_SHORT).show()
+            }
+            R.id.button_less -> {
+               settingsViewModel.setSortListKey(Constant.mCanDoItAnytime)
+               Toast.makeText(this, getString(R.string.filter_can_do_it_anytime), Toast.LENGTH_SHORT).show()
+            }
+         }
+         sortListDialog.dismiss()
+      }
+
+   }
+
+   private fun showInputDialog(){
+      val inputDialog = BottomSheetDialog(this, R.style.BottomSheetDialogTheme)
       val view = layoutInflater.inflate(R.layout.fragment_task, null)
-      inputSheet.setContentView(view)
-      inputSheet.show()
+      inputDialog.setContentView(view)
+      inputDialog.show()
 
       val layoutTask = view.findViewById<TextInputLayout>(R.id.layout_task)
       val inputTask = view.findViewById<TextInputEditText>(R.id.input_task)
@@ -90,7 +142,7 @@ class MainActivity : AppCompatActivity() {
       buttonSubmit.setOnClickListener {
          val t = inputTask.text.toString()
          val s = inputSubject.text.toString()
-         var c = "categories"
+         var c = Constant.category
          when(radioCategories.checkedRadioButtonId){
             R.id.button_important -> c = Constant.mImportant
             R.id.button_medium -> c = Constant.mNeedToBeDone
@@ -98,10 +150,15 @@ class MainActivity : AppCompatActivity() {
          }
          when {
             t.isNotEmpty() -> {
-               val task = Task(0, t, s, c, Constant.mFalse)
-               taskViewModel.insertTask(task)
-               Toast.makeText(this, "$task", Toast.LENGTH_SHORT).show()
-               inputSheet.dismiss()
+               when(c){
+                  Constant.category -> Toast.makeText(this, getString(R.string.priority_error), Toast.LENGTH_SHORT).show()
+                  else -> {
+                     val task = Task(0, t, s, c, Constant.mFalse)
+                     taskViewModel.insertTask(task)
+                     Toast.makeText(this, "$task", Toast.LENGTH_SHORT).show()
+                     inputDialog.dismiss()
+                  }
+               }
             }
             else -> {
                layoutTask.error = getString(R.string.task_empty_error)

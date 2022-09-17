@@ -6,6 +6,16 @@ import kotlinx.coroutines.launch
 
 class SettingsViewModel(private val settings : SettingsPreference) : ViewModel() {
 
+    fun setSortListKey(sortKey : String){
+        viewModelScope.launch {
+            settings.setSortListKey(sortKey)
+        }
+    }
+
+    fun getSortListKey() : LiveData<String> {
+        return settings.getSortListKey().asLiveData()
+    }
+
     fun setDarkTheme(darkTheme : Boolean){
         viewModelScope.launch {
             settings.setDarkTheme(darkTheme)

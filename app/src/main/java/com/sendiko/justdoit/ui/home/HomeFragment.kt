@@ -16,6 +16,7 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModelLazy
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -101,8 +102,21 @@ class HomeFragment : Fragment() {
          setAppLocale(requireContext(), it)
       }
 
-      taskViewModel.allTasks.observe(viewLifecycleOwner){
-         setupRecyclerView(it)
+      settingsViewModel.getSortListKey().observe(viewLifecycleOwner){ sortKey ->
+         when(sortKey){
+            Constant.mImportant -> taskViewModel.importantTask.observe(viewLifecycleOwner){ task ->
+               setupRecyclerView(task)
+            }
+            Constant.mNeedToBeDone -> taskViewModel.mediumTask.observe(viewLifecycleOwner){ task ->
+               setupRecyclerView(task)
+            }
+            Constant.mCanDoItAnytime -> taskViewModel.lowTask.observe(viewLifecycleOwner){ task ->
+               setupRecyclerView(task)
+            }
+            else -> taskViewModel.allTasks.observe(viewLifecycleOwner){ task ->
+               setupRecyclerView(task)
+            }
+         }
       }
 
       authViewModel.getUser().observe(viewLifecycleOwner){

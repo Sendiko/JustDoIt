@@ -60,4 +60,9 @@
     <string name="need_to_be_done">Need to be done</string>
     <string name="can_do_it_anytime">Can do it anytime</string>
     <string name="priority">Priority</string>
+    <string name="priority_error">You have to choose one priority</string>
+    <string name="clear_filter"><u>clear filter</u></string>
+    <string name="filter_important">Filter : Important</string>
+    <string name="filter_need_to_be_done">Filter : Need to be done</string>
+    <string name="filter_can_do_it_anytime">Filter : Can do it anytime</string>
 </resources>

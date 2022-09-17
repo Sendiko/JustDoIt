@@ -168,7 +168,7 @@
                     <RadioButton
                         android:id="@+id/button_important"
                         android:layout_width="wrap_content"
-                        android:layout_height="48dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginEnd="4dp"
                         android:background="@drawable/pill_important"
                         android:button="@android:color/transparent"
