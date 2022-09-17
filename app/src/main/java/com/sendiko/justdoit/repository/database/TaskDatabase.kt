@@ -5,6 +5,7 @@ import androidx.room.AutoMigration
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.sendiko.justdoit.repository.model.StringConstants
 import com.sendiko.justdoit.repository.model.Task
 
 @Database(
@@ -25,7 +26,7 @@ abstract class TaskDatabase : RoomDatabase() {
                  val instance = Room.databaseBuilder(
                     context.applicationContext,
                     TaskDatabase::class.java,
-                    "task_database"
+                    StringConstants.dbName
                 ).build()
                 INSTANCE = instance
                 instance
