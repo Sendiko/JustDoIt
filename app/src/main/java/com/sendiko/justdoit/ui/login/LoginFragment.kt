@@ -81,12 +81,10 @@ class LoginFragment : Fragment() {
 
    private fun toThisFragment(){
       val fadeIn = AnimationUtils.loadAnimation(context, R.anim.fade_in)
-      binding.labelUsername.startAnimation(fadeIn)
       binding.layoutUsername.startAnimation(fadeIn)
       binding.layoutToolbar.startAnimation(fadeIn)
       binding.buttonLogin.startAnimation(fadeIn)
       Handler(Looper.getMainLooper()).postDelayed({
-         binding.labelUsername.visibility = View.VISIBLE
          binding.layoutUsername.visibility = View.VISIBLE
          binding.layoutToolbar.visibility = View.VISIBLE
          binding.buttonLogin.visibility = View.VISIBLE
