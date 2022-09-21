@@ -3,11 +3,9 @@
 import android.app.Application
 import android.content.Context
 import android.os.Bundle
-import android.view.animation.AnimationUtils
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.core.view.isVisible
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
@@ -16,7 +14,6 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.sendiko.justdoit.R
@@ -28,7 +25,7 @@ import com.sendiko.justdoit.repository.preferences.SettingsPreference
 import com.sendiko.justdoit.ui.settings.SettingsViewModel
 import com.sendiko.justdoit.ui.task.TaskViewModel
 
-val Context.dataStore : DataStore<Preferences> by preferencesDataStore(name = "preferences")
+   val Context.dataStore : DataStore<Preferences> by preferencesDataStore(name = "preferences")
 class MainActivity : AppCompatActivity() {
 
    private lateinit var binding: ActivityMainBinding
@@ -71,8 +68,38 @@ class MainActivity : AppCompatActivity() {
          showInputDialog()
       }
 
-      binding.imageMore.setOnClickListener {
-         showSortListDialog()
+      navController.addOnDestinationChangedListener { _, destination, _, ->
+         when(destination.id){
+            R.id.navigation_home -> {
+               binding.imageMore.setOnClickListener {
+                  showSortListDialog()
+               }
+            }
+            R.id.navigation_dashboard -> {
+               binding.imageMore.setOnClickListener {
+                  deleteAllDialog()
+               }
+            }
+         }
+      }
+
+   }
+
+   private fun deleteAllDialog() {
+      val deleteAllDialog = BottomSheetDialog(this, R.style.BottomSheetDialogTheme)
+      val view = layoutInflater.inflate(R.layout.fragment_delete_all, null)
+      deleteAllDialog.apply {
+         setContentView(view)
+         show()
+      }
+
+      view.findViewById<Button>(R.id.button_cancel).setOnClickListener {
+         deleteAllDialog.dismiss()
+      }
+
+      view.findViewById<Button>(R.id.button_delete).setOnClickListener {
+         taskViewModel.deleteAllTask()
+         deleteAllDialog.dismiss()
       }
 
    }
@@ -80,8 +107,10 @@ class MainActivity : AppCompatActivity() {
    private fun showSortListDialog(){
       val sortListDialog = BottomSheetDialog(this, R.style.BottomSheetDialogTheme)
       val view = layoutInflater.inflate(R.layout.fragment_sort_dialog, null)
-      sortListDialog.setContentView(view)
-      sortListDialog.show()
+      sortListDialog.apply {
+         setContentView(view)
+         show()
+      }
 
       val radioCategories = view.findViewById<RadioGroup>(R.id.radio_categories)
       val buttonSubmit = view.findViewById<Button>(R.id.button_submit)
@@ -130,8 +159,10 @@ class MainActivity : AppCompatActivity() {
    private fun showInputDialog(){
       val inputDialog = BottomSheetDialog(this, R.style.BottomSheetDialogTheme)
       val view = layoutInflater.inflate(R.layout.fragment_task, null)
-      inputDialog.setContentView(view)
-      inputDialog.show()
+      inputDialog.apply {
+         setContentView(view)
+         show()
+      }
 
       val layoutTask = view.findViewById<TextInputLayout>(R.id.layout_task)
       val inputTask = view.findViewById<TextInputEditText>(R.id.input_task)

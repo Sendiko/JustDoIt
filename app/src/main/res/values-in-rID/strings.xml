@@ -65,4 +65,6 @@
     <string name="filter_important">Filter : PENTING BANGET</string>
     <string name="filter_need_to_be_done">Filter : Harus di selesein</string>
     <string name="filter_can_do_it_anytime">Filter : Kapan aja bisa</string>
+    <string name="delete_all_tasks">Ingin hapus semua tugas?</string>
+    <string name="delete_all">Hapus semua</string>
 </resources>

@@ -22,7 +22,7 @@
 
     <style name="MainActivityTheme" parent="Theme.JusDoIt">
         <item name="android:statusBarColor">@color/white</item>
-        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
         <item name="android:navigationBarColor">@color/indigo_dye</item>
     </style>
 

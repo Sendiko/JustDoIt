@@ -16,6 +16,9 @@ interface TaskDataAccessObject {
     @Delete
     suspend fun deleteTask(task: Task)
 
+    @Query("delete from taskTable where isDone = 'true'")
+    fun deleteAll()
+
     @Query("select * from taskTable where isDone = 'false' order by task asc")
     fun getTask() : LiveData<List<Task>>
 
@@ -28,13 +31,13 @@ interface TaskDataAccessObject {
     @Query("select count (*) from taskTable as tableTask where isDone = 'true' ")
     fun alsoCheckIfEmpty() : LiveData<Int>
 
-    @Query("select * from taskTable where priority = 'high' ")
+    @Query("select * from taskTable where (priority = 'high' and isDone = 'false')  ")
     fun importantTask() : LiveData<List<Task>>
 
-    @Query("select * from taskTable where priority = 'medium' ")
+    @Query("select * from taskTable where (priority = 'medium' and isDone = 'false') ")
     fun mediumTask() : LiveData<List<Task>>
 
-    @Query("select * from taskTable where priority = 'low' ")
+    @Query("select * from taskTable where (priority = 'low' and isDone = 'false') ")
     fun lowTask() : LiveData<List<Task>>
 
 }
