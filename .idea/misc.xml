@@ -36,6 +36,7 @@
         <entry key="app/src/main/res/drawable/circle_candoitanytime.xml" value="0.333" />
         <entry key="app/src/main/res/drawable/circle_important.xml" value="0.333" />
         <entry key="app/src/main/res/drawable/circle_needtobedone.xml" value="0.333" />
+        <entry key="app/src/main/res/drawable/delete_dialog.xml" value="0.27" />
         <entry key="app/src/main/res/drawable/drag_indicator.xml" value="0.308" />
         <entry key="app/src/main/res/drawable/gradient_red.xml" value="0.2925" />
         <entry key="app/src/main/res/drawable/ic_add.xml" value="0.3175" />
@@ -111,24 +112,29 @@
         <entry key="app/src/main/res/layout-night/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout-night/card_item_task.xml" value="0.67" />
         <entry key="app/src/main/res/layout-night/card_item_task_checked.xml" value="0.5" />
+        <entry key="app/src/main/res/layout-night/delete_dialog.xml" value="0.67" />
         <entry key="app/src/main/res/layout-night/fragment_change_name_dialog.xml" value="0.5" />
         <entry key="app/src/main/res/layout-night/fragment_dashboard.xml" value="0.29157759726378796" />
+        <entry key="app/src/main/res/layout-night/fragment_delete_all.xml" value="0.32708333333333334" />
         <entry key="app/src/main/res/layout-night/fragment_display_dialog.xml" value="0.67" />
         <entry key="app/src/main/res/layout-night/fragment_home.xml" value="0.3899657924743444" />
         <entry key="app/src/main/res/layout-night/fragment_language_dialog.xml" value="0.5" />
         <entry key="app/src/main/res/layout-night/fragment_login.xml" value="0.32708333333333334" />
         <entry key="app/src/main/res/layout-night/fragment_settings.xml" value="0.29157759726378796" />
         <entry key="app/src/main/res/layout-night/fragment_sort_dialog.xml" value="0.75" />
-        <entry key="app/src/main/res/layout-night/fragment_task.xml" value="0.67" />
+        <entry key="app/src/main/res/layout-night/fragment_task.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_first.xml" value="0.2941427960666952" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.5416301489921121" />
         <entry key="app/src/main/res/layout/activity_setting.xml" value="0.29243266353142366" />
         <entry key="app/src/main/res/layout/card_item_task.xml" value="0.5" />
         <entry key="app/src/main/res/layout/card_item_task_checked.xml" value="0.6251287332646756" />
         <entry key="app/src/main/res/layout/card_ternak.xml" value="0.35520833333333335" />
+        <entry key="app/src/main/res/layout/custom_alert_dialog.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/delete_dialog.xml" value="0.67" />
         <entry key="app/src/main/res/layout/fragment_change_name_dialog.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_change_name_dialog_list_dialog.xml" value="0.29243266353142366" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/fragment_delete_all_dialog_list_dialog.xml" value="0.328125" />
         <entry key="app/src/main/res/layout/fragment_display_dialog.xml" value="0.6339285714285714" />
         <entry key="app/src/main/res/layout/fragment_display_dialog_list_dialog.xml" value="0.29243266353142366" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.5" />
@@ -144,7 +150,7 @@
         <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.75" />
         <entry key="app/src/main/res/layout/fragment_sort_dialog.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_splash_screen.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/fragment_task.xml" value="0.5849639546858908" />
+        <entry key="app/src/main/res/layout/fragment_task.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_update_dialog.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_update_dialog_list_dialog.xml" value="0.33" />
         <entry key="app/src/main/res/layout/settings_activity.xml" value="0.29243266353142366" />

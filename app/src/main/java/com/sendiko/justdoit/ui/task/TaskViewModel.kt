@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.sendiko.justdoit.repository.TaskRepository
 import com.sendiko.justdoit.repository.database.TaskDatabase
 import com.sendiko.justdoit.repository.model.Task
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -22,16 +23,12 @@ class TaskViewModel(application: Application) : AndroidViewModel(application) {
     val checkIfEmpty : LiveData<Int> = repo.checkIfEmpty
     val alsoCheckIfEmpty : LiveData<Int> = repo.alsoCheckIfEmpty
 
-    fun insertTask(task: Task) = viewModelScope.launch(Dispatchers.IO){
-        repo.insertTask(task)
-    }
+    fun insertTask(task: Task) = viewModelScope.launch(Dispatchers.IO) { repo.insertTask(task) }
 
-    fun updateTask(task: Task) = viewModelScope.launch(Dispatchers.IO){
-        repo.updateTask(task)
-    }
+    fun updateTask(task: Task) = viewModelScope.launch(Dispatchers.IO) { repo.updateTask(task) }
 
-    fun deleteTask(task: Task) = viewModelScope.launch(Dispatchers.IO){
-        repo.deleteTask(task)
-    }
+    fun deleteTask(task: Task) = viewModelScope.launch(Dispatchers.IO) { repo.deleteTask(task) }
+
+    fun deleteAllTask() = CoroutineScope(Dispatchers.IO).launch { repo.deleteAllTask() }
 
 }
