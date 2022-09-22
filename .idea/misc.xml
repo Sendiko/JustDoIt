@@ -134,6 +134,7 @@
         <entry key="app/src/main/res/layout/fragment_change_name_dialog.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_change_name_dialog_list_dialog.xml" value="0.29243266353142366" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/fragment_delete_all.xml" value="0.328125" />
         <entry key="app/src/main/res/layout/fragment_delete_all_dialog_list_dialog.xml" value="0.328125" />
         <entry key="app/src/main/res/layout/fragment_display_dialog.xml" value="0.6339285714285714" />
         <entry key="app/src/main/res/layout/fragment_display_dialog_list_dialog.xml" value="0.29243266353142366" />
@@ -148,6 +149,7 @@
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.3582427536231884" />
         <entry key="app/src/main/res/layout/fragment_register.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.75" />
+        <entry key="app/src/main/res/layout/fragment_show_task.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_sort_dialog.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_splash_screen.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_task.xml" value="0.33" />

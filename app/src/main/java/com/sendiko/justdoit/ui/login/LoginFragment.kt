@@ -98,7 +98,6 @@ class LoginFragment : Fragment() {
    private fun postLogin(u : String){
       authViewModel.saveUsername(u)
       authViewModel.setLoginState(true)
-      sharedViewModel.saveUsername(u)
       startActivity(Intent(requireActivity(), MainActivity::class.java))
    }
 
