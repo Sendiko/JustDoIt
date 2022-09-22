@@ -67,4 +67,5 @@
     <string name="filter_can_do_it_anytime">Filter : Kapan aja bisa</string>
     <string name="delete_all_tasks">Ingin hapus semua tugas?</string>
     <string name="delete_all">Hapus semua</string>
+    <string name="your_task">Tugas anda</string>
 </resources>

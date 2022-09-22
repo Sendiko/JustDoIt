@@ -121,6 +121,7 @@
         <entry key="app/src/main/res/layout-night/fragment_language_dialog.xml" value="0.5" />
         <entry key="app/src/main/res/layout-night/fragment_login.xml" value="0.32708333333333334" />
         <entry key="app/src/main/res/layout-night/fragment_settings.xml" value="0.29157759726378796" />
+        <entry key="app/src/main/res/layout-night/fragment_show_task.xml" value="0.32708333333333334" />
         <entry key="app/src/main/res/layout-night/fragment_sort_dialog.xml" value="0.75" />
         <entry key="app/src/main/res/layout-night/fragment_task.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_first.xml" value="0.2941427960666952" />

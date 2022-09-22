@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".ui.task.showtask.ShowTaskFragment"
+    android:background="@drawable/bottom_sheet_background"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/drag_indicator"
+        android:layout_width="96dp"
+        android:layout_height="4dp"
+        android:layout_marginTop="8dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/drag_indicator" />
+
+    <TextView
+        android:id="@+id/header_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/nunito_bold"
+        android:text="@string/your_task"
+        android:textColor="@color/white"
+        android:textSize="24sp"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/label_task"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:fontFamily="@font/nunito_bold"
+                android:text="@string/task"
+                android:textColor="@color/white"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/task_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:background="@drawable/box_background"
+                android:fontFamily="@font/nunito_semibold"
+                android:padding="16dp"
+                android:text="TextView"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/label_subject"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:fontFamily="@font/nunito_bold"
+                android:text="@string/subject"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/task_subject"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:background="@drawable/box_background"
+                android:fontFamily="@font/nunito_semibold"
+                android:padding="16dp"
+                android:text="TextView"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/label_priority"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/nunito_bold"
+                android:text="@string/priority"
+                android:textColor="@color/white"
+                android:textSize="18sp"/>
+
+            <HorizontalScrollView
+                android:id="@+id/horizontalScrollView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="32dp"
+                android:scrollbars="none">
+
+                <RadioGroup
+                    android:id="@+id/radio_categories"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/button_important"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="4dp"
+                        android:background="@drawable/pill_important"
+                        android:button="@android:color/transparent"
+                        android:fontFamily="@font/nunito_bold"
+                        android:padding="16dp"
+                        android:text="@string/had_to_do_it_now"
+                        android:textAlignment="center"
+                        android:textColor="@drawable/text_important" />
+
+                    <RadioButton
+                        android:id="@+id/button_medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="4dp"
+                        android:background="@drawable/pill_needtobedone"
+                        android:button="@android:color/transparent"
+                        android:fontFamily="@font/nunito_bold"
+                        android:padding="16dp"
+                        android:text="@string/need_to_be_done"
+                        android:textAlignment="center"
+                        android:textColor="@drawable/text_needtobedone" />
+
+                    <RadioButton
+                        android:id="@+id/button_less"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/pill_candoitanytime"
+                        android:button="@android:color/transparent"
+                        android:fontFamily="@font/nunito_bold"
+                        android:padding="16dp"
+                        android:text="@string/can_do_it_anytime"
+                        android:textAlignment="center"
+                        android:textColor="@drawable/text_candoitanytime" />
+
+                </RadioGroup>
+            </HorizontalScrollView>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
