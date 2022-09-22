@@ -22,11 +22,6 @@ class ChangeNameDialogFragment : BottomSheetDialogFragment() {
 
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        // TODO: CODE HERE
-    }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
