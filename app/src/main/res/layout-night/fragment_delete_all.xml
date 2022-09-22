@@ -49,6 +49,7 @@
         android:text="@string/cancel"
         android:textColor="@color/indigo_dye"
         android:backgroundTint="@color/white"
+        android:fontFamily="@font/nunito_semibold"
         app:layout_constraintEnd_toStartOf="@+id/textView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/header_title" />
@@ -63,6 +64,7 @@
         android:layout_marginBottom="16dp"
         android:backgroundTint="@android:color/holo_red_light"
         android:text="@string/delete_all"
+        android:fontFamily="@font/nunito_semibold"
         app:icon="@drawable/ic_trash_icon"
         app:iconGravity="end"
         app:layout_constraintBottom_toBottomOf="parent"

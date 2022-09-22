@@ -84,7 +84,6 @@ class SettingsFragment : Fragment() {
       binding.frameLogout.setOnClickListener {
          authViewModel.setLoginState(false)
          authViewModel.clearUser()
-         sharedViewModel.removeUsername()
          startActivity(Intent(requireActivity(), FirstActivity::class.java))
       }
 

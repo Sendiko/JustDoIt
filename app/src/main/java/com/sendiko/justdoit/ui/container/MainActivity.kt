@@ -118,15 +118,9 @@ class MainActivity : AppCompatActivity() {
 
       settingsViewModel.getSortListKey().observe(this){ sortKey ->
          when(sortKey){
-            Constant.mImportant -> {
-               view.findViewById<RadioButton>(R.id.button_important).isChecked = true
-            }
-            Constant.mNeedToBeDone -> {
-               view.findViewById<RadioButton>(R.id.button_medium).isChecked = true
-            }
-            Constant.mCanDoItAnytime -> {
-               view.findViewById<RadioButton>(R.id.button_less).isChecked = true
-            }
+            Constant.mImportant -> view.findViewById<RadioButton>(R.id.button_important).isChecked = true
+            Constant.mNeedToBeDone -> view.findViewById<RadioButton>(R.id.button_medium).isChecked = true
+            Constant.mCanDoItAnytime -> view.findViewById<RadioButton>(R.id.button_less).isChecked = true
          }
       }
 

@@ -16,7 +16,6 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelLazy
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -151,6 +150,31 @@ class HomeFragment : Fragment() {
       }
    }
 
+
+
+   private fun showTaskDialog(tasks: Task){
+      val showTaskDialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)
+      val view = layoutInflater.inflate(R.layout.fragment_show_task, null)
+
+      showTaskDialog.apply {
+         setContentView(view)
+         show()
+      }
+
+      val textTask = view.findViewById<TextView>(R.id.task_title)
+      val textSubject = view.findViewById<TextView>(R.id.task_subject)
+
+      textTask.text = tasks.task
+      textSubject.text = tasks.subject
+
+      when(tasks.priority){
+         Constant.mImportant -> view.findViewById<RadioButton>(R.id.button_important).isChecked = true
+         Constant.mNeedToBeDone -> view.findViewById<RadioButton>(R.id.button_medium).isChecked = true
+         Constant.mCanDoItAnytime -> view.findViewById<RadioButton>(R.id.button_less).isChecked = true
+      }
+
+   }
+
    @SuppressLint("SetTextI18n")
    private fun showUpdateSheet(tasks: Task, title : String, button : String){
       val inputSheet = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)
@@ -202,6 +226,10 @@ class HomeFragment : Fragment() {
    private fun setupRecyclerView(taskList : List<Task>){
       val rv = binding.rvTask
       val rvAdapter = TaskAdapter(arrayListOf(), requireContext(), object : OnItemClickListener {
+         override fun onShowTaskListener(task: Task) {
+            showTaskDialog(task)
+         }
+
          override fun onCheckListener(task: Task) {
             Handler(Looper.myLooper()!!).postDelayed({
                taskViewModel.updateTask(Task(task.id, task.task, task.subject, task.priority, Constant.mTrue))

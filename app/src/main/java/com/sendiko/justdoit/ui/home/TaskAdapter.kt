@@ -38,6 +38,10 @@ class TaskAdapter(
       }
 
       holder.binding.cardTask.setOnClickListener {
+         onClick.onShowTaskListener(currentItem)
+      }
+
+      holder.binding.update.setOnClickListener {
          onClick.onUpdateClickListener(currentItem)
       }
 
@@ -61,6 +65,7 @@ class TaskAdapter(
    }
 
    interface OnItemClickListener {
+      fun onShowTaskListener(task: Task)
       fun onCheckListener(task: Task)
       fun onUpdateClickListener(task: Task)
    }
