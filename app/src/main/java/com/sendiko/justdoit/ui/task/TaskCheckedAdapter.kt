@@ -1,4 +1,4 @@
-package com.sendiko.justdoit.ui.dashboard
+package com.sendiko.justdoit.ui.task
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -24,7 +24,7 @@ class TaskCheckedAdapter(
    class Task2ViewHolder(var binding : CardItemTaskCheckedBinding) : RecyclerView.ViewHolder(binding.root)
 
    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Task2ViewHolder {
-      val binding = CardItemTaskCheckedBinding.inflate(LayoutInflater.from(parent.context))
+      val binding = CardItemTaskCheckedBinding.inflate(LayoutInflater.from(parent.context), parent, false)
       return Task2ViewHolder(binding)
    }
 

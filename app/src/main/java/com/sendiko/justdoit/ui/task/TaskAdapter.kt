@@ -1,4 +1,4 @@
-package com.sendiko.justdoit.ui.home
+package com.sendiko.justdoit.ui.task
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -22,7 +22,7 @@ class TaskAdapter(
    class TaskViewHolder(var binding: CardItemTaskBinding) : RecyclerView.ViewHolder(binding.root)
 
    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
-      val binding = CardItemTaskBinding.inflate(LayoutInflater.from(parent.context))
+      val binding = CardItemTaskBinding.inflate(LayoutInflater.from(parent.context), parent, false)
       return TaskViewHolder(binding)
    }
 

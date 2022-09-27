@@ -27,6 +27,7 @@ import com.sendiko.justdoit.repository.preferences.SettingsPreference
 import com.sendiko.justdoit.ui.container.SettingActivity
 import com.sendiko.justdoit.ui.container.dataStore1
 import com.sendiko.justdoit.ui.settings.SettingsViewModel
+import com.sendiko.justdoit.ui.task.TaskCheckedAdapter
 import com.sendiko.justdoit.ui.task.TaskViewModel
 import java.util.*
 
