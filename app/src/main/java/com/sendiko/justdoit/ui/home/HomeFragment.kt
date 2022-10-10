@@ -34,8 +34,8 @@ import com.sendiko.justdoit.repository.preferences.SettingsPreference
 import com.sendiko.justdoit.ui.container.SettingActivity
 import com.sendiko.justdoit.ui.container.dataStore
 import com.sendiko.justdoit.ui.container.dataStore1
-import com.sendiko.justdoit.ui.home.TaskAdapter.OnItemClickListener
 import com.sendiko.justdoit.ui.settings.SettingsViewModel
+import com.sendiko.justdoit.ui.task.TaskAdapter
 import com.sendiko.justdoit.ui.task.TaskViewModel
 import java.util.*
 
@@ -225,7 +225,7 @@ class HomeFragment : Fragment() {
 
    private fun setupRecyclerView(taskList : List<Task>){
       val rv = binding.rvTask
-      val rvAdapter = TaskAdapter(arrayListOf(), requireContext(), object : OnItemClickListener {
+      val rvAdapter = TaskAdapter(arrayListOf(), requireContext(), object : TaskAdapter.OnItemClickListener {
          override fun onShowTaskListener(task: Task) {
             showTaskDialog(task)
          }

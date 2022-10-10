@@ -12,6 +12,7 @@ import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.sendiko.justdoit.R
 import com.sendiko.justdoit.databinding.FragmentLoginBinding
@@ -69,6 +70,10 @@ class LoginFragment : Fragment() {
          setAppLocale(requireContext(), it)
       }
 
+      binding.textToRegister.setOnClickListener {
+         findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
+      }
+
       binding.buttonLogin.setOnClickListener {
          val u = binding.inputUsername.text.toString()
          val p = binding.inputUsername.text.toString()
@@ -83,10 +88,12 @@ class LoginFragment : Fragment() {
       val fadeIn = AnimationUtils.loadAnimation(context, R.anim.fade_in)
       binding.layoutUsername.startAnimation(fadeIn)
       binding.layoutToolbar.startAnimation(fadeIn)
+      binding.layoutPassword.startAnimation(fadeIn)
       binding.buttonLogin.startAnimation(fadeIn)
       Handler(Looper.getMainLooper()).postDelayed({
          binding.layoutUsername.visibility = View.VISIBLE
          binding.layoutToolbar.visibility = View.VISIBLE
+         binding.layoutPassword.visibility = View.VISIBLE
          binding.buttonLogin.visibility = View.VISIBLE
       }, 2000)
    }
