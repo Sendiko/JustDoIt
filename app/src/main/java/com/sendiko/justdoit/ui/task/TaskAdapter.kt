@@ -1,4 +1,4 @@
-package com.sendiko.justdoit.ui.home
+package com.sendiko.justdoit.ui.task
 
 import android.annotation.SuppressLint
 import android.content.Context

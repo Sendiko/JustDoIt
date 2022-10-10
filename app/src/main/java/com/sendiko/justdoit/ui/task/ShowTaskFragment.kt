@@ -1,4 +1,4 @@
-package com.sendiko.justdoit.ui.task.showtask
+package com.sendiko.justdoit.ui.task
 
 import android.os.Bundle
 import android.view.LayoutInflater
