@@ -12,6 +12,19 @@ class AuthPreferences private constructor(private val dataStore: DataStore<Prefe
 
    private val loginKey = booleanPreferencesKey("login")
    private val usernameKey = stringPreferencesKey("username")
+   private val tokenKey = stringPreferencesKey("token")
+
+   fun getToken() : Flow<String> {
+      return dataStore.data.map { preferences ->
+         preferences[tokenKey] ?:""
+      }
+   }
+
+   suspend fun saveToken(token : String){
+      dataStore.edit { preferences ->
+         preferences[tokenKey] = token
+      }
+   }
 
    suspend fun clearUsername(){
       dataStore.edit { key ->
