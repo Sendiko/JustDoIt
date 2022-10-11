@@ -41,8 +41,8 @@ class SettingsFragment : Fragment() {
    private val sharedViewModel : SharedViewModel by activityViewModels()
 
    private val pref by lazy{
-      val context = requireNotNull(this.context)
-      AuthPreferences.getInstance(context.dataStore3)
+      AuthPreferences
+         .getInstance(requireNotNull(this.context).dataStore3)
    }
 
    private val authViewModel : AuthViewModel by lazy {
@@ -50,7 +50,8 @@ class SettingsFragment : Fragment() {
    }
 
    private val settingsPref by lazy {
-      SettingsPreference.getInstance(requireNotNull(this.context).dataStore1)
+      SettingsPreference
+         .getInstance(requireNotNull(this.context).dataStore1)
    }
 
    private val settingsViewModel : SettingsViewModel by lazy {
@@ -66,8 +67,14 @@ class SettingsFragment : Fragment() {
       return binding.root
    }
 
-   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-      super.onViewCreated(view, savedInstanceState)
+   override fun onViewCreated(
+      view: View,
+      savedInstanceState: Bundle?
+   ) {
+      super.onViewCreated(
+         view,
+         savedInstanceState
+      )
 
       settingsViewModel.getLanguage().observe(viewLifecycleOwner){
          setAppLocale(requireContext(), it)
@@ -107,8 +114,15 @@ class SettingsFragment : Fragment() {
    }
 
    private fun showLanguageDialog(){
-      val languageDialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)
-      val view = layoutInflater.inflate(R.layout.fragment_language_dialog, null)
+      val languageDialog = BottomSheetDialog(
+         requireContext(),
+         R.style.BottomSheetDialogTheme
+      )
+      val view = layoutInflater
+         .inflate(
+            R.layout.fragment_language_dialog,
+            null
+         )
       languageDialog.setContentView(view)
       languageDialog.show()
 
@@ -120,7 +134,11 @@ class SettingsFragment : Fragment() {
             R.id.language_indonesian -> settingsViewModel.setLanguage("id")
          }
          languageDialog.dismiss()
-         startActivity(Intent(requireActivity(), FirstActivity::class.java))
+         startActivity(
+            Intent(
+               requireActivity(),
+               FirstActivity::class.java)
+         )
          requireActivity().overridePendingTransition(R.anim.activity_fade_out, R.anim.activity_fade_in)
       }
 
@@ -134,8 +152,15 @@ class SettingsFragment : Fragment() {
    }
 
    private fun showDisplayDialog(){
-      val displayDialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)
-      val view = layoutInflater.inflate(R.layout.fragment_display_dialog, null)
+      val displayDialog = BottomSheetDialog(
+         requireContext(),
+         R.style.BottomSheetDialogTheme
+      )
+      val view = layoutInflater
+         .inflate(
+            R.layout.fragment_display_dialog,
+            null
+         )
       displayDialog.setContentView(view)
       displayDialog.show()
 
@@ -169,8 +194,15 @@ class SettingsFragment : Fragment() {
    }
 
    private fun showChangeNameDialog(){
-      val changeNameDialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)
-      val view = layoutInflater.inflate(R.layout.fragment_change_name_dialog, null)
+      val changeNameDialog = BottomSheetDialog(
+         requireContext(),
+         R.style.BottomSheetDialogTheme
+      )
+      val view = layoutInflater
+         .inflate(
+            R.layout.fragment_change_name_dialog,
+            null
+         )
       changeNameDialog.setContentView(view)
       changeNameDialog.show()
 
@@ -197,7 +229,10 @@ class SettingsFragment : Fragment() {
 
    }
 
-   private fun setAppLocale(context: Context, language: String) {
+   private fun setAppLocale(
+      context: Context,
+      language: String
+   ) {
       val locale = Locale(language)
       Locale.setDefault(locale)
       val config = context.resources.configuration

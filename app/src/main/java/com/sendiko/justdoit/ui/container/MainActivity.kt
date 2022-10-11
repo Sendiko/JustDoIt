@@ -125,7 +125,7 @@ class MainActivity : AppCompatActivity() {
       }
 
       clearFilter.setOnClickListener {
-         settingsViewModel.setSortListKey("none")
+         settingsViewModel.setSortListKey(Constant.mNone)
          Toast.makeText(this, "Filter cleared", Toast.LENGTH_SHORT).show()
          sortListDialog.dismiss()
       }

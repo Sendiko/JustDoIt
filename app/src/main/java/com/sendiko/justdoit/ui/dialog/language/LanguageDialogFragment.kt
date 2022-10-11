@@ -15,16 +15,22 @@ class LanguageDialogFragment : BottomSheetDialogFragment() {
     private val binding get() = _binding!!
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentLanguageDialogBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        binding.languagesCheckbox.setOnCheckedChangeListener { radioGroup, i ->
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?
+    ) {
+        super.onViewCreated(
+            view, savedInstanceState
+        )
+        binding.languagesCheckbox.setOnCheckedChangeListener { _, i ->
             when(i){
                 R.id.language_english -> Toast.makeText(context, "English", Toast.LENGTH_SHORT)
                     .show()

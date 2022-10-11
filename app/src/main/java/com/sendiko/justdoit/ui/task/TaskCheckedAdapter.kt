@@ -23,12 +23,18 @@ class TaskCheckedAdapter(
 
    class Task2ViewHolder(var binding : CardItemTaskCheckedBinding) : RecyclerView.ViewHolder(binding.root)
 
-   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Task2ViewHolder {
+   override fun onCreateViewHolder(
+      parent: ViewGroup,
+      viewType: Int
+   ): Task2ViewHolder {
       val binding = CardItemTaskCheckedBinding.inflate(LayoutInflater.from(parent.context))
       return Task2ViewHolder(binding)
    }
 
-   override fun onBindViewHolder(holder: Task2ViewHolder, position: Int) {
+   override fun onBindViewHolder(
+      holder: Task2ViewHolder,
+      position: Int
+   ) {
       val currentItem = task[position]
       holder.binding.task.text = currentItem.task
       holder.binding.subjectTask.text = currentItem.subject

@@ -34,7 +34,8 @@ class LoginFragment : Fragment() {
    private val sharedViewModel : SharedViewModel by activityViewModels()
 
    private val pref by lazy {
-      AuthPreferences.getInstance(requireNotNull(this.context).dataStore1)
+      AuthPreferences
+         .getInstance(requireNotNull(this.context).dataStore1)
    }
 
    private val authViewModel : AuthViewModel by lazy {
@@ -42,7 +43,8 @@ class LoginFragment : Fragment() {
    }
 
    private val settingsPref by lazy {
-      SettingsPreference.getInstance(requireNotNull(this.context).dataStore1)
+      SettingsPreference
+         .getInstance(requireNotNull(this.context).dataStore1)
    }
 
    private val settingsViewModel : SettingsViewModel by lazy {
@@ -52,7 +54,8 @@ class LoginFragment : Fragment() {
    }
 
    override fun onCreateView(
-      inflater: LayoutInflater, container: ViewGroup?,
+      inflater: LayoutInflater,
+      container: ViewGroup?,
       savedInstanceState: Bundle?
    ): View {
       _binding = FragmentLoginBinding.inflate(layoutInflater)
@@ -60,14 +63,27 @@ class LoginFragment : Fragment() {
       return binding.root
    }
 
-   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-      super.onViewCreated(view, savedInstanceState)
+   override fun onViewCreated(
+      view: View,
+      savedInstanceState: Bundle?
+   ) {
+      super.onViewCreated(
+         view,
+         savedInstanceState
+      )
 
-      val fadeIn = AnimationUtils.loadAnimation(context, R.anim.fade_in)
+      val fadeIn = AnimationUtils
+         .loadAnimation(
+            context,
+            R.anim.fade_in
+      )
       binding.root.startAnimation(fadeIn)
 
       settingsViewModel.getLanguage().observe(viewLifecycleOwner){
-         setAppLocale(requireContext(), it)
+         setAppLocale(
+            requireContext(),
+            it
+         )
       }
 
       binding.textToRegister.setOnClickListener {
@@ -77,15 +93,20 @@ class LoginFragment : Fragment() {
       binding.buttonLogin.setOnClickListener {
          val u = binding.inputUsername.text.toString()
          val p = binding.inputUsername.text.toString()
-         when{
-            validation(u, p) -> postLogin(u)
+         when(validation(u, p)){
+            true -> postLogin(u)
+            else -> null
          }
       }
 
    }
 
    private fun toThisFragment(){
-      val fadeIn = AnimationUtils.loadAnimation(context, R.anim.fade_in)
+      val fadeIn = AnimationUtils
+         .loadAnimation(
+            context,
+            R.anim.fade_in
+         )
       binding.layoutUsername.startAnimation(fadeIn)
       binding.layoutToolbar.startAnimation(fadeIn)
       binding.layoutPassword.startAnimation(fadeIn)
@@ -105,10 +126,18 @@ class LoginFragment : Fragment() {
    private fun postLogin(u : String){
       authViewModel.saveUsername(u)
       authViewModel.setLoginState(true)
-      startActivity(Intent(requireActivity(), MainActivity::class.java))
+      startActivity(
+         Intent(
+            requireActivity(),
+            MainActivity::class.java
+         )
+      )
    }
 
-   private fun validation(username : String, password : String): Boolean {
+   private fun validation(
+      username : String,
+      password : String
+   ): Boolean {
       var valid = true
       when {
          username.isNotBlank() && password.isNotBlank() -> {
@@ -123,7 +152,10 @@ class LoginFragment : Fragment() {
       return valid
    }
 
-   private fun setAppLocale(context: Context, language: String) {
+   private fun setAppLocale(
+      context: Context,
+      language: String
+   ) {
       val locale = Locale(language)
       Locale.setDefault(locale)
       val config = context.resources.configuration

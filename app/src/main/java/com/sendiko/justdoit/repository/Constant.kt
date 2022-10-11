@@ -7,6 +7,9 @@ class Constant {
         const val mImportant = "high"
         const val mNeedToBeDone = "medium"
         const val mCanDoItAnytime = "low"
+        const val mNone = "none"
         const val category = "category"
+        const val dbName = "task_database"
+        const val unknownModelClass = "Unknown model class : "
     }
 }

@@ -36,8 +36,8 @@ class SplashScreenFragment : Fragment() {
    val sharedViewModel : SharedViewModel by activityViewModels()
 
    private val pref by lazy{
-      val context = requireNotNull(this.context)
-      AuthPreferences.getInstance(context.dataStore1)
+      AuthPreferences
+         .getInstance(requireNotNull(this.context).dataStore1)
    }
 
    private val authViewModel : AuthViewModel by lazy {
@@ -45,7 +45,8 @@ class SplashScreenFragment : Fragment() {
    }
 
    private val settingsPref by lazy {
-      SettingsPreference.getInstance(requireNotNull(this.context).dataStore1)
+      SettingsPreference
+         .getInstance(requireNotNull(this.context).dataStore1)
    }
 
    private val settingsViewModel : SettingsViewModel by lazy {
@@ -55,18 +56,31 @@ class SplashScreenFragment : Fragment() {
    }
 
    override fun onCreateView(
-      inflater: LayoutInflater, container: ViewGroup?,
+      inflater: LayoutInflater,
+      container: ViewGroup?,
       savedInstanceState: Bundle?
    ): View {
       _binding = FragmentSplashScreenBinding.inflate(layoutInflater)
-
       return binding.root
    }
 
-   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-      super.onViewCreated(view, savedInstanceState)
-      val zoomOut = AnimationUtils.loadAnimation(context, R.anim.zoom_out)
-      val zoomIn = AnimationUtils.loadAnimation(context, R.anim.zoom_in)
+   override fun onViewCreated(
+      view: View,
+      savedInstanceState: Bundle?
+   ) {
+      super.onViewCreated(
+         view, savedInstanceState
+      )
+      val zoomOut = AnimationUtils
+         .loadAnimation(
+            context,
+            R.anim.zoom_out
+         )
+      val zoomIn = AnimationUtils
+         .loadAnimation(
+            context,
+            R.anim.zoom_in
+         )
       binding.appName.startAnimation(zoomOut)
       binding.appLogo.startAnimation(zoomOut)
 
@@ -96,7 +110,10 @@ class SplashScreenFragment : Fragment() {
 
    }
 
-   private fun setAppLocale(context: Context, language: String) {
+   private fun setAppLocale(
+      context: Context,
+      language: String
+   ) {
       val locale = Locale(language)
       Locale.setDefault(locale)
       val config = context.resources.configuration

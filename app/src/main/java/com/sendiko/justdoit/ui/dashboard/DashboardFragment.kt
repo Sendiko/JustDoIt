@@ -38,18 +38,19 @@ class DashboardFragment : Fragment() {
    private val binding get() = _binding!!
 
    private val taskViewModel : TaskViewModel by lazy {
-      val activity = requireNotNull(this.activity)
-      getViewModel(activity)
+      getViewModel(requireNotNull(this.activity))
    }
 
    private fun getViewModel(activity: FragmentActivity) : TaskViewModel {
-      val factory = ViewModelFactory.getInstance(activity.application)
-      return ViewModelProvider(this, factory)[TaskViewModel::class.java]
+      return ViewModelProvider(
+         this, ViewModelFactory
+            .getInstance(activity.application)
+      )[TaskViewModel::class.java]
    }
 
    private val pref by lazy{
-      val context = requireNotNull(this.context)
-      AuthPreferences.getInstance(context.dataStore1)
+      AuthPreferences
+         .getInstance(requireNotNull(this.context).dataStore1)
    }
 
    private val authViewModel : AuthViewModel by lazy {
@@ -77,8 +78,14 @@ class DashboardFragment : Fragment() {
    }
 
    @SuppressLint("SetTextI18n")
-   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-      super.onViewCreated(view, savedInstanceState)
+   override fun onViewCreated(
+      view: View,
+      savedInstanceState: Bundle?
+   ) {
+      super.onViewCreated(
+         view,
+         savedInstanceState
+      )
 
       settingsViewModel.getDarkTheme().observe(viewLifecycleOwner){
          when(it){
@@ -133,26 +140,39 @@ class DashboardFragment : Fragment() {
    private fun setupRecyclerView(taskList : List<Task>){
       val rv = binding.rvTaskChecked
       rv.layoutManager = LinearLayoutManager(context)
-      val rvAdapter = TaskCheckedAdapter(arrayListOf(), requireContext(), object : TaskCheckedAdapter.OnItemClickListener{
-         override fun onUncheckListener(task: Task) {
-            Handler(Looper.myLooper()!!).postDelayed({
-               taskViewModel.updateTask(Task(task.id, task.task, task.subject, task.priority, Constant.mFalse))
-            }, 200)
-            Toast.makeText(context, "${task.task} is unchecked", Toast.LENGTH_SHORT).show()
-         }
+      val rvAdapter = TaskCheckedAdapter(
+         arrayListOf(),
+         requireContext(),
+         object : TaskCheckedAdapter.OnItemClickListener{
+            override fun onUncheckListener(task: Task) {
+               Handler(Looper.myLooper()!!).postDelayed({
+                  taskViewModel.updateTask(
+                     Task(
+                        task.id, task.task, task.subject, task.priority, Constant.mFalse
+                     )
+                  )
+               }, 200)
+               Toast.makeText(context, "${task.task} is unchecked", Toast.LENGTH_SHORT)
+                  .show()
+            }
 
-         override fun onDeleteListener(task: Task) {
-            taskViewModel.deleteTask(task)
-            Toast.makeText(context, "${task.task} is deleted", Toast.LENGTH_SHORT).show()
-         }
+            override fun onDeleteListener(task: Task) {
+               taskViewModel.deleteTask(task)
+               Toast.makeText(context, "${task.task} is deleted", Toast.LENGTH_SHORT)
+                  .show()
+            }
 
-      })
+         }
+      )
       rv.adapter = rvAdapter
       rvAdapter.updateList(taskList)
       rv.setHasFixedSize(true)
    }
 
-   private fun setAppLocale(context: Context, language: String) {
+   private fun setAppLocale(
+      context: Context,
+      language: String
+   ) {
       val locale = Locale(language)
       Locale.setDefault(locale)
       val config = context.resources.configuration

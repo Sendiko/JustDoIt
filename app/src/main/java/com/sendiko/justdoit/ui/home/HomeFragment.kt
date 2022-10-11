@@ -52,11 +52,15 @@ class HomeFragment : Fragment() {
    }
 
    private fun getViewModel(activity: FragmentActivity) : TaskViewModel {
-      return ViewModelProvider(this, ViewModelFactory.getInstance(activity.application))[TaskViewModel::class.java]
+      return ViewModelProvider(
+         this, ViewModelFactory
+            .getInstance(activity.application)
+      )[TaskViewModel::class.java]
    }
 
    private val pref by lazy{
-      AuthPreferences.getInstance(requireNotNull(this.context).dataStore)
+      AuthPreferences
+         .getInstance(requireNotNull(this.context).dataStore)
    }
 
    private val authViewModel : AuthViewModel by lazy {
@@ -64,7 +68,8 @@ class HomeFragment : Fragment() {
    }
 
    private val settingsPref by lazy {
-      SettingsPreference.getInstance(requireNotNull(this.context).dataStore1)
+      SettingsPreference
+         .getInstance(requireNotNull(this.context).dataStore1)
    }
 
    private val settingsViewModel : SettingsViewModel by lazy {
@@ -83,17 +88,19 @@ class HomeFragment : Fragment() {
    }
 
    @SuppressLint("SetTextI18n")
-   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-      super.onViewCreated(view, savedInstanceState)
+   override fun onViewCreated(
+      view: View,
+      savedInstanceState: Bundle?
+   ) {
+      super.onViewCreated(
+         view,
+         savedInstanceState
+      )
 
       settingsViewModel.getDarkTheme().observe(viewLifecycleOwner){
          when(it){
-            true -> {
-               AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            }
-            false -> {
-               AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            }
+            true -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            false -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
          }
       }
 
@@ -123,7 +130,10 @@ class HomeFragment : Fragment() {
       }
 
       binding.buttonSettings.setOnClickListener {
-         startActivity(Intent(requireActivity(), SettingActivity::class.java))
+         startActivity(Intent(
+            requireActivity(),
+            SettingActivity::class.java
+         ))
       }
 
       binding.swipeRefresh.setOnRefreshListener {
@@ -153,8 +163,15 @@ class HomeFragment : Fragment() {
 
 
    private fun showTaskDialog(tasks: Task){
-      val showTaskDialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)
-      val view = layoutInflater.inflate(R.layout.fragment_show_task, null)
+      val showTaskDialog = BottomSheetDialog(
+         requireContext(),
+         R.style.BottomSheetDialogTheme
+      )
+      val view = layoutInflater
+         .inflate(
+            R.layout.fragment_show_task,
+            null
+         )
 
       showTaskDialog.apply {
          setContentView(view)
@@ -176,9 +193,20 @@ class HomeFragment : Fragment() {
    }
 
    @SuppressLint("SetTextI18n")
-   private fun showUpdateSheet(tasks: Task, title : String, button : String){
-      val inputSheet = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)
-      val view = layoutInflater.inflate(R.layout.fragment_task, null)
+   private fun showUpdateSheet(
+      tasks: Task,
+      title : String,
+      button : String
+   ){
+      val inputSheet = BottomSheetDialog(
+         requireContext(),
+         R.style.BottomSheetDialogTheme
+      )
+      val view = layoutInflater
+         .inflate(
+            R.layout.fragment_task,
+            null
+         )
       inputSheet.setContentView(view)
       inputSheet.show()
 
@@ -225,23 +253,36 @@ class HomeFragment : Fragment() {
 
    private fun setupRecyclerView(taskList : List<Task>){
       val rv = binding.rvTask
-      val rvAdapter = TaskAdapter(arrayListOf(), requireContext(), object : TaskAdapter.OnItemClickListener {
-         override fun onShowTaskListener(task: Task) {
-            showTaskDialog(task)
-         }
+      val rvAdapter = TaskAdapter(
+         arrayListOf(),
+         requireContext(),
+         object : TaskAdapter.OnItemClickListener {
+            override fun onShowTaskListener(task: Task) {
+               showTaskDialog(task)
+            }
 
-         override fun onCheckListener(task: Task) {
-            Handler(Looper.myLooper()!!).postDelayed({
-               taskViewModel.updateTask(Task(task.id, task.task, task.subject, task.priority, Constant.mTrue))
-            }, 200)
-            Toast.makeText(context, "${task.task} is checked", Toast.LENGTH_SHORT).show()
-         }
+            override fun onCheckListener(task: Task) {
+               Handler(Looper.myLooper()!!).postDelayed({
+                  taskViewModel.updateTask(
+                     Task(
+                        task.id, task.task, task.subject, task.priority, Constant.mTrue
+                     )
+                  )
+               }, 200)
+               Toast.makeText(context, "${task.task} is checked", Toast.LENGTH_SHORT)
+                  .show()
+            }
 
-         override fun onUpdateClickListener(task: Task) {
-            showUpdateSheet(task, getString(R.string.update_title), getString(R.string.update_button))
-         }
+            override fun onUpdateClickListener(task: Task) {
+               showUpdateSheet(
+                  task,
+                  getString(R.string.update_title),
+                  getString(R.string.update_button)
+               )
+            }
 
-      })
+         }
+      )
       rvAdapter.updateList(taskList)
       rv.apply {
          adapter = rvAdapter
@@ -250,7 +291,10 @@ class HomeFragment : Fragment() {
       }
    }
 
-   private fun setAppLocale(context: Context, language: String) {
+   private fun setAppLocale(
+      context: Context,
+      language: String
+   ) {
       val locale = Locale(language)
       Locale.setDefault(locale)
       val config = context.resources.configuration

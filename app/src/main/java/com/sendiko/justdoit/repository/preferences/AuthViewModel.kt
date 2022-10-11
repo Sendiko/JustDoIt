@@ -1,7 +1,7 @@
 package com.sendiko.justdoit.repository.preferences
 
 import androidx.lifecycle.*
-import com.sendiko.justdoit.repository.model.StringConstants
+import com.sendiko.justdoit.repository.Constant
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -39,7 +39,7 @@ class AuthViewModelFactory(private val auth : AuthPreferences) : ViewModelProvid
    override fun <T : ViewModel> create(modelClass: Class<T>): T {
       when{
          modelClass.isAssignableFrom(AuthViewModel::class.java) -> return AuthViewModel(auth) as T
-         else -> throw IllegalArgumentException(StringConstants.unknownModelClass + modelClass.name)
+         else -> throw IllegalArgumentException(Constant.unknownModelClass + modelClass.name)
       }
    }
 }
