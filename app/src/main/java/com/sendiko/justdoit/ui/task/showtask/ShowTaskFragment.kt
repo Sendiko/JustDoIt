@@ -9,12 +9,12 @@ import com.sendiko.justdoit.databinding.FragmentShowTaskBinding
 
 class ShowTaskFragment : BottomSheetDialogFragment() {
 
-    private var _binding : FragmentShowTaskBinding?= null
+    private var _binding: FragmentShowTaskBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?,
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentShowTaskBinding.inflate(layoutInflater)
         return binding.root

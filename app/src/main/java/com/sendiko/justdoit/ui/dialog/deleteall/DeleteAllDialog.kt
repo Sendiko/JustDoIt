@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.sendiko.justdoit.databinding.FragmentDeleteAllBinding
+
 class DeleteAllDialog : BottomSheetDialogFragment() {
 
     private var _binding: FragmentDeleteAllBinding? = null
@@ -19,10 +20,6 @@ class DeleteAllDialog : BottomSheetDialogFragment() {
         _binding = FragmentDeleteAllBinding.inflate(inflater, container, false)
         return binding.root
 
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
     }
 
     override fun onDestroyView() {

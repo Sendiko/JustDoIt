@@ -25,10 +25,14 @@ class LanguageDialogFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.languagesCheckbox.setOnCheckedChangeListener { radioGroup, i ->
-            when(i){
+            when (i) {
                 R.id.language_english -> Toast.makeText(context, "English", Toast.LENGTH_SHORT)
                     .show()
-                R.id.language_indonesian -> Toast.makeText(context, "Indonesian", Toast.LENGTH_SHORT)
+                R.id.language_indonesian -> Toast.makeText(
+                    context,
+                    "Indonesian",
+                    Toast.LENGTH_SHORT
+                )
                     .show()
             }
         }
