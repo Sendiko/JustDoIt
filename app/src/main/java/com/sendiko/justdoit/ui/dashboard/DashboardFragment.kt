@@ -31,137 +31,150 @@ import com.sendiko.justdoit.ui.task.TaskViewModel
 import java.util.*
 
 private const val TAG = "DashboardFragment"
+
 class DashboardFragment : Fragment() {
 
-   private var _binding: FragmentDashboardBinding? = null
-   private val binding get() = _binding!!
+    private var _binding: FragmentDashboardBinding? = null
+    private val binding get() = _binding!!
 
-   private val taskViewModel : TaskViewModel by lazy {
-      val activity = requireNotNull(this.activity)
-      getViewModel(activity)
-   }
+    private val taskViewModel: TaskViewModel by lazy {
+        val activity = requireNotNull(this.activity)
+        getViewModel(activity)
+    }
 
-   private fun getViewModel(activity: FragmentActivity) : TaskViewModel {
-      val factory = ViewModelFactory.getInstance(activity.application)
-      return ViewModelProvider(this, factory)[TaskViewModel::class.java]
-   }
+    private fun getViewModel(activity: FragmentActivity): TaskViewModel {
+        val factory = ViewModelFactory.getInstance(activity.application)
+        return ViewModelProvider(this, factory)[TaskViewModel::class.java]
+    }
 
-   private val pref by lazy{
-      val context = requireNotNull(this.context)
-      AuthPreferences.getInstance(context.dataStore1)
-   }
+    private val pref by lazy {
+        val context = requireNotNull(this.context)
+        AuthPreferences.getInstance(context.dataStore1)
+    }
 
-   private val authViewModel : AuthViewModel by lazy {
-      ViewModelProvider(this, AuthViewModelFactory(pref))[AuthViewModel::class.java]
-   }
+    private val authViewModel: AuthViewModel by lazy {
+        ViewModelProvider(this, AuthViewModelFactory(pref))[AuthViewModel::class.java]
+    }
 
-   private val settingsPref by lazy {
-      SettingsPreference.getInstance(requireNotNull(this.context).dataStore1)
-   }
+    private val settingsPref by lazy {
+        SettingsPreference.getInstance(requireNotNull(this.context).dataStore1)
+    }
 
-   private val settingsViewModel : SettingsViewModel by lazy {
-      ViewModelProvider(this,
-         SettingsViewModel.SettingsViewModelFactory(settingsPref)
-      )[SettingsViewModel::class.java]
-   }
+    private val settingsViewModel: SettingsViewModel by lazy {
+        ViewModelProvider(
+            this,
+            SettingsViewModel.SettingsViewModelFactory(settingsPref)
+        )[SettingsViewModel::class.java]
+    }
 
-   override fun onCreateView(
-      inflater: LayoutInflater,
-      container: ViewGroup?,
-      savedInstanceState: Bundle?
-   ): View {
-      _binding = FragmentDashboardBinding.inflate(inflater, container, false)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentDashboardBinding.inflate(inflater, container, false)
 
-      return binding.root
-   }
+        return binding.root
+    }
 
-   @SuppressLint("SetTextI18n")
-   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-      super.onViewCreated(view, savedInstanceState)
+    @SuppressLint("SetTextI18n")
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-      settingsViewModel.getDarkTheme().observe(viewLifecycleOwner){
-         when(it){
-            true -> {
-               AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        settingsViewModel.getDarkTheme().observe(viewLifecycleOwner) {
+            when (it) {
+                true -> {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                }
+                false -> {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                }
             }
-            false -> {
-               AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
+
+        settingsViewModel.getLanguage().observe(viewLifecycleOwner) {
+            setAppLocale(requireContext(), it)
+        }
+
+        taskViewModel.allCheckTasks.observe(viewLifecycleOwner) {
+            setupRecyclerView(it)
+        }
+
+        authViewModel.getUser().observe(viewLifecycleOwner) {
+            binding.toolbar.title = getString(R.string.greeting3) + it + "!"
+        }
+
+        binding.swipeRefresh.setOnRefreshListener {
+            requireActivity().recreate()
+        }
+
+        binding.buttonSettings.setOnClickListener {
+            startActivity(Intent(requireActivity(), SettingActivity::class.java))
+        }
+
+        alsoCheckIfEmpty()
+
+    }
+
+    private fun alsoCheckIfEmpty() {
+        taskViewModel.alsoCheckIfEmpty.observe(viewLifecycleOwner) {
+            when (it) {
+                0 -> {
+                    binding.imageView3.visibility = View.VISIBLE
+                    binding.textSwipe3.visibility = View.VISIBLE
+                }
+                else -> {
+                    binding.imageView3.visibility = View.GONE
+                    binding.textSwipe3.visibility = View.GONE
+                }
             }
-         }
-      }
+        }
+    }
 
-      settingsViewModel.getLanguage().observe(viewLifecycleOwner){
-         setAppLocale(requireContext(), it)
-      }
+    private fun setupRecyclerView(taskList: List<Task>) {
+        val rv = binding.rvTaskChecked
+        rv.layoutManager = LinearLayoutManager(context)
+        val rvAdapter = TaskCheckedAdapter(
+            arrayListOf(),
+            requireContext(),
+            object : TaskCheckedAdapter.OnItemClickListener {
+                override fun onUncheckListener(task: Task) {
+                    Handler(Looper.myLooper()!!).postDelayed({
+                        taskViewModel.updateTask(
+                            Task(
+                                task.id,
+                                task.task,
+                                task.subject,
+                                task.priority,
+                                Constant.mFalse
+                            )
+                        )
+                    }, 200)
+                    Toast.makeText(context, "${task.task} is unchecked", Toast.LENGTH_SHORT).show()
+                }
 
-      taskViewModel.allCheckTasks.observe(viewLifecycleOwner){
-         setupRecyclerView(it)
-      }
+                override fun onDeleteListener(task: Task) {
+                    taskViewModel.deleteTask(task)
+                    Toast.makeText(context, "${task.task} is deleted", Toast.LENGTH_SHORT).show()
+                }
 
-      authViewModel.getUser().observe(viewLifecycleOwner){
-         binding.toolbar.title = getString(R.string.greeting3) + it + "!"
-      }
+            })
+        rv.adapter = rvAdapter
+        rvAdapter.updateList(taskList)
+        rv.setHasFixedSize(true)
+    }
 
-      binding.swipeRefresh.setOnRefreshListener {
-         requireActivity().recreate()
-      }
+    private fun setAppLocale(context: Context, language: String) {
+        val locale = Locale(language)
+        Locale.setDefault(locale)
+        val config = context.resources.configuration
+        config.setLocale(locale)
+        context.createConfigurationContext(config)
+        context.resources.updateConfiguration(config, context.resources.displayMetrics)
+    }
 
-      binding.buttonSettings.setOnClickListener {
-         startActivity(Intent(requireActivity(), SettingActivity::class.java))
-      }
-
-      alsoCheckIfEmpty()
-
-   }
-
-   private fun alsoCheckIfEmpty(){
-      taskViewModel.alsoCheckIfEmpty.observe(viewLifecycleOwner){
-         when(it){
-            0 -> {
-               binding.imageView3.visibility = View.VISIBLE
-               binding.textSwipe3.visibility = View.VISIBLE
-            }
-            else -> {
-               binding.imageView3.visibility = View.GONE
-               binding.textSwipe3.visibility = View.GONE
-            }
-         }
-      }
-   }
-
-   private fun setupRecyclerView(taskList : List<Task>){
-      val rv = binding.rvTaskChecked
-      rv.layoutManager = LinearLayoutManager(context)
-      val rvAdapter = TaskCheckedAdapter(arrayListOf(), requireContext(), object : TaskCheckedAdapter.OnItemClickListener{
-         override fun onUncheckListener(task: Task) {
-            Handler(Looper.myLooper()!!).postDelayed({
-               taskViewModel.updateTask(Task(task.id, task.task, task.subject, task.priority, Constant.mFalse))
-            }, 200)
-            Toast.makeText(context, "${task.task} is unchecked", Toast.LENGTH_SHORT).show()
-         }
-
-         override fun onDeleteListener(task: Task) {
-            taskViewModel.deleteTask(task)
-            Toast.makeText(context, "${task.task} is deleted", Toast.LENGTH_SHORT).show()
-         }
-
-      })
-      rv.adapter = rvAdapter
-      rvAdapter.updateList(taskList)
-      rv.setHasFixedSize(true)
-   }
-
-   private fun setAppLocale(context: Context, language: String) {
-      val locale = Locale(language)
-      Locale.setDefault(locale)
-      val config = context.resources.configuration
-      config.setLocale(locale)
-      context.createConfigurationContext(config)
-      context.resources.updateConfiguration(config, context.resources.displayMetrics)
-   }
-
-   override fun onDestroyView() {
-      super.onDestroyView()
-      _binding = null
-   }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

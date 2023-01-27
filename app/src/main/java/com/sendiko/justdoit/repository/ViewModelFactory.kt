@@ -3,7 +3,6 @@ package com.sendiko.justdoit.repository
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.sendiko.justdoit.repository.model.StringConstants
 import com.sendiko.justdoit.ui.task.TaskViewModel
 
 class ViewModelFactory private constructor(private val application : Application) : ViewModelProvider.NewInstanceFactory(){
@@ -27,7 +26,7 @@ class ViewModelFactory private constructor(private val application : Application
    override fun <T : ViewModel> create(modelClass: Class<T>): T {
       return when {
          modelClass.isAssignableFrom(TaskViewModel::class.java)-> TaskViewModel(application) as T
-         else -> throw IllegalArgumentException(StringConstants.unknownModelClass + modelClass.name)
+         else -> throw IllegalArgumentException(Constant.unknownModelClass + modelClass.name)
       }
    }
 

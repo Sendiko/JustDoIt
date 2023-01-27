@@ -13,61 +13,62 @@ import com.sendiko.justdoit.repository.Constant
 import com.sendiko.justdoit.repository.model.Task
 
 private const val TAG = "TaskAdapter"
+
 class TaskAdapter(
-   private val task: ArrayList<Task>,
-   private val context: Context,
-   private val onClick: OnItemClickListener
-   ) : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>(){
+        private val task: ArrayList<Task>,
+        private val context: Context,
+        private val onClick: OnItemClickListener
+) : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
 
-   class TaskViewHolder(var binding: CardItemTaskBinding) : RecyclerView.ViewHolder(binding.root)
+    class TaskViewHolder(var binding: CardItemTaskBinding) : RecyclerView.ViewHolder(binding.root)
 
-   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
-      val binding = CardItemTaskBinding.inflate(LayoutInflater.from(parent.context))
-      return TaskViewHolder(binding)
-   }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
+        val binding = CardItemTaskBinding.inflate(LayoutInflater.from(parent.context))
+        return TaskViewHolder(binding)
+    }
 
-   override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
-      val currentItem = task[position]
-      holder.binding.task.text = currentItem.task
-      holder.binding.subjectTask.text = currentItem.subject
+    override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
+        val currentItem = task[position]
+        holder.binding.task.text = currentItem.task
+        holder.binding.subjectTask.text = currentItem.subject
 
-      when(currentItem.priority){
-         Constant.mImportant -> holder.binding.circlePriority.setImageResource(R.drawable.circle_important)
-         Constant.mNeedToBeDone -> holder.binding.circlePriority.setImageResource(R.drawable.circle_needtobedone)
-         Constant.mCanDoItAnytime -> holder.binding.circlePriority.setImageResource(R.drawable.circle_candoitanytime)
-      }
+        when (currentItem.priority) {
+            Constant.mImportant -> holder.binding.circlePriority.setImageResource(R.drawable.circle_important)
+            Constant.mNeedToBeDone -> holder.binding.circlePriority.setImageResource(R.drawable.circle_needtobedone)
+            Constant.mCanDoItAnytime -> holder.binding.circlePriority.setImageResource(R.drawable.circle_candoitanytime)
+        }
 
-      holder.binding.cardTask.setOnClickListener {
-         onClick.onShowTaskListener(currentItem)
-      }
+        holder.binding.cardTask.setOnClickListener {
+            onClick.onShowTaskListener(currentItem)
+        }
 
-      holder.binding.update.setOnClickListener {
-         onClick.onUpdateClickListener(currentItem)
-      }
+        holder.binding.update.setOnClickListener {
+            onClick.onUpdateClickListener(currentItem)
+        }
 
-      holder.binding.checkbox.setOnCheckedChangeListener { _, _ ->
-         holder.binding.root.startAnimation(AnimationUtils.loadAnimation(context, R.anim.activity_fade_out))
-         holder.binding.root.isVisible = false
-         onClick.onCheckListener(currentItem)
-      }
+        holder.binding.checkbox.setOnCheckedChangeListener { _, _ ->
+            holder.binding.root.startAnimation(AnimationUtils.loadAnimation(context, R.anim.activity_fade_out))
+            holder.binding.root.isVisible = false
+            onClick.onCheckListener(currentItem)
+        }
 
-   }
+    }
 
-   override fun getItemCount(): Int {
-      return task.size
-   }
+    override fun getItemCount(): Int {
+        return task.size
+    }
 
-   @SuppressLint("NotifyDataSetChanged")
-   fun updateList(newList : List<Task>) {
-      task.clear()
-      task.addAll(newList)
-      notifyDataSetChanged()
-   }
+    @SuppressLint("NotifyDataSetChanged")
+    fun updateList(newList: List<Task>) {
+        task.clear()
+        task.addAll(newList)
+        notifyDataSetChanged()
+    }
 
-   interface OnItemClickListener {
-      fun onShowTaskListener(task: Task)
-      fun onCheckListener(task: Task)
-      fun onUpdateClickListener(task: Task)
-   }
+    interface OnItemClickListener {
+        fun onShowTaskListener(task: Task)
+        fun onCheckListener(task: Task)
+        fun onUpdateClickListener(task: Task)
+    }
 
 }

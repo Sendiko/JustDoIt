@@ -8,54 +8,54 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-class SettingsPreference private constructor(private val dataStore : DataStore<Preferences>){
+class SettingsPreference private constructor(private val dataStore: DataStore<Preferences>) {
 
     private val isDarkThemeKey = booleanPreferencesKey("isDarkTheme")
     private val languageKey = stringPreferencesKey("language")
     private val sortListKey = stringPreferencesKey("sort_list")
 
-    suspend fun setSortListKey(sortKey : String){
+    suspend fun setSortListKey(sortKey: String) {
         dataStore.edit { key ->
             key[sortListKey] = sortKey
         }
     }
 
-    fun getSortListKey() : Flow<String> {
+    fun getSortListKey(): Flow<String> {
         return dataStore.data.map { key ->
-            key[sortListKey]?: "none"
+            key[sortListKey] ?: "none"
         }
     }
 
-    suspend fun setDarkTheme(darkTheme : Boolean){
+    suspend fun setDarkTheme(darkTheme: Boolean) {
         dataStore.edit { key ->
             key[isDarkThemeKey] = darkTheme
         }
     }
 
-    fun getDarkTheme() : Flow<Boolean> {
+    fun getDarkTheme(): Flow<Boolean> {
         return dataStore.data.map { key ->
-            key[isDarkThemeKey]?: false
+            key[isDarkThemeKey] ?: false
         }
     }
 
-    suspend fun setLanguageKey(languange : String){
+    suspend fun setLanguageKey(language: String) {
         dataStore.edit { key ->
-            key[languageKey] = languange
+            key[languageKey] = language
         }
     }
 
-    fun getLanguageKey() : Flow<String> {
+    fun getLanguageKey(): Flow<String> {
         return dataStore.data.map { key ->
-            key[languageKey]?: "en"
+            key[languageKey] ?: "en"
         }
     }
 
-    companion object{
+    companion object {
         @Volatile
-        private var INSTANCE : SettingsPreference ?= null
+        private var INSTANCE: SettingsPreference? = null
 
-        fun getInstance(dataStore: DataStore<Preferences>) : SettingsPreference{
-            return INSTANCE ?: kotlin.synchronized(this){
+        fun getInstance(dataStore: DataStore<Preferences>): SettingsPreference {
+            return INSTANCE ?: synchronized(this) {
                 val instance = SettingsPreference(dataStore)
                 INSTANCE = instance
                 instance

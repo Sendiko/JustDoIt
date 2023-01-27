@@ -4,21 +4,21 @@ import androidx.lifecycle.LiveData
 import com.sendiko.justdoit.repository.database.TaskDataAccessObject
 import com.sendiko.justdoit.repository.model.Task
 
-class TaskRepository(private val taskDao : TaskDataAccessObject) {
+class TaskRepository(private val taskDao: TaskDataAccessObject) {
 
-    val allTask : LiveData<List<Task>> = taskDao.getTask()
+    val allTask: LiveData<List<Task>> = taskDao.getTask()
 
-    val allCheckTask : LiveData<List<Task>> = taskDao.getCheckedTask()
+    val allCheckTask: LiveData<List<Task>> = taskDao.getCheckedTask()
 
-    val checkIfEmpty : LiveData<Int> = taskDao.checkIfEmpty()
+    val checkIfEmpty: LiveData<Int> = taskDao.checkIfEmpty()
 
-    val alsoCheckIfEmpty : LiveData<Int> = taskDao.alsoCheckIfEmpty()
+    val alsoCheckIfEmpty: LiveData<Int> = taskDao.alsoCheckIfEmpty()
 
-    val importantTask : LiveData<List<Task>> = taskDao.importantTask()
+    val importantTask: LiveData<List<Task>> = taskDao.importantTask()
 
-    val mediumTask : LiveData<List<Task>> = taskDao.mediumTask()
+    val mediumTask: LiveData<List<Task>> = taskDao.mediumTask()
 
-    val lowTask : LiveData<List<Task>> = taskDao.lowTask()
+    val lowTask: LiveData<List<Task>> = taskDao.lowTask()
 
     suspend fun insertTask(task: Task) = taskDao.insertTask(task)
 
