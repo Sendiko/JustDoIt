@@ -17,8 +17,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sendiko.justdoit.R
 import com.sendiko.justdoit.databinding.FragmentDashboardBinding
-import com.sendiko.justdoit.repository.Constant
+import com.sendiko.justdoit.repository.helper.Constant
 import com.sendiko.justdoit.repository.ViewModelFactory
+import com.sendiko.justdoit.repository.helper.TaskPriority
+import com.sendiko.justdoit.repository.helper.TaskStatus
 import com.sendiko.justdoit.repository.model.Task
 import com.sendiko.justdoit.repository.preferences.AuthPreferences
 import com.sendiko.justdoit.repository.preferences.AuthViewModel
@@ -146,7 +148,7 @@ class DashboardFragment : Fragment() {
                                 task.task,
                                 task.subject,
                                 task.priority,
-                                Constant.mFalse
+                                TaskStatus.isNotDone.status
                             )
                         )
                     }, 200)

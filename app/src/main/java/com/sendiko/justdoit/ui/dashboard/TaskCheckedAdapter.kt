@@ -13,7 +13,7 @@ import com.sendiko.justdoit.R
 import com.sendiko.justdoit.databinding.CardItemTaskCheckedBinding
 import com.sendiko.justdoit.repository.model.Task
 
-private const val TAG = "TaskCheckedAdapter"
+private const val TAG = "TaskCheckedAd apter"
 
 class TaskCheckedAdapter(
     private val task: ArrayList<Task>,
@@ -63,7 +63,6 @@ class TaskCheckedAdapter(
         task.clear()
         task.addAll(newList)
         notifyDataSetChanged()
-        Log.d(TAG, "updateList: $newList")
     }
 
     interface OnItemClickListener {

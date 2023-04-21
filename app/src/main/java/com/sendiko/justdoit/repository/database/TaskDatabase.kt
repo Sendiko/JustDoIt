@@ -5,7 +5,7 @@ import androidx.room.AutoMigration
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.sendiko.justdoit.repository.Constant
+import com.sendiko.justdoit.repository.helper.Constant
 import com.sendiko.justdoit.repository.model.Task
 
 @Database(

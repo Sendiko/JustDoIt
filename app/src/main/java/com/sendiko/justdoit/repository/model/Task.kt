@@ -3,7 +3,6 @@ package com.sendiko.justdoit.repository.model
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.sendiko.justdoit.repository.Constant
 
 @Entity(tableName = "taskTable")
 data class Task(
