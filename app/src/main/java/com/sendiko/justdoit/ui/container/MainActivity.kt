@@ -18,8 +18,10 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.sendiko.justdoit.R
 import com.sendiko.justdoit.databinding.ActivityMainBinding
-import com.sendiko.justdoit.repository.Constant
+import com.sendiko.justdoit.repository.helper.Constant
 import com.sendiko.justdoit.repository.ViewModelFactory
+import com.sendiko.justdoit.repository.helper.TaskPriority
+import com.sendiko.justdoit.repository.helper.TaskStatus
 import com.sendiko.justdoit.repository.model.Task
 import com.sendiko.justdoit.repository.preferences.SettingsPreference
 import com.sendiko.justdoit.ui.settings.SettingsViewModel
@@ -119,9 +121,9 @@ class MainActivity : AppCompatActivity() {
 
         settingsViewModel.getSortListKey().observe(this) { sortKey ->
             when (sortKey) {
-                Constant.mImportant -> view.findViewById<RadioButton>(R.id.button_important).isChecked = true
-                Constant.mNeedToBeDone -> view.findViewById<RadioButton>(R.id.button_medium).isChecked = true
-                Constant.mCanDoItAnytime -> view.findViewById<RadioButton>(R.id.button_less).isChecked = true
+                TaskPriority.Important.level -> view.findViewById<RadioButton>(R.id.button_important).isChecked = true
+                TaskPriority.NeedToBeDone.level -> view.findViewById<RadioButton>(R.id.button_medium).isChecked = true
+                TaskPriority.CanDoItAnytime.level -> view.findViewById<RadioButton>(R.id.button_less).isChecked = true
             }
         }
 
@@ -134,15 +136,15 @@ class MainActivity : AppCompatActivity() {
         buttonSubmit.setOnClickListener {
             when (radioCategories.checkedRadioButtonId) {
                 R.id.button_important -> {
-                    settingsViewModel.setSortListKey(Constant.mImportant)
+                    settingsViewModel.setSortListKey(TaskPriority.Important.level)
                     Toast.makeText(this, getString(R.string.filter_important), Toast.LENGTH_SHORT).show()
                 }
                 R.id.button_medium -> {
-                    settingsViewModel.setSortListKey(Constant.mNeedToBeDone)
+                    settingsViewModel.setSortListKey(TaskPriority.NeedToBeDone.level)
                     Toast.makeText(this, getString(R.string.filter_need_to_be_done), Toast.LENGTH_SHORT).show()
                 }
                 R.id.button_less -> {
-                    settingsViewModel.setSortListKey(Constant.mCanDoItAnytime)
+                    settingsViewModel.setSortListKey(TaskPriority.CanDoItAnytime.level)
                     Toast.makeText(this, getString(R.string.filter_can_do_it_anytime), Toast.LENGTH_SHORT).show()
                 }
             }
@@ -170,16 +172,16 @@ class MainActivity : AppCompatActivity() {
             val s = inputSubject.text.toString()
             var c = Constant.category
             when (radioCategories.checkedRadioButtonId) {
-                R.id.button_important -> c = Constant.mImportant
-                R.id.button_medium -> c = Constant.mNeedToBeDone
-                R.id.button_less -> c = Constant.mCanDoItAnytime
+                R.id.button_important -> c = TaskPriority.Important.level
+                R.id.button_medium -> c = TaskPriority.NeedToBeDone.level
+                R.id.button_less -> c = TaskPriority.CanDoItAnytime.level
             }
             when {
                 t.isNotEmpty() -> {
                     when (c) {
                         Constant.category -> Toast.makeText(this, getString(R.string.priority_error), Toast.LENGTH_SHORT).show()
                         else -> {
-                            val task = Task(0, t, s, c, Constant.mFalse)
+                            val task = Task(0, t, s, c, TaskStatus.isNotDone.status)
                             taskViewModel.insertTask(task)
                             inputDialog.dismiss()
                         }

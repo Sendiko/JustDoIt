@@ -15,7 +15,6 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -23,8 +22,10 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.sendiko.justdoit.R
 import com.sendiko.justdoit.databinding.FragmentHomeBinding
-import com.sendiko.justdoit.repository.Constant
+import com.sendiko.justdoit.repository.helper.Constant
 import com.sendiko.justdoit.repository.ViewModelFactory
+import com.sendiko.justdoit.repository.helper.TaskPriority
+import com.sendiko.justdoit.repository.helper.TaskStatus
 import com.sendiko.justdoit.repository.model.Task
 import com.sendiko.justdoit.repository.preferences.AuthPreferences
 import com.sendiko.justdoit.repository.preferences.AuthViewModel
@@ -105,13 +106,13 @@ class HomeFragment : Fragment() {
 
         settingsViewModel.getSortListKey().observe(viewLifecycleOwner) { sortKey ->
             when (sortKey) {
-                Constant.mImportant -> taskViewModel.importantTask.observe(viewLifecycleOwner) { task ->
+                TaskPriority.Important.level -> taskViewModel.importantTask.observe(viewLifecycleOwner) { task ->
                     setupRecyclerView(task)
                 }
-                Constant.mNeedToBeDone -> taskViewModel.mediumTask.observe(viewLifecycleOwner) { task ->
+                TaskPriority.NeedToBeDone.level -> taskViewModel.mediumTask.observe(viewLifecycleOwner) { task ->
                     setupRecyclerView(task)
                 }
-                Constant.mCanDoItAnytime -> taskViewModel.lowTask.observe(viewLifecycleOwner) { task ->
+                TaskPriority.CanDoItAnytime.level -> taskViewModel.lowTask.observe(viewLifecycleOwner) { task ->
                     setupRecyclerView(task)
                 }
                 else -> taskViewModel.allTasks.observe(viewLifecycleOwner) { task ->
@@ -169,11 +170,11 @@ class HomeFragment : Fragment() {
         textSubject.text = tasks.subject
 
         when (tasks.priority) {
-            Constant.mImportant -> view.findViewById<RadioButton>(R.id.button_important).isChecked =
+            TaskPriority.Important.level -> view.findViewById<RadioButton>(R.id.button_important).isChecked =
                 true
-            Constant.mNeedToBeDone -> view.findViewById<RadioButton>(R.id.button_medium).isChecked =
+            TaskPriority.NeedToBeDone.level -> view.findViewById<RadioButton>(R.id.button_medium).isChecked =
                 true
-            Constant.mCanDoItAnytime -> view.findViewById<RadioButton>(R.id.button_less).isChecked =
+            TaskPriority.CanDoItAnytime.level -> view.findViewById<RadioButton>(R.id.button_less).isChecked =
                 true
         }
 
@@ -199,11 +200,11 @@ class HomeFragment : Fragment() {
         buttonSubmit.text = button
 
         when (tasks.priority) {
-            Constant.mImportant -> view.findViewById<RadioButton>(R.id.button_important).isChecked =
+            TaskPriority.Important.level -> view.findViewById<RadioButton>(R.id.button_important).isChecked =
                 true
-            Constant.mNeedToBeDone -> view.findViewById<RadioButton>(R.id.button_medium).isChecked =
+            TaskPriority.NeedToBeDone.level -> view.findViewById<RadioButton>(R.id.button_medium).isChecked =
                 true
-            Constant.mCanDoItAnytime -> view.findViewById<RadioButton>(R.id.button_less).isChecked =
+            TaskPriority.CanDoItAnytime.level -> view.findViewById<RadioButton>(R.id.button_less).isChecked =
                 true
         }
 
@@ -212,13 +213,13 @@ class HomeFragment : Fragment() {
             val sub = inputSubject.text.toString()
             var c = "categories"
             when (radioCategories.checkedRadioButtonId) {
-                R.id.button_important -> c = Constant.mImportant
-                R.id.button_medium -> c = Constant.mNeedToBeDone
-                R.id.button_less -> c = Constant.mCanDoItAnytime
+                R.id.button_important -> c = TaskPriority.Important.level
+                R.id.button_medium -> c = TaskPriority.NeedToBeDone.level
+                R.id.button_less -> c = TaskPriority.CanDoItAnytime.level
             }
             when {
                 task.isNotEmpty() -> {
-                    val task = Task(tasks.id, task, sub, c, Constant.mFalse)
+                    val task = Task(tasks.id, task, sub, c, TaskStatus.isNotDone.status)
                     taskViewModel.insertTask(task)
                     inputSheet.dismiss()
                 }
@@ -248,7 +249,7 @@ class HomeFragment : Fragment() {
                             task.task,
                             task.subject,
                             task.priority,
-                            Constant.mTrue
+                            TaskStatus.isDone.status
                         )
                     )
                 }, 200)

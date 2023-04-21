@@ -9,7 +9,8 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.sendiko.justdoit.R
 import com.sendiko.justdoit.databinding.CardItemTaskBinding
-import com.sendiko.justdoit.repository.Constant
+import com.sendiko.justdoit.repository.helper.Constant
+import com.sendiko.justdoit.repository.helper.TaskPriority
 import com.sendiko.justdoit.repository.model.Task
 
 private const val TAG = "TaskAdapter"
@@ -33,9 +34,9 @@ class TaskAdapter(
         holder.binding.subjectTask.text = currentItem.subject
 
         when (currentItem.priority) {
-            Constant.mImportant -> holder.binding.circlePriority.setImageResource(R.drawable.circle_important)
-            Constant.mNeedToBeDone -> holder.binding.circlePriority.setImageResource(R.drawable.circle_needtobedone)
-            Constant.mCanDoItAnytime -> holder.binding.circlePriority.setImageResource(R.drawable.circle_candoitanytime)
+            TaskPriority.Important.level -> holder.binding.circlePriority.setImageResource(R.drawable.circle_important)
+            TaskPriority.NeedToBeDone.level -> holder.binding.circlePriority.setImageResource(R.drawable.circle_needtobedone)
+            TaskPriority.CanDoItAnytime.level -> holder.binding.circlePriority.setImageResource(R.drawable.circle_candoitanytime)
         }
 
         holder.binding.cardTask.setOnClickListener {
