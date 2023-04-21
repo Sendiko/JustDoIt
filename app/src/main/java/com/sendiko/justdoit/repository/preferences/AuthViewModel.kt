@@ -1,7 +1,7 @@
 package com.sendiko.justdoit.repository.preferences
 
 import androidx.lifecycle.*
-import com.sendiko.justdoit.repository.Constant
+import com.sendiko.justdoit.repository.helper.Constant
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
